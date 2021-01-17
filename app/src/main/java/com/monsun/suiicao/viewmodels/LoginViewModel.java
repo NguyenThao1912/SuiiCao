@@ -1,11 +1,13 @@
 package com.monsun.suiicao.viewmodels;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -15,6 +17,7 @@ import com.monsun.suiicao.R;
 import com.monsun.suiicao.models.User;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Observable;
 
 public class LoginViewModel extends ViewModel {
@@ -32,20 +35,26 @@ public class LoginViewModel extends ViewModel {
         }
         return _user;
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void onClick(View view){
-        User u = new User(username.getValue(),password.getValue());
-        _user.setValue(u);
-        //logic check on server here
         try
         {
-            if(_user.getValue().getUsername().equals("thao") && _user.getValue().getPassword().equals("12345678"))
-                isSuccess.set("Success");
+            if(!Objects.isNull(username) && !Objects.isNull(password)){
+                User u = new User(username.getValue(),password.getValue());
+                _user.setValue(u);
+                if(Objects.requireNonNull(_user.getValue()).getUsername().equals("thao") && _user.getValue().getPassword().equals("12345678"))
+                    isSuccess.set("Success");
+                else
+                    isSuccess.set("Failed to Login");
+            }
             else
-                isSuccess.set("Failed to Login");
+                return;
         }
         catch (NullPointerException e)
         {
-            Log.e("LoginError",e.getMessage());
+            Log.e("Thao",e.getMessage());
         }
+        }
+    //logic check on server here
     }
-}
+
