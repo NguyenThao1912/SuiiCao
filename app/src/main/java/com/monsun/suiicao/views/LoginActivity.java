@@ -1,23 +1,31 @@
-package com.monsun.suiicao;
+package com.monsun.suiicao.views;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.Toast;
+
+import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.LoginBinding;
 import com.monsun.suiicao.models.User;
 import com.monsun.suiicao.viewmodels.LoginViewModel;
+
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginVM;
     private LoginBinding binding;
+    private long backpresstimes; // the time user press back button
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loginVM = ViewModelProviders.of(this).get(LoginViewModel.class);
-        binding = DataBindingUtil.setContentView(MainActivity.this,R.layout.login);
+        binding = DataBindingUtil.setContentView(LoginActivity.this, R.layout.login);
         binding.setLifecycleOwner(this);
         binding.setILogin(loginVM);
 
@@ -37,5 +45,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (backpresstimes + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(this, "Press back again to exit the program", Toast.LENGTH_SHORT).show();
+        }
+        backpresstimes = System.currentTimeMillis();
+    }
+}
