@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loginVM = ViewModelProviders.of(this).get(LoginViewModel.class);
-        binding = DataBindingUtil.setContentView(LoginActivity.this, R.layout.login);
+        binding = DataBindingUtil.setContentView(this, R.layout.login);
         binding.setLifecycleOwner(this);
         binding.setILogin(loginVM);
 
@@ -42,6 +42,17 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (!user.isPasswordGreaterThan_Eight()) {
                     binding.password.setError("Password must have at least 8 character");
                     binding.password.requestFocus();
+                }
+                else{
+                    //check user and password if true
+                    if(binding.username.getText().equals("thao") && binding.password.getText().equals("12345678"))
+                    {
+                        //do something
+                        loginVM.isSuccess.set("Success");
+                    }
+                    else
+                        //give them a message
+                        loginVM.isSuccess.set("Failed");
                 }
             }
         });
