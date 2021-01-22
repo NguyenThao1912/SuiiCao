@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.LoginBinding;
 import com.monsun.suiicao.models.User;
+import com.monsun.suiicao.repositories.Database;
 import com.monsun.suiicao.viewmodels.LoginViewModel;
 
 import java.util.Objects;
@@ -45,9 +46,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else{
                     //check user and password if true
-                    if(binding.username.getText().equals("thao") && binding.password.getText().equals("12345678"))
+                    if(loginVM.loginAuth(binding.username.getText().toString(),binding.password.getText().toString()))
                     {
                         //do something
+                        // Write a message to the database
                         loginVM.isSuccess.set("Success");
                     }
                     else

@@ -3,14 +3,22 @@ package com.monsun.suiicao.viewmodels;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.monsun.suiicao.models.User;
+import com.monsun.suiicao.views.LoginActivity;
 
 import java.util.List;
 import java.util.Objects;
@@ -41,5 +49,25 @@ public class LoginViewModel extends ViewModel {
         }
     }
     //logic check on server here
+
+    public static boolean loginAuth(String username, String password){
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("accounts");
+        boolean result = false;
+        rootRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User post = dataSnapshot.getValue(User.class);
+                System.out.println(post);
+                rootRef.child(username);S
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+        return result;
+    }
 }
 
