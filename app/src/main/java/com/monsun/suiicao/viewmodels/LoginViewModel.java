@@ -1,13 +1,6 @@
 package com.monsun.suiicao.viewmodels;
 
-import android.os.Build;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -18,56 +11,70 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.monsun.suiicao.models.User;
-import com.monsun.suiicao.views.LoginActivity;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Observable;
 
 public class LoginViewModel extends ViewModel {
     //binding data in xml
-    public MutableLiveData<String> username = new MutableLiveData<>();
-    public MutableLiveData<String> password = new MutableLiveData<>();
-    public ObservableField<String> isSuccess = new ObservableField<>();
-    //_user variable
-    private MutableLiveData<User> _user;
+    public String Username = "";
+    public String Password = "";
+    private MutableLiveData<String> isSuccess = new MutableLiveData<>() ;
+    public boolean isLogin = false;
 
-    public LiveData<User> getUser() {
-        if (_user == null) {
-            _user = new MutableLiveData<>();
-        }
-        return _user;
+    public LiveData<String> getIsSuccess() {
+        if (isSuccess == null) isSuccess= new MutableLiveData<>();
+        return isSuccess;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public void onClick(View view) {
-        try {
-            User u = new User(username.getValue(), password.getValue());
-            _user.setValue(u);
-        } catch (NullPointerException e) {
-            Log.e("Thao", e.getMessage());
+    public void Validation()
+    {
+        if (Username.isEmpty())
+        {
+            isSuccess.setValue("Invalid username");
+            return ;
         }
+        if (Password.isEmpty())
+        {
+            isSuccess.setValue("Invalid Password");
+            return ;
+        }
+        if (Password.length()<8)
+        {
+            isSuccess.setValue("Password must have at least 8 characters");
+            return ;
+        }
+        loginAuth();
     }
-    //logic check on server here
+    public boolean loginAuth() {
 
-    public static boolean loginAuth(String username, String password){
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("accounts");
-        boolean result = false;
-        rootRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User post = dataSnapshot.getValue(User.class);
-                System.out.println(post);
-                rootRef.child(username);S
+        User loginUser = new User(Username, Password);
+        rootRef.orderByChild("accounts");
 
+        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    if (data.getKey().equals(loginUser.getUsername())) {
+                        if (data.child("password").getValue().equals(loginUser.getPassword()))
+                        {
+                            // Log.d("id",data.child("username").getValue().toString() + " " + data.child("password").getValue().toString());
+                            isLogin = true;
+                            isSuccess.setValue("Login Success");
+                            break;
+                        }
+                    }
+                }
+                if(!isLogin)
+                    isSuccess.setValue("Failed To Login !!");
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
-        return result;
+
+        return isLogin;
     }
 }
 

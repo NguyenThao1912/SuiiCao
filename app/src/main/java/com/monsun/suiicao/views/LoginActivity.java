@@ -5,19 +5,23 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.monsun.suiicao.R;
+import com.monsun.suiicao.Utils.Utils;
 import com.monsun.suiicao.databinding.LoginBinding;
 import com.monsun.suiicao.models.User;
 import com.monsun.suiicao.repositories.Database;
 import com.monsun.suiicao.viewmodels.LoginViewModel;
 
 import java.util.Objects;
+import java.util.Random;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ILoginHandler  {
     private LoginViewModel loginVM;
     private LoginBinding binding;
     private long backpresstimes; // the time user press back button
@@ -29,33 +33,16 @@ public class LoginActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.login);
         binding.setLifecycleOwner(this);
         binding.setILogin(loginVM);
-
-        //check simple input realtime
-        loginVM.getUser().observe(this, new Observer<User>() {
+        binding.setHandler(this::onClick);
+        //Result after click login
+        loginVM.getIsSuccess().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(User user) {
-                if (TextUtils.isEmpty(Objects.requireNonNull(user).getUsername())) {
-                    binding.username.setError("Username can not be empty");
-                    binding.username.requestFocus();
-                } else if (TextUtils.isEmpty(Objects.requireNonNull(user).getPassword())) {
-                    binding.password.setError("Password can not be empty");
-                    binding.password.requestFocus();
-                } else if (!user.isPasswordGreaterThan_Eight()) {
-                    binding.password.setError("Password must have at least 8 character");
-                    binding.password.requestFocus();
+            public void onChanged(String s) {
+                if(loginVM.isLogin)
+                {
+                    //start new intent
                 }
-                else{
-                    //check user and password if true
-                    if(loginVM.loginAuth(binding.username.getText().toString(),binding.password.getText().toString()))
-                    {
-                        //do something
-                        // Write a message to the database
-                        loginVM.isSuccess.set("Success");
-                    }
-                    else
-                        //give them a message
-                        loginVM.isSuccess.set("Failed");
-                }
+                Utils.showToast(LoginActivity.this,s);
             }
         });
     }
@@ -69,5 +56,10 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Press back again to exit the program", Toast.LENGTH_SHORT).show();
         }
         backpresstimes = System.currentTimeMillis();
+    }
+
+    @Override
+    public void onClick() {
+        loginVM.Validation();
     }
 }
