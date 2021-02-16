@@ -10,18 +10,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.monsun.suiicao.R;
-import com.monsun.suiicao.databinding.LoginBinding;
+import com.monsun.suiicao.databinding.LoginActivityBinding;
 import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.main.MainActivity;
 
 public class LoginActivity extends BaseActivity implements ILoginHandler {
     private static final String TAG = "LoginActivity";
-    private LoginBinding loginBinding;
+    private LoginActivityBinding loginBinding;
     private LoginViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginBinding = DataBindingUtil.setContentView(this,R.layout.login);
+        loginBinding = DataBindingUtil.setContentView(this,R.layout.login_activity);
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         viewModel.setNavigator(this);
         loginBinding.setLifecycleOwner(this);

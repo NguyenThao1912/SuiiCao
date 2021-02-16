@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.models.User;
 import com.monsun.suiicao.views.base.BaseViewModel;
 
@@ -35,18 +36,17 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
         if (getNavigator().login())
         {
             getNavigator().setIsLoading(true);
-            User userlogin = new User(Username,Password);
             FirebaseFirestore db =  FirebaseFirestore.getInstance();
             db.collection("users")
-                    .whereEqualTo("userid",userlogin.getUsername())
-                    .whereEqualTo("password",userlogin.getPassword()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    .whereEqualTo("username",Username)
+                    .whereEqualTo("password",Password).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     if (!task.getResult().isEmpty())
                     {
                         getNavigator().setIsLoading(false);
                         DocumentSnapshot doc =  task.getResult().getDocuments().get(0);
-                        getNavigator().showToast("Hello " + doc.get("LastName") + " " + doc.get("FirstName") );
+                        AppVar.Currentuser = doc.toObject(User.class);
                         getNavigator().startMainActivity();
                     }
                     else

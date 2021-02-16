@@ -16,7 +16,7 @@ import com.monsun.suiicao.Utils.AppUtil;
 import com.monsun.suiicao.views.login.LoginActivity;
 
 public class SplashScreen extends AppCompatActivity {
-    private static int SPLASH_DURATION = 4; // 4 seconds
+    private static int SPLASH_DURATION = 3; // 4 seconds
     private Animation topAnimation,botAnimation;
     ImageView logo;
     TextView slogan;

@@ -45,6 +45,7 @@
             android:hint="username"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
+            android:inputType="textAutoComplete"
             android:text="@={viewModel.Username}"
             android:drawableStart="@drawable/ic_user_login"
             android:drawablePadding="12dp"
@@ -58,7 +59,6 @@
             android:paddingRight="14dp"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true"
-            app:errorContentDescription="sss"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -73,32 +73,33 @@
                 android:drawablePadding="12dp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="14dp"
+            android:textStyle="bold"
+            android:layout_marginRight="18dp"
+            android:id="@+id/btn_forgetpass"
+            android:onClick="@{v->viewModel.onClickForgetPassword()}"
+            android:textSize="14sp"
+            android:gravity="right|top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forget Password ? " />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginLeft="14dp"
             android:layout_marginRight="14dp"
+            android:layout_gravity="center"
             android:background="@drawable/custom_input_login"
             android:fontFamily="sans-serif-medium"
             android:text="Login In"
             android:onClick="@{ v -> viewModel.onClickLogin()}"
             android:textColor="@color/white"
             android:textSize="16sp" />
-
-        <TextView
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:id="@+id/btn_forgetpass"
-            android:onClick="@{v->viewModel.onClickForgetPassword()}"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Forget Password ? " />
 
         <View
             android:layout_marginTop="15dp"

@@ -43,6 +43,9 @@ dependencies {
 
     // Dependency Injection - tend to use this but too hard
     implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
 
     // Firebase Firestore
