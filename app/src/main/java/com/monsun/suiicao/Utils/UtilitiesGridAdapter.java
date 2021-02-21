@@ -13,7 +13,11 @@ import java.util.List;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.models.Utilities;
 
-public class UtilitiesGridAdapter extends BaseAdapter {
+public class
+
+
+
+UtilitiesGridAdapter extends BaseAdapter {
     private List<Utilities> listData;
     private LayoutInflater layoutInflater;
     private Context context;
@@ -60,8 +64,8 @@ public class UtilitiesGridAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.grid_item_layout, null);
             holder = new ViewHolder();
-            holder.iconView = (ImageView) convertView.findViewById(R.id.iconView);
-            holder.nameView = (TextView) convertView.findViewById(R.id.nameView);
+            holder.iconView = (ImageView) convertView.findViewById(R.id.imageView_icon);
+            holder.nameView = (TextView) convertView.findViewById(R.id.textView_name);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

@@ -4,7 +4,7 @@ public class Utilities {
     private String utiIcon;
     private String utiName;
 
-    public Utilities(String utiIcon, String utiDescription) {
+    public Utilities(String utiIcon, String utiName) {
         this.utiIcon = utiIcon;
         this.utiName = utiName;
     }
