@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.trash.themsv"
+    android:padding="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="mã sinh viên"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/stu_id"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="nhap ma sinh vien"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="mật khẩu"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/stu_password"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="mặc định không nhập pass 123"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="chuyên ngành"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:weightSum="2"
+            >
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/major_IT"
+                android:text="IT"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/major_economic"
+                android:text="economic"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ten sinh vien"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/stu_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="nhap ten sinh vien"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ho dem sinh vien"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/stu_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="ho dem sinh vien"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giới tính"
+            android:textSize="20sp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:weightSum="2"
+            >
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/gender_male"
+                android:text="Nam"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/gender_female"
+                android:text="Nữ"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ngay sinh"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/stu_dob"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="ngay sinh"
+            android:inputType="date"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="lop sinh vien"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/stu_class"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="1-2-3-4"
+            android:inputType="date"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Khoa vao truong"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/stu_k"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="58-59-60-61"
+            android:inputType="date"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Can cuoc cong dan"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/stu_cccd"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="nhap tuy"
+            android:inputType="date"
+            android:padding="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="email"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/stu_email"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="nhap tuy"
+            android:inputType="textEmailAddress"
+            android:padding="5dp"
+            />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="80dp"
+            android:text="Submit"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+</ScrollView>
