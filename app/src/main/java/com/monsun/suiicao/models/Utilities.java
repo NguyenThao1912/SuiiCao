@@ -1,15 +1,15 @@
 package com.monsun.suiicao.models;
 
 public class Utilities {
-    private String utiIcon;
+    private int utiIcon;
     private String utiName;
 
-    public Utilities(String utiIcon, String utiName) {
+    public Utilities(int utiIcon, String utiName) {
         this.utiIcon = utiIcon;
         this.utiName = utiName;
     }
 
-    public void setUtiIcon(String utiIcon) {
+    public void setUtiIcon(int utiIcon) {
         this.utiIcon = utiIcon;
     }
 
@@ -21,7 +21,7 @@ public class Utilities {
         this.utiName = utiName;
     }
 
-    public String getUtiIcon() {
+    public int getUtiIcon() {
         return utiIcon;
     }
 

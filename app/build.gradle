@@ -40,14 +40,14 @@ dependencies {
     implementation "com.android.support:design:$rootProject.appCompatVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    //Glide - loading image  link : https://github.com/bumptech/glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
-    // Dependency Injection - tend to use this but too hard
-    implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
 
     // Firebase Firestore
     implementation "com.google.firebase:firebase-firestore:$rootProject.fireStoreVersion"

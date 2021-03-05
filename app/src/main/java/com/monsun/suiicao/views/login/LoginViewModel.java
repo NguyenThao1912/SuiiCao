@@ -8,7 +8,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.models.User;
 import com.monsun.suiicao.views.base.BaseViewModel;
@@ -37,25 +36,27 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
         {
             getNavigator().setIsLoading(true);
             FirebaseFirestore db =  FirebaseFirestore.getInstance();
-            db.collection("users")
-                    .whereEqualTo("username",Username)
-                    .whereEqualTo("password",Password).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            db.collection("users").document(Username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (!task.getResult().isEmpty())
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful())
                     {
-                        getNavigator().setIsLoading(false);
-                        DocumentSnapshot doc =  task.getResult().getDocuments().get(0);
-                        AppVar.Currentuser = doc.toObject(User.class);
-                        getNavigator().startMainActivity();
-                    }
-                    else
-                    {
-                        getNavigator().setIsLoading(false);
-                        getNavigator().showToast("Sai tài khoản hoặc mật khẩu !");
+                        DocumentSnapshot doc = task.getResult();
+                        if (doc.exists())
+                        {
+                            getNavigator().setIsLoading(false);
+                            getNavigator().startMainActivity();
+                            AppVar.Currentuser = doc.toObject(User.class);
+                        }
+                        else {
+                            getNavigator().setIsLoading(false);
+                            getNavigator().showToast("Sai tài khoản hoặc mật khẩu");
+
+                        }
                     }
                 }
             });
+
         }
 
     }
