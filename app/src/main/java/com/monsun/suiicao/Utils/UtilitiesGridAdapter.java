@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,18 +25,22 @@ UtilitiesGridAdapter extends RecyclerView.Adapter<UtilitiesGridAdapter.ViewHolde
     private Context context;
     private LayoutInflater inflater;
     List<Utilities> listItem;
-
-    public UtilitiesGridAdapter(Context context, List<Utilities> listItem) {
+    private onItemListener itemListener;
+    public void setList(List<Utilities> list)
+    {
+        this.listItem = list;
+    }
+    public UtilitiesGridAdapter(Context context,onItemListener onItemListener) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.listItem = listItem;
+        this.itemListener = onItemListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.grid_item_layout,parent,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,this.itemListener);
     }
 
     @Override
@@ -49,14 +54,27 @@ UtilitiesGridAdapter extends RecyclerView.Adapter<UtilitiesGridAdapter.ViewHolde
         return listItem.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
         ImageView icon;
         TextView item_menu;
-
-        public ViewHolder(@NonNull View itemView) {
+        CardView container;
+        onItemListener onItemListener;
+        public ViewHolder(@NonNull View itemView,onItemListener onItemListener) {
             super(itemView);
             icon =  itemView.findViewById(R.id.menu_icon_stu);
             item_menu = itemView.findViewById(R.id.menu_item_stu);
+            container = itemView.findViewById(R.id.item_container);
+            this.onItemListener = onItemListener;
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemListener.onMenuItemClick(getAdapterPosition());
+                }
+            });
         }
+    }
+    public interface onItemListener
+    {
+        void onMenuItemClick(int position);
     }
 }

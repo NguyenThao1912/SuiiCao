@@ -44,14 +44,20 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
                         DocumentSnapshot doc = task.getResult();
                         if (doc.exists())
                         {
-                            getNavigator().setIsLoading(false);
-                            getNavigator().startMainActivity();
-                            AppVar.Currentuser = doc.toObject(User.class);
+                            if (doc.get("password").equals(Password))
+                            {
+                                getNavigator().setIsLoading(false);
+                                getNavigator().startMainActivity();
+                                AppVar.Currentuser = doc.toObject(User.class);
+                            }
+                            else {
+                                getNavigator().setIsLoading(false);
+                                getNavigator().showToast("Sai tài khoản hoặc mật khẩu");
+                            }
                         }
                         else {
                             getNavigator().setIsLoading(false);
                             getNavigator().showToast("Sai tài khoản hoặc mật khẩu");
-
                         }
                     }
                 }
