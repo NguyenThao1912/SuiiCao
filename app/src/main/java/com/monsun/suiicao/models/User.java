@@ -3,15 +3,67 @@ package com.monsun.suiicao.models;
 public class User {
     private String username;
     private String password;
-    private int roleId;
     private String userid;
     private String FirstName;
     private String LastName;
     private String major;
-    private String Address;
+    private String gender;
+    private String dateofbirth;
+    private String classid;
+    private String email;
+    private String address;
+    private String k;
+
+    public String getK() {
+        return k;
+    }
+
+    public void setK(String k) {
+        this.k = k;
+    }
 
     public String getFirstName() {
         return FirstName;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDateofbirth() {
+        return dateofbirth;
+    }
+
+    public void setDateofbirth(String dateofbirth) {
+        this.dateofbirth = dateofbirth;
+    }
+
+    public String getClassid() {
+        return classid;
+    }
+
+    public void setClassid(String classid) {
+        this.classid = classid;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setFirstName(String firstName) {
@@ -35,11 +87,11 @@ public class User {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public String getUserid() {
@@ -49,16 +101,16 @@ public class User {
     public void setUserid(String userid) {
         this.userid = userid;
     }
+
     public String getFullName()
     {
         return LastName + " " + FirstName;
     }
 
 
-    public User(String username, String password, int roleId,String userid) {
+    public User(String username, String password,String userid) {
         this.username = username;
         this.password = password;
-        this.roleId = roleId;
         this.userid = userid;
     }
 
@@ -71,7 +123,6 @@ public class User {
 
     }
 
-    public int getRoleId() { return roleId; }
 
     public String getPassword() {
         return password;

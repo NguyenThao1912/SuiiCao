@@ -24,12 +24,8 @@ public class MainViewModel extends BaseViewModel<IMainHandler> {
         utilities.add(new Utilities(R.drawable.calendar_item, "Thời Khóa Biểu"));
         utilities.add(new Utilities(R.drawable.calendar_item, "Lịch Thi"));
         utilities.add(new Utilities(R.drawable.calendar_item, "Giáo Trình"));
-
-
         listitem.setValue(utilities);
     }
-    public MutableLiveData<List<Utilities>> getListitem() {
-        return listitem;
-    }
+
 
 }

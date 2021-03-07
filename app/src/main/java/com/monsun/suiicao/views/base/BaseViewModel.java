@@ -12,6 +12,7 @@ public abstract class BaseViewModel<T> extends ViewModel {
     {
 
     }
+
     public void setNavigator(T navigator) {
         this.mNavigator = new WeakReference<>(navigator);
     }

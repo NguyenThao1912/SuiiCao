@@ -4,12 +4,133 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.useraccount.userAccountFrag">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="user account"
-        android:textSize="30sp"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/student_pic"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="156dp"
+                android:src="@drawable/testprofile" />
+
+            <TextView
+                android:id="@+id/student_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/student_pic"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/didact_gothic"
+                android:text="Nguyễn Hữu Thảo"
+                android:textColor="#072C9A"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/student_major"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/student_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/didact_gothic"
+                android:text="Công nghệ thông tin 3 K59"
+                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_below="@+id/student_major"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@drawable/divinder"
+                android:showDividers="beginning|middle"
+                android:layout_marginTop="5dp"
+                android:dividerPadding="12dip"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:drawableEnd="@drawable/arrow_right_line"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="Thông tin sinh viên"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/arrow_right_line"
+                    android:fontFamily="@font/didact_gothic"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:text="Thông Báo"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/arrow_right_line"
+                    android:fontFamily="@font/didact_gothic"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:text="Cài Đặt"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/arrow_right_line"
+                    android:fontFamily="@font/didact_gothic"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:text="Trợ giúp và giúp đỡ"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/arrow_right_line"
+                    android:fontFamily="@font/didact_gothic"
+                    android:gravity="center_vertical"
+                    android:padding="20dp"
+                    android:text="Profile information"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/roundbtn"
+                    android:text="Sign out"
+                    android:textSize="18sp"
+                    android:textColor="#627BBB"
+                    android:layout_marginBottom="10dp"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </FrameLayout>
