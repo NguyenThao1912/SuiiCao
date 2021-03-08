@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.monsun.suiicao.views.useraccount.UserViewModel" />
+    </data>
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.useraccount.userAccountFrag">
@@ -9,7 +16,7 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/student_pic"
@@ -27,23 +34,34 @@
                 android:layout_below="@id/student_pic"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="3dp"
-                android:fontFamily="@font/didact_gothic"
-                android:text="Nguyễn Hữu Thảo"
-                android:textColor="#072C9A"
-                android:textSize="20sp"
-                android:textStyle="bold" />
 
+                android:fontFamily="@font/alike"
+                android:text="@{viewModel.stu_fullName}"
+                android:textColor="#072C9A"
+                android:textSize="18sp"
+                android:textStyle="bold" />
             <TextView
-                android:id="@+id/student_major"
+                android:id="@+id/student_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/student_name"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/alike"
+                android:text="@{viewModel.stuID}"
+                android:textColor="#072C9A"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/student_major"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/student_id"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="@font/didact_gothic"
-                android:text="Công nghệ thông tin 3 K59"
-                android:textSize="18sp" />
+                android:fontFamily="@font/alike"
+                android:text="@{viewModel.major_class_year}"
+                android:textSize="14sp" />
             <LinearLayout
                 android:layout_below="@+id/student_major"
                 android:layout_width="match_parent"
@@ -56,75 +74,79 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
+                    android:clickable="true"
                     android:drawableEnd="@drawable/arrow_right_line"
+                    android:focusable="true"
+                    android:fontFamily="@font/alike"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:padding="20dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:text="Thông tin sinh viên"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:drawableEnd="@drawable/arrow_right_line"
-                    android:fontFamily="@font/didact_gothic"
+                    android:focusable="true"
+                    android:fontFamily="@font/alike"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:padding="20dp"
                     android:text="Thông Báo"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:drawableEnd="@drawable/arrow_right_line"
-                    android:fontFamily="@font/didact_gothic"
+                    android:focusable="true"
+                    android:fontFamily="@font/alike"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:padding="20dp"
                     android:text="Cài Đặt"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:drawableEnd="@drawable/arrow_right_line"
-                    android:fontFamily="@font/didact_gothic"
+                    android:focusable="true"
+                    android:fontFamily="@font/alike"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:padding="20dp"
                     android:text="Trợ giúp và giúp đỡ"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:drawableEnd="@drawable/arrow_right_line"
-                    android:fontFamily="@font/didact_gothic"
+                    android:focusable="true"
+                    android:fontFamily="@font/alike"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:padding="20dp"
                     android:text="Profile information"
-                    android:textSize="16sp" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:layout_height="60dp"
                     android:background="@drawable/roundbtn"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() ->viewModel.signOutClick()}"
                     android:text="Sign out"
                     android:textSize="18sp"
                     android:textColor="#627BBB"
@@ -134,3 +156,4 @@
         </RelativeLayout>
     </ScrollView>
 </FrameLayout>
+</layout>

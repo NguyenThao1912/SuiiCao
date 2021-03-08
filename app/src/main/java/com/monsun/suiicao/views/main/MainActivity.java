@@ -49,21 +49,22 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                         switch (item.getItemId())
                         {
                             case R.id.home_Screen:
-                                selectedFragment = new HomeFragment();
+                                selectedFragment = HomeFragment.newInstance();
                                 Toast.makeText(MainActivity.this, "Home screen", Toast.LENGTH_SHORT).show();
                                 break;
 
                             case R.id.help:
                                 Toast.makeText(MainActivity.this, "help", Toast.LENGTH_SHORT).show();
-                                break;
+                                return false;
 
                             case R.id.ask_answer:
                                 Toast.makeText(MainActivity.this, "ask answer", Toast.LENGTH_SHORT).show();
-                                break;
+                                return false;
 
                             case R.id.user_account:
-                                selectedFragment = new userAccountFrag();
+                                selectedFragment = userAccountFrag.newInstance();
                                 Toast.makeText(MainActivity.this, "user account", Toast.LENGTH_SHORT).show();
+                                break;
                         }
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
                         return true;
@@ -82,10 +83,5 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
     }
 
-    @Override
-    public void OpenUserAccount() {
-        Intent i = new Intent(this, userAccountFrag.class);
-        startActivity(i);
-    }
 
 }

@@ -106,7 +106,18 @@ public class User {
     {
         return LastName + " " + FirstName;
     }
-
+    public String getmajor_class_year()
+    {
+        switch (major)
+        {
+            case "IT":
+                return "Công nghệ thông tin " + classid + " K" + k;
+            case "Eco":
+                return "Kinh tế Vận Tải " + classid + " K" + k;
+            default:
+                return "Error";
+        }
+    }
 
     public User(String username, String password,String userid) {
         this.username = username;

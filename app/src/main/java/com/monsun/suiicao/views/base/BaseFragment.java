@@ -1,37 +1,28 @@
 package com.monsun.suiicao.views.base;
 
-import android.content.Context;
-import android.view.View;
+import android.os.Bundle;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class BaseFragment extends Fragment {
-    private BaseActivity activity;
-    private View rootview;
+public abstract class BaseFragment extends Fragment {
 
+    private BaseActivity activity;
+    public abstract
+    @LayoutRes
+    int getLayoutId();
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof BaseActivity) {
-            BaseActivity activity = (BaseActivity) context;
-            this.activity = activity;
-            activity.onFragmentAttached();
-        }
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
+
 
     @Override
     public void onDetach() {
         activity = null;
         super.onDetach();
     }
-    public BaseActivity getBaseActivity() {
-        return activity;
-    }
-    public interface Callback {
 
-        void onFragmentAttached();
-
-        void onFragmentDetached(String tag);
-    }
 }

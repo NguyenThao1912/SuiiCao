@@ -23,7 +23,10 @@ public class HomeFragment extends BaseFragment {
         // Required empty public constructor
 
     }
-
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
+        return fragment;
+    }
     private void setWiget()
     {
         greeting = v.findViewById(R.id.greeting);
@@ -40,6 +43,12 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_home;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
