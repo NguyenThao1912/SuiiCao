@@ -76,6 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:clickable="true"
+                    android:onClick="@{() ->viewModel.stuInforClick()}"
                     android:drawableEnd="@drawable/arrow_right_line"
                     android:focusable="true"
                     android:fontFamily="@font/alike"

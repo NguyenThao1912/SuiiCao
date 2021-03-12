@@ -1,27 +1,30 @@
-package com.monsun.suiicao.views.useraccount;
+package com.monsun.suiicao.views.useraccount.studentinformation;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.Toolbar;
-
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.monsun.suiicao.R;
+import com.monsun.suiicao.databinding.ActivityStudentInformationBinding;
+import com.monsun.suiicao.views.base.BaseActivity;
 
 import kotlin.jvm.internal.Intrinsics;
 
-public class StudentInformationActivity extends AppCompatActivity {
-
+public class StudentInformationActivity extends BaseActivity implements IStuInformation{
+    ActivityStudentInformationBinding binding;
+    StuInforViewModel viewModel ;
     private ImageView ivUserAvatar;
     private float EXPAND_AVATAR_SIZE;
     private float COLLAPSE_IMAGE_SIZE;
@@ -46,6 +49,15 @@ public class StudentInformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_information);
+        //set binding data and viewmodel
+
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_student_information);
+        viewModel = new ViewModelProvider(this).get(StuInforViewModel.class);
+        viewModel.setNavigator(this);
+        binding.setLifecycleOwner(this);
+        binding.setViewModel(viewModel);
+
+        //==================================
 
         EXPAND_AVATAR_SIZE = this.getResources().getDimension(R.dimen.default_expanded_image_size);
         COLLAPSE_IMAGE_SIZE = this.getResources().getDimension(R.dimen.default_collapsed_image_size);

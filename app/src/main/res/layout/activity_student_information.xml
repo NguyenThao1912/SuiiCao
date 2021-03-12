@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.monsun.suiicao.views.useraccount.studentinformation.StuInforViewModel" />
+    </data>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -70,7 +78,7 @@
                 android:gravity="center"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="Tên trên thanh toolbar"
+                android:text="@{viewModel.Titletoolbar}"
                 android:textAllCaps="true"
                 android:textColor="#808080"
                 android:textSize="17sp"
@@ -105,7 +113,7 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:scrollHorizontally="true"
-                android:text="Tên trên thanh toolbar khi phóng to"
+                android:text="@{viewModel.Titletoolbar}"
                 android:textAllCaps="true"
                 android:textColor="@color/color_white"
                 android:textSize="24sp" />
@@ -148,6 +156,7 @@
 
             <EditText
                 android:id="@+id/info_id"
+                android:text="@{viewModel.infor.username}"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
@@ -169,6 +178,7 @@
 
             <EditText
                 android:id="@+id/info_name"
+                android:text="@{viewModel.infor.fullName}"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
@@ -191,6 +201,7 @@
 
             <EditText
                 android:id="@+id/info_birthdate"
+                android:text="@{viewModel.infor.dateofbirth}"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
@@ -212,6 +223,7 @@
 
             <EditText
                 android:id="@+id/info_birthplace"
+                android:text="@{viewModel.infor.address}"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
@@ -233,6 +245,7 @@
 
             <EditText
                 android:id="@+id/info_gender"
+                android:text="@{viewModel.infor.gender}"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
@@ -254,6 +267,7 @@
 
             <EditText
                 android:id="@+id/info_yearin"
+                android:text="@{viewModel.infor.k}"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
@@ -275,6 +289,7 @@
 
             <EditText
                 android:id="@+id/info_mobile"
+                android:text="@{viewModel.infor.phonenumber}"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
@@ -296,7 +311,9 @@
 
             <EditText
                 android:id="@+id/info_class"
+                android:text="@{viewModel.infor.classid}"
                 android:layout_width="match_parent"
+                android:textAlignment="center"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
@@ -319,6 +336,7 @@
 
             <EditText
                 android:id="@+id/editText6"
+                android:text="@{viewModel.infor.CCCD}"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="18dp"
@@ -331,5 +349,5 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

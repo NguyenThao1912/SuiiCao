@@ -16,6 +16,7 @@ import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.FragmentUserAccountBinding;
 import com.monsun.suiicao.views.base.BaseFragment;
 import com.monsun.suiicao.views.login.LoginActivity;
+import com.monsun.suiicao.views.useraccount.studentinformation.StudentInformationActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,10 +70,6 @@ public class userAccountFrag extends BaseFragment implements IUserHandler {
         binding = null;
     }
 
-    @Override
-    public void OpenStudentInformation() {
-
-    }
 
     @Override
     public void OpenLoginActivity() {
@@ -83,5 +80,11 @@ public class userAccountFrag extends BaseFragment implements IUserHandler {
         AppVar.Currentuser = null;
     }
 
+    @Override
+    public void OpenStudentInfor() {
+        Log.d(TAG, "OpenStudentInfor: hahhaha");
+        Intent t = StudentInformationActivity.newIntent(getActivity());
+        startActivity(t);
+    }
 
 }

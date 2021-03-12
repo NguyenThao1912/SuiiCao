@@ -1,12 +1,14 @@
-package com.monsun.suiicao.views.useraccount;
+package com.monsun.suiicao.views.useraccount.studentinformation;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 public final class FlingBehavior extends AppBarLayout.Behavior {
 

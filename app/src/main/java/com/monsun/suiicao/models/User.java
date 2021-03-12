@@ -13,6 +13,26 @@ public class User {
     private String email;
     private String address;
     private String k;
+    private String phonenumber;
+    private String CCCD;
+
+    public String getCCCD() {
+        return CCCD;
+    }
+
+    public void setCCCD(String CCCD) {
+        this.CCCD = CCCD;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+
 
     public String getK() {
         return k;

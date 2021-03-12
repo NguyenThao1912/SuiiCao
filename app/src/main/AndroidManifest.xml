@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SuiiCao">
         <activity android:name=".views.study.StudyActivity" />
-        <activity android:name=".views.useraccount.StudentInformationActivity" />
+        <activity android:name=".views.useraccount.studentinformation.StudentInformationActivity" />
         <activity android:name=".views.main.MainActivity" />
         <activity android:name=".views.login.LoginActivity" />
         <activity android:name=".views.SplashScreen">

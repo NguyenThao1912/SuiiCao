@@ -18,6 +18,7 @@ public class LoginActivity extends BaseActivity implements ILoginHandler {
     private static final String TAG = "LoginActivity";
     private LoginActivityBinding loginBinding;
     private LoginViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
