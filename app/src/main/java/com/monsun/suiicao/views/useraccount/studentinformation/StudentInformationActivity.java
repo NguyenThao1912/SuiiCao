@@ -59,6 +59,21 @@ public class StudentInformationActivity extends BaseActivity implements IStuInfo
 
         //==================================
 
+        //turn on back button
+        Toolbar mToolbar= (Toolbar) findViewById(R.id.anim_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left_s_line);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                // perform whatever you want on back arrow click
+            }
+        });
+        //==================================
+
         EXPAND_AVATAR_SIZE = this.getResources().getDimension(R.dimen.default_expanded_image_size);
         COLLAPSE_IMAGE_SIZE = this.getResources().getDimension(R.dimen.default_collapsed_image_size);
         horizontalToolbarAvatarMargin = this.getResources().getDimension(R.dimen.activity_margin);

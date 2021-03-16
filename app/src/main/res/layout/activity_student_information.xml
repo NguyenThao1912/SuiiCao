@@ -156,15 +156,17 @@
 
             <EditText
                 android:id="@+id/info_id"
-                android:text="@{viewModel.infor.username}"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
-                android:enabled="false" />
+                android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.username}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -178,15 +180,17 @@
 
             <EditText
                 android:id="@+id/info_name"
-                android:text="@{viewModel.infor.fullName}"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
-                android:enabled="false" />
+                android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.fullName}" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -201,15 +205,17 @@
 
             <EditText
                 android:id="@+id/info_birthdate"
-                android:text="@{viewModel.infor.dateofbirth}"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
-                android:enabled="false" />
+                android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.dateofbirth}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -223,15 +229,17 @@
 
             <EditText
                 android:id="@+id/info_birthplace"
-                android:text="@{viewModel.infor.address}"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
-                android:enabled="false" />
+                android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.address}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -245,15 +253,17 @@
 
             <EditText
                 android:id="@+id/info_gender"
-                android:text="@{viewModel.infor.gender}"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
-                android:enabled="false" />
+                android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.gender}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -267,15 +277,17 @@
 
             <EditText
                 android:id="@+id/info_yearin"
-                android:text="@{viewModel.infor.k}"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
-                android:enabled="false" />
+                android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.k}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -289,15 +301,17 @@
 
             <EditText
                 android:id="@+id/info_mobile"
-                android:text="@{viewModel.infor.phonenumber}"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
-                android:enabled="false" />
+                android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.phonenumber}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -311,16 +325,18 @@
 
             <EditText
                 android:id="@+id/info_class"
-                android:text="@{viewModel.infor.classid}"
                 android:layout_width="match_parent"
-                android:textAlignment="center"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
-                android:enabled="false" />
+                android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.classid}"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -336,15 +352,17 @@
 
             <EditText
                 android:id="@+id/editText6"
-                android:text="@{viewModel.infor.CCCD}"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_text_view"
                 android:enabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.infor.CCCD}"
                 android:visibility="invisible" />
 
         </LinearLayout>
