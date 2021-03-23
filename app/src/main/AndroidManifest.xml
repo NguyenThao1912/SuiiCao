@@ -10,14 +10,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SuiiCao">
-        <activity android:name=".views.study.StudyActivity" />
+        android:theme="@style/Theme.SuiiCao"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".views.curriculum.CurriculumActivity"></activity>
+        <activity android:name=".views.timetable.TimetableActivity" />
+        <activity android:name=".views.study.StudentExamActivity" />
         <activity android:name=".views.useraccount.studentinformation.StudentInformationActivity" />
         <activity android:name=".views.main.MainActivity" />
         <activity android:name=".views.login.LoginActivity" />
         <activity android:name=".views.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

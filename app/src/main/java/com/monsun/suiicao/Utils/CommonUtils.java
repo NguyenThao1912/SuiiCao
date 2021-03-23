@@ -10,6 +10,8 @@ import android.provider.Settings;
 import com.monsun.suiicao.R;
 
 public final class CommonUtils {
+
+
     private CommonUtils() {
 
     }

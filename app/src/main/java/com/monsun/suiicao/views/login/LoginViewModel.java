@@ -1,16 +1,17 @@
 package com.monsun.suiicao.views.login;
 
-import androidx.annotation.NonNull;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.models.User;
+import com.monsun.suiicao.repositories.ApiInstance;
 import com.monsun.suiicao.views.base.BaseViewModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class LoginViewModel extends BaseViewModel<ILoginHandler> {
@@ -18,7 +19,7 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
     //binding data in xml
     public String Username = "";
     public String Password = "";
-
+    private ApiInstance caller = new ApiInstance();
     private MutableLiveData<User> userLiveData ;
     public LiveData<User> getUser() {
         if (userLiveData == null)
@@ -35,34 +36,36 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
         if (getNavigator().login())
         {
             getNavigator().setIsLoading(true);
-            FirebaseFirestore db =  FirebaseFirestore.getInstance();
-            db.collection("users").document(Username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            Call<Boolean> call =  caller.getServices().GetLoginResult(Username, Password);
+            call.enqueue(new Callback<Boolean>() {
                 @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful())
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (!response.isSuccessful())
                     {
-                        DocumentSnapshot doc = task.getResult();
-                        if (doc.exists())
-                        {
-                            if (doc.get("password").equals(Password))
-                            {
-                                getNavigator().setIsLoading(false);
-                                getNavigator().startMainActivity();
-                                AppVar.Currentuser = doc.toObject(User.class);
-                            }
-                            else {
-                                getNavigator().setIsLoading(false);
-                                getNavigator().showToast("Sai tài khoản hoặc mật khẩu");
-                            }
-                        }
-                        else {
-                            getNavigator().setIsLoading(false);
-                            getNavigator().showToast("Sai tài khoản hoặc mật khẩu");
-                        }
+                       getNavigator().showToast("Code :" + response.code());
                     }
+                    if (response.body() == true)
+                    {
+                        getNavigator().showToast("Login successful");
+                        Log.d(TAG, "Login Successfull");
+                        getNavigator().startMainActivity();
+                    }
+                    else
+                    {
+                        getNavigator().showToast("Wrong account or password");
+                        Log.d(TAG, "onResponse: Login failed");
+                    }
+                       
+                    
+                    getNavigator().setIsLoading(false);
+                }
+
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    Log.d(TAG, "onFailure: " +  t.getMessage());
+                    getNavigator().setIsLoading(false);
                 }
             });
-
         }
 
     }

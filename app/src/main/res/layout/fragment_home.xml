@@ -37,11 +37,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/greeting"
-            app:layout_constraintVertical_bias="0.21"
+            app:layout_constraintVertical_bias="0.1"
             app:rowCount="2">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/feature_summary_score"
+                android:id="@+id/feature_study_exam"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_margin="22dp"
@@ -62,7 +62,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:contentDescription="schedule"
+                        android:contentDescription="exam"
                         android:id="@+id/feature_image1"
                         android:layout_width="65dp"
                         android:layout_height="65dp"
@@ -120,7 +120,7 @@
                         android:layout_below="@+id/feature_image2"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:text="Học Vụ"
+                        android:text="TKB"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
@@ -164,7 +164,7 @@
                         android:layout_below="@+id/feature_image3"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:text="Học Vụ"
+                        android:text="CT Học"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </RelativeLayout>

@@ -1,22 +1,25 @@
 package com.monsun.suiicao.views.homefragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.views.base.BaseFragment;
+import com.monsun.suiicao.views.curriculum.CurriculumActivity;
+import com.monsun.suiicao.views.study.StudentExamActivity;
+import com.monsun.suiicao.views.timetable.TimetableActivity;
 
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements IHomeHandler {
 
-    private CardView study_summary,calender;
+    private CardView study_summary,curriculum,schedule;
     private TextView greeting;
     public View v;
     public HomeFragment() {
@@ -30,8 +33,9 @@ public class HomeFragment extends BaseFragment {
     private void setWiget()
     {
         greeting = v.findViewById(R.id.greeting);
-        study_summary = v.findViewById(R.id.feature_summary_score);
-        calender = v.findViewById(R.id.feature_2);
+        study_summary = v.findViewById(R.id.feature_study_exam);
+        schedule = v.findViewById(R.id.feature_2);
+        curriculum = v.findViewById(R.id.feature_3);
         if (AppVar.Currentuser != null)
         {
             greeting.setText("Xin Chào " + AppVar.Currentuser.getFullName());
@@ -39,8 +43,16 @@ public class HomeFragment extends BaseFragment {
         study_summary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "hoc vu", Toast.LENGTH_SHORT).show();
+                OpenStudentExam();
             }
+        });
+        schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { OpenSchedule(); }
+        });
+        curriculum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { OpenCurriculum(); }
         });
     }
 
@@ -61,5 +73,23 @@ public class HomeFragment extends BaseFragment {
         v = inflater.inflate(R.layout.fragment_home, container, false);
         setWiget();
         return v;
+    }
+
+    @Override
+    public void OpenStudentExam() {
+        Intent i = StudentExamActivity.newIntent(getActivity());
+        startActivity(i);
+    }
+
+    @Override
+    public void OpenCurriculum() {
+        Intent i = CurriculumActivity.newIntent(getActivity());
+        startActivity(i);
+    }
+
+    @Override
+    public void OpenSchedule() {
+        Intent i = TimetableActivity.newIntent(getActivity());
+        startActivity(i);
     }
 }
