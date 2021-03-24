@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.models.Curriculum;
 import com.monsun.suiicao.repositories.ApiInstance;
 import com.monsun.suiicao.views.base.BaseViewModel;
@@ -16,8 +17,6 @@ import retrofit2.Response;
 
 public class CurriculumViewModel extends BaseViewModel<ICurriculum> {
     private static final String TAG = "CurriculumViewModel";
-
-
     public MutableLiveData<List<Curriculum>> data = new MutableLiveData<>();
     ApiInstance instance;
     public CurriculumViewModel()
@@ -30,7 +29,7 @@ public class CurriculumViewModel extends BaseViewModel<ICurriculum> {
     }
 
     private void getdata() {
-        Call<List<Curriculum>> services = instance.getServices().getStudentLecture();
+        Call<List<Curriculum>> services = instance.getServices().getStudentLecture(Integer.parseInt(AppVar.currentuser.getClassId()));
         services.enqueue(new Callback<List<Curriculum>>() {
             @Override
             public void onResponse(Call<List<Curriculum>> call, Response<List<Curriculum>> response) {

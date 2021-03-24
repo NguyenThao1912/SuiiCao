@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.FragmentUserAccountBinding;
@@ -77,7 +78,12 @@ public class userAccountFrag extends BaseFragment implements IUserHandler {
         Intent t = LoginActivity.newIntent(getActivity());
         startActivity(t);
         getActivity().finish();
-        AppVar.Currentuser = null;
+
+        // TODO logging out user
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
+        AppVar.currentuser = null;
     }
 
     @Override

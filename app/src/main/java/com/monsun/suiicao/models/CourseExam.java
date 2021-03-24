@@ -13,19 +13,19 @@ public class CourseExam {
     private String courseName;
     @SerializedName("course_credit")
     @Expose
-    private Integer courseCredit;
+    private String courseCredit;
     @SerializedName("Date")
     @Expose
     private String date;
     @SerializedName("Shift")
     @Expose
-    private Integer shift;
+    private String shift;
     @SerializedName("Format")
     @Expose
     private String format;
     @SerializedName("SBD")
     @Expose
-    private Integer sBD;
+    private String sBD;
     @SerializedName("Location")
     @Expose
     private String location;
@@ -46,11 +46,11 @@ public class CourseExam {
         this.courseName = courseName;
     }
 
-    public Integer getCourseCredit() {
+    public String getCourseCredit() {
         return courseCredit;
     }
 
-    public void setCourseCredit(Integer courseCredit) {
+    public void setCourseCredit(String courseCredit) {
         this.courseCredit = courseCredit;
     }
 
@@ -62,11 +62,11 @@ public class CourseExam {
         this.date = date;
     }
 
-    public Integer getShift() {
+    public String getShift() {
         return shift;
     }
 
-    public void setShift(Integer shift) {
+    public void setShift(String shift) {
         this.shift = shift;
     }
 
@@ -78,11 +78,11 @@ public class CourseExam {
         this.format = format;
     }
 
-    public Integer getSBD() {
+    public String getSBD() {
         return sBD;
     }
 
-    public void setSBD(Integer sBD) {
+    public void setSBD(String sBD) {
         this.sBD = sBD;
     }
 

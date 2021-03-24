@@ -30,7 +30,7 @@ public class StudentExamActivity extends BaseActivity implements IStudentExam {
     private ActivityStudentExamBinding binding;
     private Spinner spinner;
     private RecyclerView recyclerView;
-    ExamAdapter examAdapter;
+    private ExamAdapter examAdapter;
     public static Intent newIntent(Context context) {
         return new Intent(context, StudentExamActivity.class);
     }
@@ -83,8 +83,12 @@ public class StudentExamActivity extends BaseActivity implements IStudentExam {
                     recyclerView.setLayoutManager(linearLayoutManager);
                     examAdapter = new ExamAdapter(courseExams);
                     recyclerView.setAdapter(examAdapter);
+                    recyclerView.setVisibility(View.VISIBLE);
                 }
-
+                else
+                {
+                    recyclerView.setVisibility(View.GONE);
+                }
             }
         });
     }

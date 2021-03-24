@@ -1,44 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
         >
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            <LinearLayout
+                android:id="@+id/lecture_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="vertical">
             <TextView
+                android:textColor="#0303fc"
                 android:id="@+id/lecture_name"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="25sp"
+                android:textSize="18sp"
+                android:padding="18dp"
                 android:hint="thu nghiem"
-                android:gravity="center"/>
-            <com.skydoves.expandablelayout.ExpandableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:expandable_showSpinner="true"
-                app:layout_constraintTop_toBottomOf="@+id/lecture_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:expandable_spinner_margin="14dp"
-                android:padding="20dp">
+                android:gravity="left"/>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lecture_expanable"
+                    app:layout_constraintTop_toBottomOf="@+id/lecture_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="18dp">
                     <TextView
                         android:id="@+id/tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Mã Học Phần : "
                         android:textStyle="bold"
+                        android:textColor="@color/black"
                         android:textSize="17sp"/>
 
                     <TextView
@@ -53,6 +56,7 @@
                         android:id="@+id/tv1"
                         android:layout_below="@+id/tv"
                         android:layout_marginTop="8dp"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Số tín chỉ : "
@@ -71,6 +75,7 @@
                         android:hint="tín chỉ"/>
                     <TextView
                         android:id="@+id/tv2"
+                        android:textColor="@color/black"
                         android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -92,6 +97,7 @@
                     <TextView
                         android:id="@+id/tv3"
                         android:layout_marginTop="8dp"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Số tiết thực hành : "
@@ -111,10 +117,11 @@
                         android:hint="tín chỉ"/>
                     <TextView
                         android:id="@+id/tv4"
+                        android:textColor="@color/black"
                         android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Số tiết thực hành : "
+                        android:text="Số tiết thảo luận : "
                         android:layout_below="@+id/tv3"
                         android:textStyle="bold"
                         android:textSize="17sp"/>
@@ -131,6 +138,7 @@
                         android:hint="tín chỉ"/>
                     <TextView
                         android:id="@+id/tv5"
+                        android:textColor="@color/black"
                         android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -149,9 +157,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="17sp"
                         android:hint="tín chỉ"/>
-                </RelativeLayout>
 
-            </com.skydoves.expandablelayout.ExpandableLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                </RelativeLayout>
+            </LinearLayout>
     </androidx.cardview.widget.CardView>
-</LinearLayout>

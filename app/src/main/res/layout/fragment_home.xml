@@ -78,7 +78,7 @@
                         android:layout_below="@+id/feature_image1"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        android:text="Học Vụ"
+                        android:text="Lịch Thi"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </RelativeLayout>

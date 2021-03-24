@@ -12,19 +12,29 @@ public class Curriculum {
     private String courseName;
     @SerializedName("course_credit")
     @Expose
-    private Integer courseCredit;
+    private String courseCredit;
     @SerializedName("course_theory")
     @Expose
-    private Integer courseTheory;
+    private String courseTheory;
     @SerializedName("course_practical")
     @Expose
-    private Integer coursePractical;
+    private String coursePractical;
     @SerializedName("discuss")
     @Expose
-    private Integer discuss;
+    private String discuss;
     @SerializedName("semester")
     @Expose
-    private Integer semester;
+    private String semester;
+
+    private boolean isexpandable = false;
+
+    public boolean isIsexpandable() {
+        return isexpandable;
+    }
+
+    public void setIsexpandable(boolean isexpandable) {
+        this.isexpandable = isexpandable;
+    }
 
     public String getCourseId() {
         return courseId;
@@ -42,43 +52,43 @@ public class Curriculum {
         this.courseName = courseName;
     }
 
-    public Integer getCourseCredit() {
+    public String getCourseCredit() {
         return courseCredit;
     }
 
-    public void setCourseCredit(Integer courseCredit) {
+    public void setCourseCredit(String courseCredit) {
         this.courseCredit = courseCredit;
     }
 
-    public Integer getCourseTheory() {
+    public String getCourseTheory() {
         return courseTheory;
     }
 
-    public void setCourseTheory(Integer courseTheory) {
+    public void setCourseTheory(String courseTheory) {
         this.courseTheory = courseTheory;
     }
 
-    public Integer getCoursePractical() {
+    public String getCoursePractical() {
         return coursePractical;
     }
 
-    public void setCoursePractical(Integer coursePractical) {
+    public void setCoursePractical(String coursePractical) {
         this.coursePractical = coursePractical;
     }
 
-    public Integer getDiscuss() {
+    public String getDiscuss() {
         return discuss;
     }
 
-    public void setDiscuss(Integer discuss) {
+    public void setDiscuss(String discuss) {
         this.discuss = discuss;
     }
 
-    public Integer getSemester() {
+    public String getSemester() {
         return semester;
     }
 
-    public void setSemester(Integer semester) {
+    public void setSemester(String semester) {
         this.semester = semester;
     }
 }

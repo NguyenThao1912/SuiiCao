@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.models.CourseExam;
 import com.monsun.suiicao.models.Semester;
 import com.monsun.suiicao.repositories.ApiInstance;
@@ -40,7 +41,7 @@ public class StudentExamViewModel extends BaseViewModel<IStudentExam> {
     {
         //Đang test nên để mặc định id sinh viên là 1 - id nó là kiểu int nhé
 
-        Call<List<CourseExam>> listCall = apiInstance.getServices().getExamList(1,se.getSemesterKey());
+        Call<List<CourseExam>> listCall = apiInstance.getServices().getExamList(AppVar.currentuser.getStudentId(),se.getSemesterKey());
         listCall.enqueue(new Callback<List<CourseExam>>() {
             @Override
             public void onResponse(Call<List<CourseExam>> call, Response<List<CourseExam>> response) {
@@ -75,7 +76,7 @@ public class StudentExamViewModel extends BaseViewModel<IStudentExam> {
                 else
                 {
                     List<Semester> s = response.body();
-                    s.add(new Semester("","- Chọn Kỳ -"));
+                    s.add(new Semester(999,"- Chọn Kỳ -"));
                     listSemester.setValue(s);
                 }
             }

@@ -215,7 +215,7 @@
                 android:enabled="false"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="@{viewModel.infor.dateofbirth}" />
+                android:text="@{viewModel.infor.dateOfBirth}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -239,7 +239,7 @@
                 android:enabled="false"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="@{viewModel.infor.address}" />
+                android:text="@{viewModel.infor.birthplace}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -287,7 +287,7 @@
                 android:enabled="false"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="@{viewModel.infor.k}" />
+                android:text="@{viewModel.infor.classId}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -311,7 +311,7 @@
                 android:enabled="false"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="@{viewModel.infor.phonenumber}" />
+                android:text="@{viewModel.infor.studentMobile}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -335,7 +335,7 @@
                 android:enabled="false"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="@{viewModel.infor.classid}"
+                android:text="@{viewModel.infor.classId}"
                 android:textAlignment="center" />
 
             <TextView
@@ -362,7 +362,7 @@
                 android:enabled="false"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="@{viewModel.infor.CCCD}"
+                android:text="@{viewModel.infor.evaluation}"
                 android:visibility="invisible" />
 
         </LinearLayout>

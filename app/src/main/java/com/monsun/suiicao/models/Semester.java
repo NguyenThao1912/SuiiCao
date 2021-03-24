@@ -9,16 +9,16 @@ public class Semester {
 
     @SerializedName("SemesterKey")
     @Expose
-    private String semesterKey;
+    private int semesterKey;
     @SerializedName("SemesterName")
     @Expose
     private String semesterName;
 
-    public String getSemesterKey() {
+    public int getSemesterKey() {
         return semesterKey;
     }
 
-    public void setSemesterKey(String semesterKey) {
+    public void setSemesterKey(int semesterKey) {
         this.semesterKey = semesterKey;
     }
 
@@ -30,7 +30,7 @@ public class Semester {
         this.semesterName = semesterName;
     }
 
-    public Semester(String semesterKey, String semesterName) {
+    public Semester(int semesterKey, String semesterName) {
         this.semesterKey = semesterKey;
         this.semesterName = semesterName;
     }

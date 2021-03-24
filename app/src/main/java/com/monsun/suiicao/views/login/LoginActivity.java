@@ -75,4 +75,5 @@ public class LoginActivity extends BaseActivity implements ILoginHandler {
         else
             hideLoading();
     }
+
 }

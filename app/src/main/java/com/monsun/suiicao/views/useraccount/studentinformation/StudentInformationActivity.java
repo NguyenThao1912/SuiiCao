@@ -24,6 +24,12 @@ import kotlin.jvm.internal.Intrinsics;
 
 public class StudentInformationActivity extends BaseActivity implements IStuInformation{
     ActivityStudentInformationBinding binding;
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     StuInforViewModel viewModel ;
     private ImageView ivUserAvatar;
     private float EXPAND_AVATAR_SIZE;

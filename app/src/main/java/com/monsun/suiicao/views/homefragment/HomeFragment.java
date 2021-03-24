@@ -36,9 +36,9 @@ public class HomeFragment extends BaseFragment implements IHomeHandler {
         study_summary = v.findViewById(R.id.feature_study_exam);
         schedule = v.findViewById(R.id.feature_2);
         curriculum = v.findViewById(R.id.feature_3);
-        if (AppVar.Currentuser != null)
+        if (AppVar.currentuser != null)
         {
-            greeting.setText("Xin Chào " + AppVar.Currentuser.getFullName());
+            greeting.setText("Xin Chào " + AppVar.currentuser.getFullName());
         }
         study_summary.setOnClickListener(new View.OnClickListener() {
             @Override

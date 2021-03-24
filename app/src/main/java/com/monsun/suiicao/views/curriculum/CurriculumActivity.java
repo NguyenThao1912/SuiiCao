@@ -18,7 +18,7 @@ import com.monsun.suiicao.views.base.BaseActivity;
 import java.util.List;
 
 public class CurriculumActivity extends BaseActivity implements ICurriculum {
-
+    private static final String TAG = "CurriculumActivity";
     ActivityCurriculumBinding binding;
     CurriculumViewModel viewModel;
     RecyclerView lectures;
@@ -53,7 +53,6 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum {
     {
         lectures = findViewById(R.id.list_lecture);
     }
-
 
     @Override
     public void onBackPressed() {

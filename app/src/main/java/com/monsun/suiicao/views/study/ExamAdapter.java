@@ -30,12 +30,15 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ExamAdapter.ViewHolder holder, int position) {
-        holder.coursename.setText(courseExamList.get(position).getCourseName());
-        holder.examday.setText("Ngày Thi : "+courseExamList.get(position).getDate());
-        holder.examshift.setText("Ca thi : "+courseExamList.get(position).getShift());
-        holder.examformat.setText("Hình thức thi : " + courseExamList.get(position).getFormat());
-        holder.exam_student_id.setText("Số Báo Danh : " + courseExamList.get(position).getSBD());
-        holder.exam_location.setText("Địa Điểm :" + courseExamList.get(position).getLocation());
+        if (courseExamList.get(position).getDate() != null)
+        {
+            holder.coursename.setText(courseExamList.get(position).getCourseName());
+            holder.examday.setText("Ngày Thi : "+courseExamList.get(position).getDate());
+            holder.examshift.setText("Ca thi : "+courseExamList.get(position).getShift());
+            holder.examformat.setText("Hình thức thi : " + courseExamList.get(position).getFormat());
+            holder.exam_student_id.setText("Số Báo Danh : " + courseExamList.get(position).getSBD());
+            holder.exam_location.setText("Địa Điểm :" + courseExamList.get(position).getLocation());
+        }
     }
 
     @Override

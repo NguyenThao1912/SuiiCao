@@ -21,9 +21,12 @@ public class UserViewModel extends BaseViewModel<IUserHandler> {
     }
 
     private void initdata() {
-        stu_fullName.setValue(AppVar.Currentuser.getFullName());
-        major_class_year.setValue(AppVar.Currentuser.getmajor_class_year());
-        stuID .setValue(AppVar.Currentuser.getUsername()); ;
+        if (AppVar.currentuser.getFullName() != null)
+            stu_fullName.setValue(AppVar.currentuser.getFullName());
+        if (AppVar.currentuser.getYearIn() != null)
+            major_class_year.setValue(AppVar.currentuser.getYearIn());
+        if (AppVar.currentuser.getUsername() != null)
+            stuID .setValue(AppVar.currentuser.getUsername()); ;
     }
 
     public void signOutClick()
