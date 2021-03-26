@@ -11,12 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuiiCao"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".views.curriculum.CurriculumActivity"></activity>
+        android:usesCleartextTraffic="true"
+        >
+        <activity android:name=".views.chatting.message.MessageActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".views.curriculum.CurriculumActivity" />
         <activity android:name=".views.timetable.TimetableActivity" />
         <activity android:name=".views.study.StudentExamActivity" />
         <activity android:name=".views.useraccount.studentinformation.StudentInformationActivity" />
-        <activity android:name=".views.main.MainActivity" />
+        <activity android:name=".views.main.MainActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".views.login.LoginActivity" />
         <activity android:name=".views.SplashScreen">
             <intent-filter>

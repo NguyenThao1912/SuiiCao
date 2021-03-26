@@ -1,216 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.homefragment.HomeFragment"
-    android:background="@drawable/background">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.monsun.suiicao.views.homefragment.HomeFragmentViewModel" />
+    </data>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".views.homefragment.HomeFragment"
+        android:background="@drawable/background">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/greeting"
-            android:layout_width="300dp"
-            android:layout_height="83dp"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/main_infor"
-            android:gravity="center_horizontal"
-            android:paddingTop="27dp"
-            android:text="Xin chào ,"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/greeting"
+                    android:layout_width="300dp"
+                    android:layout_height="83dp"
+                    android:layout_marginTop="60dp"
+                    android:background="@drawable/main_infor"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="27dp"
+                    android:text="@{viewModel.greeting}"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.gridlayout.widget.GridLayout
-            android:layout_width="373dp"
-            android:layout_height="412dp"
-            android:background="@color/white"
-            android:clipChildren="true"
-            android:clipToPadding="false"
-            android:padding="5dp"
-            app:columnCount="2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/greeting"
-            app:layout_constraintVertical_bias="0.1"
-            app:rowCount="2">
+                <androidx.gridlayout.widget.GridLayout
+                    android:layout_width="373dp"
+                    android:layout_height="412dp"
+                    android:background="@color/white"
+                    android:clipChildren="true"
+                    android:clipToPadding="false"
+                    android:padding="5dp"
+                    app:columnCount="2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/greeting"
+                    app:layout_constraintVertical_bias="0.1"
+                    app:rowCount="2">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/feature_study_exam"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_margin="22dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="5dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="8dp"
-                app:layout_column="0"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                app:layout_row="0"
-                app:layout_rowWeight="1">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/feature_study_exam"
+                        android:onClick="@{() ->viewModel._OnClick_Student_Exam()}"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_margin="22dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="5dp"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="8dp"
+                        app:layout_column="0"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="fill"
+                        app:layout_row="0"
+                        app:layout_rowWeight="1">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                    <ImageView
-                        android:contentDescription="exam"
-                        android:id="@+id/feature_image1"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="30dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/_76_library" />
+                            <ImageView
+                                android:contentDescription="exam"
+                                android:id="@+id/feature_image1"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/_76_library" />
 
-                    <TextView
-                        android:id="@+id/feature_name1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/feature_image1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        android:text="Lịch Thi"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/feature_name1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/feature_image1"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                android:text="Lịch Thi"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/feature_2"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_margin="22dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="5dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="8dp"
-                app:layout_column="1"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                app:layout_row="0"
-                app:layout_rowWeight="1">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/feature_2"
+                        android:onClick="@{() ->viewModel._OnClick_Student_Schedule()}"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_margin="22dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="5dp"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="8dp"
+                        app:layout_column="1"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="fill"
+                        app:layout_row="0"
+                        app:layout_rowWeight="1">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/feature_image2"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="30dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/calendar_item" />
+                            <ImageView
+                                android:id="@+id/feature_image2"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/calendar_item" />
 
-                    <TextView
-                        android:id="@+id/feature_name2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/feature_image2"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        android:text="TKB"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                            <TextView
+                                android:id="@+id/feature_name2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/feature_image2"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                android:text="TKB"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
 
 
-            </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/feature_3"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_margin="22dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="5dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="8dp"
-                app:layout_column="0"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                app:layout_row="1"
-                app:layout_rowWeight="1">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/feature_3"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_margin="22dp"
+                        android:clickable="true"
+                        android:onClick="@{() ->viewModel._OnClick_Student_Curriculum()}"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="5dp"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="8dp"
+                        app:layout_column="0"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="fill"
+                        app:layout_row="1"
+                        app:layout_rowWeight="1">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/feature_image3"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="30dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/openbook" />
+                            <ImageView
+                                android:id="@+id/feature_image3"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/openbook" />
 
-                    <TextView
-                        android:id="@+id/feature_name3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/feature_image3"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        android:text="CT Học"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/feature_name3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/feature_image3"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                android:text="CT Học"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/feature_4"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_margin="22dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="5dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="8dp"
-                app:layout_column="1"
-                app:layout_columnWeight="1"
-                app:layout_gravity="fill"
-                app:layout_row="1"
-                app:layout_rowWeight="1">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/feature_4"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_margin="22dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:padding="5dp"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="8dp"
+                        app:layout_column="1"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="fill"
+                        app:layout_row="1"
+                        app:layout_rowWeight="1">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/feature_image4"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="30dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/_76_chat" />
+                            <ImageView
+                                android:id="@+id/feature_image4"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/_76_chat" />
 
-                    <TextView
-                        android:id="@+id/feature_name4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/feature_image4"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="15dp"
-                        android:text="Học Vụ"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-        </androidx.gridlayout.widget.GridLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+                            <TextView
+                                android:id="@+id/feature_name4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/feature_image4"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="15dp"
+                                android:text="Học Vụ"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </androidx.gridlayout.widget.GridLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </FrameLayout>
+</layout>

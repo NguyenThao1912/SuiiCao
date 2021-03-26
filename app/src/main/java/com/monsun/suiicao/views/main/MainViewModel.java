@@ -16,6 +16,7 @@ public class MainViewModel extends BaseViewModel<IMainHandler> {
     {
         listitem = new MutableLiveData<>();
         initData();
+
     }
 
     private void initData() {

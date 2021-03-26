@@ -80,10 +80,9 @@ public class userAccountFrag extends BaseFragment implements IUserHandler {
         getActivity().finish();
 
         // TODO logging out user
-
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signOut();
-        AppVar.currentuser = null;
+        AppVar.mStudent = null;
     }
 
     @Override

@@ -1,13 +1,16 @@
 package com.monsun.suiicao.views.base;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public abstract class BaseFragment extends Fragment {
+import com.monsun.suiicao.Utils.CommonUtils;
 
+public abstract class BaseFragment extends Fragment {
+    private ProgressDialog mProgressDialog;
     private BaseActivity activity;
     public abstract
     @LayoutRes
@@ -23,6 +26,17 @@ public abstract class BaseFragment extends Fragment {
     public void onDetach() {
         activity = null;
         super.onDetach();
+    }
+
+    public void hideLoading()
+    {
+        if (mProgressDialog != null && mProgressDialog.isShowing()){
+            mProgressDialog.cancel();
+        }
+    }
+    public void showLoading() {
+        hideLoading();
+        mProgressDialog = CommonUtils.showLoadingDialog(getContext());
     }
 
 }

@@ -20,7 +20,7 @@ public class StuInforViewModel extends BaseViewModel<IStuInformation> {
     private void setData()
     {
         Titletoolbar.setValue("Thông tin sinh viên");
-        infor.setValue(AppVar.currentuser);
+        infor.setValue(AppVar.mStudent);
 
     }
 }

@@ -29,7 +29,7 @@ public class CurriculumViewModel extends BaseViewModel<ICurriculum> {
     }
 
     private void getdata() {
-        Call<List<Curriculum>> services = instance.getServices().getStudentLecture(Integer.parseInt(AppVar.currentuser.getClassId()));
+        Call<List<Curriculum>> services = instance.getServices().getStudentLecture(Integer.parseInt(AppVar.mStudent.getClassId()));
         services.enqueue(new Callback<List<Curriculum>>() {
             @Override
             public void onResponse(Call<List<Curriculum>> call, Response<List<Curriculum>> response) {

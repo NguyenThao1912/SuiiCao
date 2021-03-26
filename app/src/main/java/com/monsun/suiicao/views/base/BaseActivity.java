@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.monsun.suiicao.Utils.CommonUtils;
 
 public abstract class BaseActivity extends AppCompatActivity   {
@@ -65,7 +64,6 @@ public abstract class BaseActivity extends AppCompatActivity   {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        mAuth.signOut();
+
     }
 }

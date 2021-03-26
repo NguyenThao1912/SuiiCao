@@ -41,7 +41,7 @@ public class StudentExamViewModel extends BaseViewModel<IStudentExam> {
     {
         //Đang test nên để mặc định id sinh viên là 1 - id nó là kiểu int nhé
 
-        Call<List<CourseExam>> listCall = apiInstance.getServices().getExamList(AppVar.currentuser.getStudentId(),se.getSemesterKey());
+        Call<List<CourseExam>> listCall = apiInstance.getServices().getExamList(AppVar.mStudent.getStudentId(),se.getSemesterKey());
         listCall.enqueue(new Callback<List<CourseExam>>() {
             @Override
             public void onResponse(Call<List<CourseExam>> call, Response<List<CourseExam>> response) {

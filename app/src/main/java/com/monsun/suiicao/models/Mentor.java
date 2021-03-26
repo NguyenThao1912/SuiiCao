@@ -34,6 +34,15 @@ public class Mentor {
     @SerializedName("img")
     @Expose
     private String img;
+    private String username;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
     public String getMentorId() {
         return mentorId;

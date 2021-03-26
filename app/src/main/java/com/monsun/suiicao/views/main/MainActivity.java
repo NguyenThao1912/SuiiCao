@@ -3,6 +3,7 @@ package com.monsun.suiicao.views.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -11,12 +12,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.monsun.suiicao.views.homefragment.HomeFragment;
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
+import com.monsun.suiicao.firebase.FirebaseSer;
 import com.monsun.suiicao.views.base.BaseActivity;
+import com.monsun.suiicao.views.chatting.ContactFragment;
+import com.monsun.suiicao.views.homefragment.HomeFragment;
 import com.monsun.suiicao.views.useraccount.userAccountFrag;
 
 public class MainActivity extends BaseActivity implements IMainHandler{
+    private static final String TAG = "MainActivity";
     private MainViewModel mainViewModel;
     private BottomNavigationView bottomNavigationView;
     private Fragment selectedFragment;
@@ -24,8 +29,17 @@ public class MainActivity extends BaseActivity implements IMainHandler{
     public static Intent newIntent(Context context) {
         return new Intent(context, MainActivity.class);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // TODO Logging in Firebase
+        FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), MainActivity.this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setWidget();
@@ -58,8 +72,9 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                                 return false;
 
                             case R.id.ask_answer:
+                                selectedFragment = ContactFragment.newInstance();
                                 Toast.makeText(MainActivity.this, "ask answer", Toast.LENGTH_SHORT).show();
-                                return false;
+                                break;
 
                             case R.id.user_account:
                                 selectedFragment = userAccountFrag.newInstance();
