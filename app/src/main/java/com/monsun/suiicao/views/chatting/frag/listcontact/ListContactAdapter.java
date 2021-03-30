@@ -38,12 +38,14 @@ public class ListContactAdapter extends RecyclerView.Adapter<ListContactAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.contact_name.setText(  lcontact.get(position).getContact_name());
+        // TODO Nếu là mentor thì thấy sv
         holder.contact_id.setText("MSV : " + lcontact.get(position).getContact_id());
+
         if (lcontact.get(position).getContact_img().equals("default"))
             Glide.with(context).load(R.drawable.testprofile).into(holder.contact_image);
         else
             Glide.with(context).load(lcontact.get(position).getContact_img()).into(holder.contact_image);
-
+        // TODO  Nếu là Sinh viên thì thấy mentor
     }
 
     @Override

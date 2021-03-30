@@ -46,8 +46,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Chat chat = chatList.get(position);
+        // TODO delete message -> click -> lấy id -> xóa message có id
         holder.message.setText(chat.getMessage());
-        //TODO set user img from firebase
+        // TODO set user img from firebase
         Glide.with(context).load(R.drawable.testprofile).into(holder.imageView);
 
     }

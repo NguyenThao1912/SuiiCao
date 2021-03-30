@@ -61,9 +61,4 @@ public abstract class BaseActivity extends AppCompatActivity   {
         backpresstimes = System.currentTimeMillis();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
 }

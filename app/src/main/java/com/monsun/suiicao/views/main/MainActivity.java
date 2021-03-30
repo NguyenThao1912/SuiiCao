@@ -33,8 +33,13 @@ public class MainActivity extends BaseActivity implements IMainHandler{
     @Override
     protected void onStart() {
         super.onStart();
-        // TODO Logging in Firebase
-        FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), MainActivity.this);
+        if (FirebaseSer.FireAuth_User == null)
+            FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), MainActivity.this);
+    }
+
+    private void reload() {
+        finish();
+        startActivity(getIntent());
     }
 
     @Override
@@ -48,6 +53,7 @@ public class MainActivity extends BaseActivity implements IMainHandler{
         mainViewModel.setNavigator(this);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+
     }
     private void setWidget()
     {

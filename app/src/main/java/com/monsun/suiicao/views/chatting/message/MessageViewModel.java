@@ -21,4 +21,8 @@ public class MessageViewModel extends BaseViewModel<IMessage> {
 
         getNavigator().SendMessage(message);
     }
+    public void GoBack()
+    {
+        getNavigator().goback();
+    }
 }

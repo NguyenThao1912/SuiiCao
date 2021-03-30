@@ -1,5 +1,7 @@
 package com.monsun.suiicao.views.login;
 
+import android.app.Activity;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -61,12 +63,13 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
                     {
                         if (response.body())
                         {
-                            // TODO: Student Login
+
                             if (!Username.startsWith("GV"))
                             {
                                 getNavigator().showToast("Login Successful");
                                 Log.d(TAG, "Login Successfull");
                                 GetUserInformation();
+
 
                             }
                             // TODO : Mentor Login

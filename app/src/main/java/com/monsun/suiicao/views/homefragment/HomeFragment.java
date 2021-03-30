@@ -32,11 +32,6 @@ public class HomeFragment extends BaseFragment implements IHomeHandler {
         return fragment;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
 
     @Override
     public int getLayoutId() {

@@ -101,7 +101,7 @@ public class ListContactFragment extends BaseFragment implements ListContactAdap
 
 
     private  void GetUser(String url) {
-        SetIsLoading(true);
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(url);
         List<Contact> contacts = new ArrayList<>();
         reference.addValueEventListener(new ValueEventListener() {
@@ -124,7 +124,7 @@ public class ListContactFragment extends BaseFragment implements ListContactAdap
 
             }
         });
-        SetIsLoading(false);
+
     }
 
     @Override

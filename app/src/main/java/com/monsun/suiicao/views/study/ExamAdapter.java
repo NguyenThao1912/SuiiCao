@@ -47,6 +47,8 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     }
 
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView coursename;
         public final TextView examday;

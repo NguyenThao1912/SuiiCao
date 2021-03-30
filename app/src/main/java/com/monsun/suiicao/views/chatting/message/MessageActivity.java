@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +27,7 @@ import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.main.MainActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,9 +65,10 @@ public class MessageActivity extends BaseActivity implements IMessage {
         name = findViewById(R.id.message_name);
         //================ TODO cheps code
         recyclerView = findViewById(R.id.message_chat);
-        recyclerView.setHasFixedSize(true);
-
-        ReadMessage(FirebaseSer.FireAuth_User.getUid(),i.getStringExtra("uid"),"");
+        //TODO Get firebase uid
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser User = auth.getCurrentUser();
+        ReadMessage(User.getUid(),i.getStringExtra("uid"),"");
         //=============
         // Set data
 
@@ -92,7 +96,7 @@ public class MessageActivity extends BaseActivity implements IMessage {
                 }
                 MessageAdapter adapter = new MessageAdapter(chats);
                 recyclerView.setAdapter(adapter);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessageActivity.this,LinearLayoutManager.VERTICAL,false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessageActivity.this);
                 linearLayoutManager.setStackFromEnd(true);
                 recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -114,7 +118,28 @@ public class MessageActivity extends BaseActivity implements IMessage {
         chat.put("sender",senderid);
         chat.put("receiver",receiverid);
         chat.put("message",message);
+        chat.put("createAt", Calendar.getInstance().getTime().toString());
+        chat.put("chatID", java.util.UUID.randomUUID().toString().replace("-", ""));
         ref.child("chats").push().setValue(chat);
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                                                .getReference("ChatList")
+                                                .child(FirebaseSer.FireAuth_User.getUid())
+                                                .child(receiverid);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists())
+                {
+                    databaseReference.child("id").setValue(receiverid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     @Override
     public void SendMessage(String message) {
@@ -130,5 +155,10 @@ public class MessageActivity extends BaseActivity implements IMessage {
             ReadMessage(FirebaseSer.FireAuth_User.getUid(),i.getStringExtra("uid"),"");
         }
 
+    }
+
+    @Override
+    public void goback() {
+        finish();
     }
 }

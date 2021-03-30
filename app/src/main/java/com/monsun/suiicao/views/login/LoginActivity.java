@@ -14,7 +14,7 @@ import com.monsun.suiicao.databinding.LoginActivityBinding;
 import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.main.MainActivity;
 
-public class LoginActivity extends BaseActivity implements ILoginHandler {
+public class LoginActivity extends BaseActivity  implements ILoginHandler {
     private static final String TAG = "LoginActivity";
     private LoginActivityBinding loginBinding;
     private LoginViewModel viewModel;
@@ -58,9 +58,11 @@ public class LoginActivity extends BaseActivity implements ILoginHandler {
 
     @Override
     public void startMainActivity() {
+
         Intent intent = MainActivity.newIntent(LoginActivity.this);
         startActivity(intent);
         finish();
+
     }
 
     @Override

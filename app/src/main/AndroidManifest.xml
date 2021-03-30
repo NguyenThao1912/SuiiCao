@@ -22,7 +22,8 @@
         <activity android:name=".views.useraccount.studentinformation.StudentInformationActivity" />
         <activity android:name=".views.main.MainActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".views.login.LoginActivity" />
+        <activity android:name=".views.login.LoginActivity" android:windowSoftInputMode="stateVisible|adjustResize"
+            android:screenOrientation="portrait"/>
         <activity android:name=".views.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
