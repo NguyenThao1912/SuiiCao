@@ -43,9 +43,80 @@ public class Users {
     @SerializedName("Evaluation")
     @Expose
     private String evaluation;
-    @SerializedName("img")
+    @SerializedName("images")
     @Expose
     private String img;
+    @SerializedName("parent_name")
+    @Expose
+    private String parentname;
+
+    @SerializedName("CCCD")
+    @Expose
+    private String CCCD;
+
+    @SerializedName("address")
+    @Expose
+    private String address;
+
+    @SerializedName("nationality")
+    @Expose
+    private String nationality;
+
+    @SerializedName("religion")
+    @Expose
+    private String religion;
+
+    @SerializedName("nation")
+    @Expose
+    private String nation;
+
+    public String getParentname() {
+        return parentname;
+    }
+
+    public void setParentname(String parentname) {
+        this.parentname = parentname;
+    }
+
+    public String getCCCD() {
+        return CCCD;
+    }
+
+    public void setCCCD(String CCCD) {
+        this.CCCD = CCCD;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
+    }
+
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
+    }
 
     private String username;
 

@@ -18,6 +18,7 @@ import com.monsun.suiicao.firebase.FirebaseSer;
 import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.chatting.ContactFragment;
 import com.monsun.suiicao.views.homefragment.HomeFragment;
+import com.monsun.suiicao.views.homementor.mentormain;
 import com.monsun.suiicao.views.useraccount.userAccountFrag;
 
 public class MainActivity extends BaseActivity implements IMainHandler{
@@ -32,9 +33,15 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
     @Override
     protected void onStart() {
+        if (AppVar.mStudent != null){
+            if (FirebaseSer.FireAuth_User == null)
+                FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), MainActivity.this);
+        }
+        if (AppVar.mMentor != null){
+            if (FirebaseSer.FireAuth_User == null)
+                FirebaseSer.TRY_LOGGING_IN(AppVar.mMentor.getEmail(), MainActivity.this);
+        }
         super.onStart();
-        if (FirebaseSer.FireAuth_User == null)
-            FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), MainActivity.this);
     }
 
     private void reload() {
@@ -52,7 +59,11 @@ public class MainActivity extends BaseActivity implements IMainHandler{
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mainViewModel.setNavigator(this);
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+
+        if (AppVar.mMentor != null)
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new mentormain()).commit();
+        else
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
 
     }
     private void setWidget()
@@ -69,9 +80,20 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                         switch (item.getItemId())
                         {
                             case R.id.home_Screen:
-                                selectedFragment = HomeFragment.newInstance();
-                                Toast.makeText(MainActivity.this, "Home screen", Toast.LENGTH_SHORT).show();
-                                break;
+                            {
+                                if (AppVar.mStudent != null){
+                                    selectedFragment = HomeFragment.newInstance();
+                                    Toast.makeText(MainActivity.this, "Home screen", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+                                else
+                                {
+                                    selectedFragment = mentormain.newInstance();
+                                    Toast.makeText(MainActivity.this, "mentor main", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+                            }
+
 
                             case R.id.help:
                                 Toast.makeText(MainActivity.this, "help", Toast.LENGTH_SHORT).show();
@@ -83,9 +105,18 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                                 break;
 
                             case R.id.user_account:
-                                selectedFragment = userAccountFrag.newInstance();
-                                Toast.makeText(MainActivity.this, "user account", Toast.LENGTH_SHORT).show();
-                                break;
+                                if (AppVar.mStudent != null){
+                                    selectedFragment = userAccountFrag.newInstance();
+                                    Toast.makeText(MainActivity.this, "user account", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+                                else
+                                {
+                                    selectedFragment = mentormain.newInstance();
+                                    Toast.makeText(MainActivity.this, "mentor main", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+
                         }
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
                         return true;

@@ -11,7 +11,7 @@ import com.monsun.suiicao.R;
 
 public final class CommonUtils {
     public static int FIREBASE_SIGN_IN_SUCESS = 6;
-    public static int FIREBASE_SIGN_IN_FAIL = 6;
+    public static int FIREBASE_SIGN_IN_FAIL = -1;
     public static int FIREBASE_CREATE_SUCCESS = 8;
     public static int FIREBASE_PASSWORD_TOO_WEAK = 10;
     public static int FIREBASE_EMAIL_WRONG_FORMAT = 15;

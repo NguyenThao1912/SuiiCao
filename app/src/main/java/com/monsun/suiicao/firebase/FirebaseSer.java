@@ -13,18 +13,12 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.Utils.CommonUtils;
-import com.monsun.suiicao.models.Contact;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FirebaseSer {
@@ -81,7 +75,10 @@ public class FirebaseSer {
 
                                 // TODO Create User Information
                                 Log.d(TAG, "Sign In FireBase: Success ");
-                                Create_User_Information_FireBase(AppVar.mStudent.getUsername(), type, uid,name);
+                                if (AppVar.mStudent != null)
+                                    Create_User_Information_FireBase(AppVar.mStudent.getUsername(), type, uid,name);
+                                else
+                                    Create_User_Information_FireBase(AppVar.mMentor.getUsername(), type, uid,name);
                             }
                             else
                                 throw task.getException();

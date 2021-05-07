@@ -79,7 +79,12 @@ public class ListContactFragment extends BaseFragment implements ListContactAdap
         viewModel.setNavigator(this);
         v = binding.getRoot();
         recyclerView = v.findViewById(R.id.list_contact);
-        GetUser("class_" + AppVar.mStudent.getClassId());
+        //============================================================================
+        if (AppVar.mMentor != null)
+            GetUser("class_" + AppVar.mMentor.getClassId());
+        else
+            GetUser("mentor_"+ AppVar.mStudent.getClassId());
+        //============================================================================
         adapter = new ListContactAdapter(contactList,this);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
@@ -98,8 +103,6 @@ public class ListContactFragment extends BaseFragment implements ListContactAdap
         startActivity(intent);
     }
 
-
-
     private  void GetUser(String url) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(url);
@@ -111,7 +114,7 @@ public class ListContactFragment extends BaseFragment implements ListContactAdap
                 for (DataSnapshot data : snapshot.getChildren())
                 {
                     Contact contact = data.getValue(Contact.class);
-                    //if (contact.getUid() != FireAuth_User.getUid() )
+
                     contacts.add(contact);
                 }
                 contactList = contacts;

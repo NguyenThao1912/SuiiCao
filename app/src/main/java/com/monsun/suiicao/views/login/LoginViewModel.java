@@ -1,7 +1,5 @@
 package com.monsun.suiicao.views.login;
 
-import android.app.Activity;
-import android.os.Handler;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -10,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.firebase.FirebaseSer;
+import com.monsun.suiicao.models.Mentor;
 import com.monsun.suiicao.models.Users;
 import com.monsun.suiicao.repositories.ApiInstance;
 import com.monsun.suiicao.security.HashMd5;
@@ -75,6 +74,9 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
                             // TODO : Mentor Login
                             else
                             {
+                                getNavigator().showToast("Login Successful");
+                                Log.d(TAG, "Login Successfull");
+                                GetMentorInfomation();
                                 //Mentor login
                             }
                         }
@@ -106,9 +108,38 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
     {
         getNavigator().showToast("Please contact to your mentor for your problem ! ");
     }
+    private void GetMentorInfomation()
+    {
+        Call<Mentor> call = caller.getServices().getMentorByUserName(Username);
+        call.enqueue(new Callback<Mentor>() {
+            @Override
+            public void onResponse(Call<Mentor> call, Response<Mentor> response) {
+                if (response.isSuccessful())
+                {
+                    try{
+
+                        AppVar.mMentor = response.body();
+                        AppVar.mMentor.setUsername(Username);
+                        Log.d(TAG, "onResponse: Get Data" + AppVar.mMentor.getMentorName());
+                        GET_INFORMATION_RESULT = CommonUtils.GET_INFORMATION_SUCESS;
+                        // TODO start main activity
+                        getNavigator().startMainActivity();
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Mentor> call, Throwable t) {
+
+            }
+        });
+    }
     private void GetUserInformation()
     {
-
         Call<Users> call =  caller.getServices().getStudentbyUsername(Username);
         call.enqueue(new Callback<Users>() {
            @Override

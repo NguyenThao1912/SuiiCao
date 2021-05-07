@@ -6,4 +6,6 @@ public interface ILoginHandler {
     void startMainActivity();
     void showToast(CharSequence message);
     void setIsLoading(Boolean isLoading);
+
+
 }

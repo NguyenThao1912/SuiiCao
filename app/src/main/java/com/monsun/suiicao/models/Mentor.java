@@ -4,9 +4,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Mentor {
+
+    private String Username;
+
     @SerializedName("mentor_id")
     @Expose
-    private String mentorId;
+    private Integer mentorId;
     @SerializedName("mentor_name")
     @Expose
     private String mentorName;
@@ -16,9 +19,9 @@ public class Mentor {
     @SerializedName("Accountid")
     @Expose
     private Integer accountid;
-    @SerializedName("edu_background")
+    @SerializedName("HocHam")
     @Expose
-    private String eduBackground;
+    private String hocHam;
     @SerializedName("teachingtime")
     @Expose
     private String teachingtime;
@@ -31,24 +34,18 @@ public class Mentor {
     @SerializedName("dateofbirth")
     @Expose
     private String dateofbirth;
-    @SerializedName("img")
+    @SerializedName("images")
     @Expose
-    private String img;
-    private String username;
-    public String getUsername() {
-        return username;
-    }
+    private String images;
+    @SerializedName("HocVi")
+    @Expose
+    private String hocVi;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-
-    public String getMentorId() {
+    public Integer getMentorId() {
         return mentorId;
     }
 
-    public void setMentorId(String mentorId) {
+    public void setMentorId(Integer mentorId) {
         this.mentorId = mentorId;
     }
 
@@ -76,12 +73,12 @@ public class Mentor {
         this.accountid = accountid;
     }
 
-    public String getEduBackground() {
-        return eduBackground;
+    public String getHocHam() {
+        return hocHam;
     }
 
-    public void setEduBackground(String eduBackground) {
-        this.eduBackground = eduBackground;
+    public void setHocHam(String hocHam) {
+        this.hocHam = hocHam;
     }
 
     public String getTeachingtime() {
@@ -116,11 +113,26 @@ public class Mentor {
         this.dateofbirth = dateofbirth;
     }
 
-    public String getImg() {
-        return img;
+    public String getImages() {
+        return images;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    public String getHocVi() {
+        return hocVi;
+    }
+
+    public void setHocVi(String hocVi) {
+        this.hocVi = hocVi;
+    }
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
     }
 }

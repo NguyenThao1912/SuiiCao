@@ -13,7 +13,7 @@ public class HomeFragmentViewModel extends BaseViewModel<IHomeHandler> {
     public HomeFragmentViewModel()
     {
         Log.d(TAG, "HomeFragmentViewModel: ");
-        greeting.setValue("Xin Chào" + AppVar.mStudent.getFullName());
+        greeting.setValue("Xin Chào " + AppVar.mStudent.getFullName() + "\n" + "Phụ Huynh " + AppVar.mStudent.getParentname());
     }
     public void _OnClick_Student_Exam()
     {
