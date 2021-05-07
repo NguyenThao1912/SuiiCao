@@ -19,6 +19,7 @@ import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.chatting.ContactFragment;
 import com.monsun.suiicao.views.homefragment.HomeFragment;
 import com.monsun.suiicao.views.homementor.mentormain;
+import com.monsun.suiicao.views.login.LoginActivity;
 import com.monsun.suiicao.views.useraccount.userAccountFrag;
 
 public class MainActivity extends BaseActivity implements IMainHandler{
@@ -112,9 +113,12 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                                 }
                                 else
                                 {
-                                    selectedFragment = mentormain.newInstance();
-                                    Toast.makeText(MainActivity.this, "mentor main", Toast.LENGTH_SHORT).show();
-                                    break;
+                                    FirebaseSer.mAuth.signOut();
+                                    FirebaseSer.FireAuth_User = null;
+                                    AppVar.mMentor = null;
+                                    Intent t = LoginActivity.newIntent(MainActivity.this);
+                                    startActivity(t);
+                                    finish();
                                 }
 
                         }
@@ -135,5 +139,13 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
     }
 
+    @Override
+    protected void onDestroy() {
 
+        FirebaseSer.mAuth.signOut();
+        FirebaseSer.FireAuth_User = null;
+        AppVar.mMentor = null;
+
+        super.onDestroy();
+    }
 }
