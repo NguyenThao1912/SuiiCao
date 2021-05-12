@@ -22,6 +22,19 @@ public class Schedule {
     @SerializedName("dayinweek")
     @Expose
     private String dayinweek;
+    @SerializedName("location")
+    @Expose
+    private String location;
+
+    private boolean isexpandable = true;
+
+    public boolean isIsexpandable() {
+        return isexpandable;
+    }
+
+    public void setIsexpandable(boolean isexpandable) {
+        this.isexpandable = isexpandable;
+    }
 
     public String getCourseID() {
         return courseID;
@@ -69,5 +82,13 @@ public class Schedule {
 
     public void setDayinweek(String dayinweek) {
         this.dayinweek = dayinweek;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
