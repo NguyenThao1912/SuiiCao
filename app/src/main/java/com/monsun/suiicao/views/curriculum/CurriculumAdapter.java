@@ -3,6 +3,8 @@ package com.monsun.suiicao.views.curriculum;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,14 +20,16 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class CurriculumAdapter extends RecyclerView.Adapter<CurriculumAdapter.ViewHolder> {
+public class CurriculumAdapter extends RecyclerView.Adapter<CurriculumAdapter.ViewHolder> implements Filterable {
 
     private List<Curriculum> list;
+    private List<Curriculum> filterlist;
     //thu
     private List<Boolean> isexpandable ;
     public CurriculumAdapter(List<Curriculum> mlist)
     {
         list = mlist;
+        filterlist = mlist;
     }
     @NonNull
     @Override
@@ -60,6 +64,43 @@ public class CurriculumAdapter extends RecyclerView.Adapter<CurriculumAdapter.Vi
         int n = list.size();
         isexpandable = new ArrayList<>(Collections.nCopies(n, false));
         return list.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                constraint = constraint.toString().toLowerCase();
+                FilterResults results = new FilterResults();
+                List<Curriculum> filter = new ArrayList<>();
+                if (constraint.equals(null) || constraint.equals(""))
+                {
+                    results.values = filterlist;
+                    return results;
+                }
+                else
+                {
+                    for (Curriculum r:list) {
+                        if (r.getCourseName().toLowerCase().contains(constraint))
+                        {
+                            filter.add(r);
+                        }
+
+                    }
+
+                }
+                results.values = filter;
+                return results;
+            }
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                List<Curriculum> curriculumList = (List<Curriculum>) results.values;
+                list = curriculumList;
+                notifyDataSetChanged();
+            }
+        };
     }
 
 

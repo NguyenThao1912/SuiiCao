@@ -1,11 +1,11 @@
 package com.monsun.suiicao.views.chatting.frag.ListChat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +23,7 @@ import com.monsun.suiicao.firebase.FirebaseSer;
 import com.monsun.suiicao.models.ChatList;
 import com.monsun.suiicao.models.Contact;
 import com.monsun.suiicao.views.base.BaseFragment;
+import com.monsun.suiicao.views.chatting.message.MessageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class ChatFragment extends BaseFragment implements ChatAdapter.OnRecentCh
         // Inflate the layout for this fragment
         v =  inflater.inflate(R.layout.fragment_recent_chat, container, false);
         recyclerView = v.findViewById(R.id.list_chat);
-        GetChatList();
+       // GetChatList();
         return v;
     }
     private void GetChatList()
@@ -81,7 +82,7 @@ public class ChatFragment extends BaseFragment implements ChatAdapter.OnRecentCh
                 chatLists.clear();
                 for (DataSnapshot data:snapshot.getChildren())
                 {
-                    ChatList c = snapshot.getValue(ChatList.class);
+                    ChatList c = data.getValue(ChatList.class);
                     chatLists.add(c);
                 }
                 GetListRecentContact();
@@ -97,11 +98,12 @@ public class ChatFragment extends BaseFragment implements ChatAdapter.OnRecentCh
     private void GetListRecentContact()
     {
 
-        Log.d(TAG, "GetListRecentContact: " + chatLists.size());
+        Log.d(TAG, "GetListRecentContact: " + chatLists.get(0).getId());
         contactList = new ArrayList<>();
-        if (AppVar.mMentor != null)
+        if(AppVar.mMentor != null)
             databaseReference = FirebaseDatabase.getInstance().getReference("class_" + AppVar.mMentor.getClassId());
-        else
+
+        if (AppVar.mStudent != null)
             databaseReference = FirebaseDatabase.getInstance().getReference("mentor_" + AppVar.mStudent.getClassId());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -134,6 +136,11 @@ public class ChatFragment extends BaseFragment implements ChatAdapter.OnRecentCh
 
     @Override
     public void OnRecentChatClick(int position) {
-        Toast.makeText(getActivity(), "1111", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "on Recent Chat click: " + position);
+        Intent intent =  new Intent(getActivity(), MessageActivity.class);
+        intent.putExtra("uid",contactList.get(position).getUid());
+        intent.putExtra("name",contactList.get(position).getContact_name());
+        intent.putExtra("img",contactList.get(position).getContact_img());
+        startActivity(intent);
     }
 }

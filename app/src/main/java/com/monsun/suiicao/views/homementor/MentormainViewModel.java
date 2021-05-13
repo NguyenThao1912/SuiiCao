@@ -15,4 +15,8 @@ public class MentormainViewModel extends BaseViewModel<IMentormain> {
         Log.d(TAG, "mentormainViewModel: ");
         greeting.setValue("Xin Chào " + AppVar.mMentor.getMentorName());
     }
+    public void OpenListStudent()
+    {
+        getNavigator().OpenListStudent();
+    }
 }

@@ -50,7 +50,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/feature_1_mentor"
-
+                        android:onClick="@{() ->viewModel.OpenListStudent()}"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_margin="22dp"
@@ -87,7 +87,7 @@
                                 android:layout_below="@+id/feature_image1"
                                 android:layout_centerHorizontal="true"
                                 android:layout_marginTop="15dp"
-                                android:text="Lịch Thi"
+                                android:text="DS Sinh Viên"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>

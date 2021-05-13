@@ -69,6 +69,15 @@ public class Users {
     @SerializedName("nation")
     @Expose
     private String nation;
+    private boolean checkstatus = false;
+
+    public boolean isCheckstatus() {
+        return checkstatus;
+    }
+
+    public void setCheckstatus(boolean checkstatus) {
+        this.checkstatus = checkstatus;
+    }
 
     public String getParentname() {
         return parentname;

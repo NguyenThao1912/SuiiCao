@@ -1,0 +1,71 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardUseCompatPadding="true"
+    >
+    <RelativeLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@drawable/testprofile"
+            android:id="@+id/list_student_img"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:padding="5dp"/>
+        <LinearLayout
+            android:layout_toRightOf="@+id/list_student_img"
+            android:id="@+id/list_student_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/list_student_name"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="18sp"
+                android:paddingLeft="20dp"
+                android:hint="thu nghiem"
+                android:gravity="left"/>
+            <TextView
+                android:paddingLeft="20dp"
+                android:textColor="#0303fc"
+                android:id="@+id/list_student_email"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:hint="thu nghiem"
+                android:gravity="left"/>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/list_student_status"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

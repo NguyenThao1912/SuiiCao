@@ -39,7 +39,6 @@ public class ContactFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
     }
 
     @Override
@@ -56,10 +55,10 @@ public class ContactFragment extends Fragment {
                 switch (position)
                 {
                     case 0:
-                        tab.setText("Users");
+                        tab.setText("Recent Contact");
                         break;
                     case 1:
-                        tab.setText("Contacts");
+                        tab.setText("Users");
                         break;
                 }
             }

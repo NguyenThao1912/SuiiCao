@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+    <EditText
+        android:id="@+id/list_student_message"
+        android:inputType="textMultiLine"
+        android:hint="Your Message"
+        android:lines="10"
+        android:minLines="8"
+        android:gravity="top|left"
+        android:maxLines="10"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+    />
+
+    <Button
+        android:id="@+id/list_student_send_message"
+        android:text="Gửi tin nhắn"
+        android:layout_gravity="right"
+        android:textSize="14dp"
+        android:padding="2dp"
+        android:onClick="SendMessage"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="150dp"
+        android:shadowRadius="0.2"
+        android:layout_height="wrap_content" />
+</LinearLayout>

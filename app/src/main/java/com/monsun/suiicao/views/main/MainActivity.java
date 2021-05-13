@@ -1,5 +1,6 @@
 package com.monsun.suiicao.views.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,17 +35,20 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
     @Override
     protected void onStart() {
+        tryLogin(this);
+        super.onStart();
+    }
+    public static void tryLogin(Context context)
+    {
         if (AppVar.mStudent != null){
             if (FirebaseSer.FireAuth_User == null)
-                FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), MainActivity.this);
+                FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), (Activity) context);
         }
         if (AppVar.mMentor != null){
             if (FirebaseSer.FireAuth_User == null)
-                FirebaseSer.TRY_LOGGING_IN(AppVar.mMentor.getEmail(), MainActivity.this);
+                FirebaseSer.TRY_LOGGING_IN(AppVar.mMentor.getEmail(), (Activity) context);
         }
-        super.onStart();
     }
-
     private void reload() {
         finish();
         startActivity(getIntent());
@@ -95,15 +99,19 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                                 }
                             }
 
-
-                            case R.id.help:
-                                Toast.makeText(MainActivity.this, "help", Toast.LENGTH_SHORT).show();
-                                return false;
-
                             case R.id.ask_answer:
-                                selectedFragment = ContactFragment.newInstance();
-                                Toast.makeText(MainActivity.this, "ask answer", Toast.LENGTH_SHORT).show();
-                                break;
+                            {
+                                if (FirebaseSer.mAuth == null){
+                                    tryLogin(MainActivity.this);
+                                    break;
+                                }
+                                else{
+
+                                    selectedFragment = ContactFragment.newInstance();
+                                    Toast.makeText(MainActivity.this, "ask answer", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+                            }
 
                             case R.id.user_account:
                                 if (AppVar.mStudent != null){

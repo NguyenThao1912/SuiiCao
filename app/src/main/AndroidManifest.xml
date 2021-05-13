@@ -11,23 +11,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuiiCao"
-        android:usesCleartextTraffic="true"
-        >
-        <activity android:name=".views.chatting.message.MessageActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:screenOrientation="portrait"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".views.liststudent.ListStudent"
+            android:parentActivityName=".views.main.MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.main.MainActivity">
+
+            </meta-data>
+        </activity>
+        <activity
+            android:name=".views.chatting.message.MessageActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".views.curriculum.CurriculumActivity" />
         <activity android:name=".views.timetable.TimetableActivity" />
         <activity android:name=".views.study.StudentExamActivity" />
         <activity android:name=".views.useraccount.studentinformation.StudentInformationActivity" />
-        <activity android:name=".views.main.MainActivity"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".views.login.LoginActivity" android:windowSoftInputMode="stateVisible|adjustResize"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".views.main.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".views.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
         <activity android:name=".views.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

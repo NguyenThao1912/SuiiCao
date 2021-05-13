@@ -1,5 +1,6 @@
 package com.monsun.suiicao.views.homementor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.FragmentMentormainBinding;
 import com.monsun.suiicao.views.base.BaseFragment;
+import com.monsun.suiicao.views.liststudent.ListStudent;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,5 +62,9 @@ public class mentormain extends BaseFragment implements IMentormain {
         return v;
     }
 
-
+    @Override
+    public void OpenListStudent() {
+        Intent i = ListStudent.newIntent(getActivity());
+        startActivity(i);
+    }
 }
