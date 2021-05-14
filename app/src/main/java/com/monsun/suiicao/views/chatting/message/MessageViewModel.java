@@ -18,7 +18,6 @@ public class MessageViewModel extends BaseViewModel<IMessage> {
         Log.d(TAG, "OnSendIconCLick: send ne " + Message.getValue());
         String message = Message.getValue();
         Message.postValue("");
-
         getNavigator().SendMessage(message);
     }
     public void GoBack()

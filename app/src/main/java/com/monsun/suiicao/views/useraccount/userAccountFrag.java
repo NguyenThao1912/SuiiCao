@@ -81,7 +81,6 @@ public class userAccountFrag extends BaseFragment implements IUserHandler {
 
 
         FirebaseSer.mAuth.signOut();
-        FirebaseSer.FireAuth_User = null;
         AppVar.mStudent = null;
     }
 

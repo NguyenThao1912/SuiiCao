@@ -40,7 +40,6 @@ public class MessageActivity extends BaseActivity implements IMessage {
     private MessageViewModel viewModel;
     private RecyclerView recyclerView;
     private Intent i;
-
     public static Intent newIntent(Context context) {
         return new Intent(context, MainActivity.class);
     }
@@ -77,66 +76,78 @@ public class MessageActivity extends BaseActivity implements IMessage {
     }
     private void ReadMessage(String myid, String receiverid, String img)
     {
-        Log.d(TAG, "ReadMessage: ");
-        List<Chat> chats =  new ArrayList<>();
-        chats.clear();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("chats");
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot data : snapshot.getChildren())
-                {
-                    Chat chat = data.getValue(Chat.class);
-                    if (chat.getReceiver().equals(myid) && chat.getSender().equals(receiverid) ||
-                    chat.getReceiver().equals(receiverid) && chat.getSender().equals(myid))
-                        chats.add(chat);
+        try {
+            Log.d(TAG, "ReadMessage: ");
+            List<Chat> chats =  new ArrayList<>();
+            chats.clear();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("chats");
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot data : snapshot.getChildren())
+                    {
+                        Chat chat = data.getValue(Chat.class);
+                        if (chat.getReceiver().equals(myid) && chat.getSender().equals(receiverid) ||
+                                chat.getReceiver().equals(receiverid) && chat.getSender().equals(myid))
+                            chats.add(chat);
+                    }
+                    MessageAdapter adapter = new MessageAdapter(chats);
+                    recyclerView.setAdapter(adapter);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessageActivity.this);
+                    linearLayoutManager.setStackFromEnd(true);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+
                 }
-                MessageAdapter adapter = new MessageAdapter(chats);
-                recyclerView.setAdapter(adapter);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessageActivity.this);
-                linearLayoutManager.setStackFromEnd(true);
-                recyclerView.setLayoutManager(linearLayoutManager);
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            Log.d(TAG, "ReadMessage: " + e.getMessage());
+        }
 
     }
     private void SendToSever(String message)
     {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        String senderid = FirebaseSer.FireAuth_User.getUid();
-        String receiverid = i.getStringExtra("uid");
-        Map<String, String> chat = new HashMap<>();
-        chat.put("sender",senderid);
-        chat.put("receiver",receiverid);
-        chat.put("message",message);
-        chat.put("createAt", Calendar.getInstance().getTime().toString());
-        chat.put("chatID", java.util.UUID.randomUUID().toString().replace("-", ""));
-        ref.child("chats").push().setValue(chat);
+        try {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+            String senderid = FirebaseSer.mAuth.getUid();
+            String receiverid = i.getStringExtra("uid");
+            Map<String, String> chat = new HashMap<>();
+            chat.put("sender",senderid);
+            chat.put("receiver",receiverid);
+            chat.put("message",message);
+            chat.put("createAt", Calendar.getInstance().getTime().toString());
+            chat.put("chatID", java.util.UUID.randomUUID().toString().replace("-", ""));
+            ref.child("chats").push().setValue(chat);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                                                .getReference("ChatList")
-                                                .child(FirebaseSer.FireAuth_User.getUid())
-                                                .child(receiverid);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists())
-                {
-                    databaseReference.child("id").setValue(receiverid);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance()
+                    .getReference("ChatList")
+                    .child(FirebaseSer.mAuth.getUid())
+                    .child(receiverid);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (!snapshot.exists())
+                    {
+                        databaseReference.child("id").setValue(receiverid);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            Log.d(TAG, "SendToSever: " + e.getMessage());
+        }
     }
     @Override
     public void SendMessage(String message) {
@@ -149,7 +160,7 @@ public class MessageActivity extends BaseActivity implements IMessage {
         {
             SendToSever(message);
             Log.d(TAG, "SendMessage: ");
-            ReadMessage(FirebaseSer.FireAuth_User.getUid(),i.getStringExtra("uid"),"");
+            ReadMessage(FirebaseSer.mAuth.getUid(),i.getStringExtra("uid"),"");
         }
 
     }

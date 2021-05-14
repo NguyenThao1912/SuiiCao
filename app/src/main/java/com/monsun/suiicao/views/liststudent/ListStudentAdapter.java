@@ -24,6 +24,7 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
     private List<Users> list;
     private List<Users> listAll;
     private OnItemCheckListener onItemCheckListener;
+    private boolean isSelected = false;
     public ListStudentAdapter(List<Users> mlist, OnItemCheckListener itemCheckListener)
     {
         list = mlist;
@@ -40,10 +41,7 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ListStudentAdapter.ViewHolder holder, int position) {
-        if (list.get(position).isCheckstatus())
-            holder.status.setChecked(list.get(position).isCheckstatus());
-        else
-            holder.status.setChecked(false);
+        holder.status.setChecked(isSelected);
         holder.student_name.setText(list.get(position).getFullName());
         holder.student_email.setText(list.get(position).getEmail());
         //holder.imageView.setImageURI(list.get(position).getImg());
@@ -101,7 +99,7 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
         public TextView student_name,student_email;
         public CircleImageView imageView;
         public CheckBox status;
@@ -111,16 +109,17 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
             student_email = itemView.findViewById(R.id.list_student_email);
             imageView = itemView.findViewById(R.id.list_student_img);
             status = itemView.findViewById(R.id.list_student_status);
-            status.setOnCheckedChangeListener(this);
-        }
-
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         }
+
+
     }
     interface OnItemCheckListener {
         void onItemCheck(Users users);
         void onItemUnCheck(Users users);
+    }
+    public void selectAll(boolean isSelectedAll){
+        isSelected=isSelectedAll;
+        notifyDataSetChanged();
     }
 }

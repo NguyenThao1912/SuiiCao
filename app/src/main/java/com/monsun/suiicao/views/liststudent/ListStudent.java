@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,23 +27,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityListStudentBinding;
-import com.monsun.suiicao.firebase.FirebaseSer;
+import com.monsun.suiicao.databinding.DialogSendMessageBinding;
 import com.monsun.suiicao.models.Contact;
 import com.monsun.suiicao.models.Users;
+import com.monsun.suiicao.task.SendMessageAysncTask;
 import com.monsun.suiicao.views.base.BaseActivity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 
 public class ListStudent extends BaseActivity implements IListStudent, SearchView.OnQueryTextListener, ListStudentAdapter.OnItemCheckListener {
     private static final String TAG = "ListStudent - Activity";
@@ -52,6 +51,9 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
     private ListStudentAdapter adapter;
     private List<Users> checked_users = new ArrayList<>();
     private Map<String,String> Uid_Userid = new HashMap<>();
+    List<String> Uid = new ArrayList<>();
+
+    DialogSendMessageBinding dialogbinding;
     private long backpresstimes;
     Dialog dialog;
     SearchView searchView;
@@ -78,11 +80,14 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
 
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
-        // xử lý phèn quá
-        // lấy danh sách uid của sinh viên trên firebase
-        GetUID("class_" + AppVar.mMentor.getClassId());
 
-        mentor_message = findViewById(R.id.list_student_message);
+        // lấy danh sách uid của sinh viên trên firebase
+       // GetUID("class_" + AppVar.mMentor.getClassId());
+        Uid.add("LWvc5tIlKTYJAaLWVllIfGdCMc73");
+        Uid.add("WcoRd3ZSEsWgecdAVw7TeOZ3JZh1");
+        Uid.add("Y3MP9GRW07TMqQxPkkPxfa1DpXA2");
+        Uid.add("zH1M8pcU6TWum2SWzVJCcYDsxbm2");
+
         viewModel.user.observe(this, new Observer<List<Users>>() {
             @Override
             public void onChanged(List<Users> users) {
@@ -91,6 +96,14 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
                 binding.listStudent.setAdapter(adapter);
             }
         });
+        binding.selectAllStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    adapter.selectAll(binding.selectAllStudent.isChecked());
+            }
+        });
+
+
     }
 
     @Override
@@ -155,42 +168,59 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
 
     @Override
     public void onItemCheck(Users users) {
-        checked_users.add(users);
+        if (!checked_users.contains(users))
+            checked_users.add(users);
         Log.d(TAG, "onItemCheck: " + users.getFullName() + " " + checked_users.size());
     }
 
     @Override
     public void onItemUnCheck(Users users) {
-        checked_users.remove(users);
+        if (checked_users.contains(users))
+            checked_users.remove(users);
         Log.d(TAG, "onItemUnCheck: " + users.getFullName() + " " + checked_users.size());
     }
     public void show_dialog_send_message()
     {
-       dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_send_message);
-        dialog.setTitle("Gửi tin nhắn");
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.gravity = Gravity.CENTER;
-        dialog.getWindow().setAttributes(lp);
-        dialog.show();
+        if (checked_users.size() > 0)
+        {
+            dialog = new Dialog(this);
+            dialogbinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_send_message, null, false);
+            dialog.setContentView(dialogbinding.getRoot());
+            dialog.setTitle("Gửi tin nhắn");
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(dialog.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.gravity = Gravity.CENTER;
+            dialog.getWindow().setAttributes(lp);
+            dialog.show();
+        }
+        else
+        {
+            Toast.makeText(this, "Bạn cần tích chọn sinh viên trước khi sử dụng tính năng này", Toast.LENGTH_SHORT).show();
+        }
     }
-    public void SendMessage(View v)
+    public void SendMessagetostudent(View v)
     {
-        if (!mentor_message.getText().toString().isEmpty())
+        if (!dialogbinding.listStudentMessage.getText().toString().isEmpty())
         {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Bạn có muốn gửi tin nhắn cho " + checked_users.size() + "sinh viên ? ");
+            alertDialogBuilder.setTitle("Bạn có muốn gửi tin nhắn cho " + checked_users.size() + " sinh viên ? ");
             alertDialogBuilder.setMessage("Xác nhận gửi tin nhắn");
             alertDialogBuilder.setPositiveButton("OK",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
-                            for (Users users : checked_users){
-                                SendToSever(mentor_message.getText().toString(),Uid_Userid.get(users.getStudentId()));
-                            }
+
+//                            for (Users users : checked_users){
+//                                Uid.add(Uid_Userid.get(users.getStudentId()));
+//                                Log.d(TAG, "onClick: Uid = " + Uid_Userid.get(users.getStudentId()) );
+//                            }
+                            Toast.makeText(ListStudent.this, "Đang gửi tin", Toast.LENGTH_SHORT).show();
+                            SendMessageAysncTask send = new SendMessageAysncTask(ListStudent.this,dialogbinding.listStudentMessage.getText().toString(),Uid);
+                            send.executeOnExecutor(Executors.newFixedThreadPool(1));
+                            Uncheckallstudent();
+                            dialog.dismiss();
                         }
                     });
             alertDialogBuilder.setNegativeButton("CANCEL",
@@ -209,57 +239,38 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
             Toast.makeText(this, "Bạn cần thêm nội dung tin nhắn ", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private void SendToSever(String message,String receiveid)
+    private void Uncheckallstudent()
     {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        String senderid = FirebaseSer.FireAuth_User.getUid();
-        String receiverid = receiveid;
-        Map<String, String> chat = new HashMap<>();
-        chat.put("sender",senderid);
-        chat.put("receiver",receiverid);
-        chat.put("message",message);
-        chat.put("createAt", Calendar.getInstance().getTime().toString());
-        chat.put("chatID", java.util.UUID.randomUUID().toString().replace("-", ""));
-        ref.child("chats").push().setValue(chat);
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                .getReference("ChatList")
-                .child(FirebaseSer.FireAuth_User.getUid())
-                .child(receiverid);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists())
-                {
-                    databaseReference.child("id").setValue(receiverid);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        for(Users u : data)
+        {
+            onItemUnCheck(u);
+        }
+    }
+    private void checkallstudent()
+    {
+        for(Users u : data)
+        {
+            onItemCheck(u);
+        }
     }
     private void GetUID(String classid)
     {
-
             DatabaseReference mDatabase;
             mDatabase = FirebaseDatabase.getInstance().getReference();
             mDatabase.child(classid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     try {
-                        if (!task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             DataSnapshot dataSnapshot = task.getResult();
                             for (DataSnapshot data: dataSnapshot.getChildren()) {
                                 Contact contact = data.getValue(Contact.class);
                                 Uid_Userid.put(contact.getContact_id(),contact.getUid());
+                                Log.d(TAG, "Uid_userid: " +  Uid_Userid.get(contact.getContact_id()));
                             }
                         }
                         else {
-                            Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                            Log.d("firebasexxx", String.valueOf(task.getResult().getValue()));
                         }
                     }
                     catch (Exception e)
@@ -268,7 +279,6 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
                     }
                 }
             });
-
-
     }
+
 }

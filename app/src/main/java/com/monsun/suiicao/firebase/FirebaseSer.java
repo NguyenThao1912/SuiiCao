@@ -23,9 +23,8 @@ import java.util.Map;
 
 public class FirebaseSer {
     public static FirebaseAuth mAuth =  FirebaseAuth.getInstance();;
-    public static FirebaseUser FireAuth_User;
     private static final String TAG = "FirebaseSer";
-    private static String DEFAULT_FIREBASE_PASSWORD = "#$!@123987";
+    private static String DEFAULT_FIREBASE_PASSWORD = "#$!@1239872333";
     private static int LOGIN_FIREBASE_RESULT = 0;
 
     public static void TRY_LOGGING_IN(String email,Activity activity) {
@@ -54,33 +53,9 @@ public class FirebaseSer {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         try
                         {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FireAuth_User = mAuth.getCurrentUser();
-                                LOGIN_FIREBASE_RESULT = CommonUtils.FIREBASE_CREATE_SUCCESS;
-                                String uid = FireAuth_User.getUid();
-                                String type = "";
-                                String username = "";
-                                String name = "";
-                                if (AppVar.mStudent != null) {
-                                    type = "class_" + AppVar.mStudent.getClassId();
-                                    username = AppVar.mStudent.getUsername();
-                                    name = AppVar.mStudent.getFullName();
-                                } else {
-                                    type = "mentor_" + AppVar.mMentor.getClassId();
-                                    username = AppVar.mMentor.getUsername();
-                                    name = AppVar.mMentor.getMentorName();
-                                }
-
-                                // TODO Create User Information
-                                Log.d(TAG, "Sign In FireBase: Success ");
-                                if (AppVar.mStudent != null)
-                                    Create_User_Information_FireBase(AppVar.mStudent.getUsername(), type, uid,name);
-                                else
-                                    Create_User_Information_FireBase(AppVar.mMentor.getUsername(), type, uid,name);
-                            }
-                            else
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            if(!task.isSuccessful())
                                 throw task.getException();
                         }
                         catch (FirebaseAuthWeakPasswordException weakPassword)
@@ -109,22 +84,36 @@ public class FirebaseSer {
                         }
                     }
                 });
+
         return LOGIN_FIREBASE_RESULT;
     }
     public static void SignInUser_with_email_password(String email,String password,Activity activity)
     {
         try
         {
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful())
-                            {
-                                FireAuth_User = mAuth.getCurrentUser();
-                            }
-                        }
-                    });
+            mAuth.signInWithEmailAndPassword(email, password);
+            FirebaseUser user = mAuth.getCurrentUser();
+            LOGIN_FIREBASE_RESULT = CommonUtils.FIREBASE_CREATE_SUCCESS;
+            String uid = user.getUid();
+            String type = "";
+            String username = "";
+            String name = "";
+            if (AppVar.mStudent != null) {
+                type = "class_" + AppVar.mStudent.getClassId();
+                username = AppVar.mStudent.getStudentId().toString();
+                name = AppVar.mStudent.getFullName();
+            } else {
+                type = "mentor_" + AppVar.mMentor.getClassId();
+                username = AppVar.mMentor.getMentorId().toString();
+                name = AppVar.mMentor.getMentorName();
+            }
+
+            // TODO Create User Information
+            Log.d(TAG, "Sign In FireBase: Success ");
+            if (AppVar.mStudent != null)
+                Create_User_Information_FireBase(AppVar.mStudent.getUsername(), type, uid,name);
+            else
+                Create_User_Information_FireBase(AppVar.mMentor.getUsername(), type, uid,name);
         }
         catch (Exception e)
         {
@@ -132,14 +121,15 @@ public class FirebaseSer {
         }
     }
 
-    private static void Create_User_Information_FireBase(String username,String type,String userid,String name)
+    public static void Create_User_Information_FireBase(String username,String type,String userid,String name)
     {
         // Lấy ref của firebase realtime
         /* TODO Ghi Thông tin user lên realtime
-            database : String type: classid -> 1 lớp sv , mentor+classid -> mentor của lớp
+            database : String type: classid -> 1 lớp sv , mentor + classid -> mentor của lớp
             String username hỗ trợ việc ghi nhớ tài khoản
             String userid : mã ng dùng trên firebase
          */
+        Log.d(TAG, "onComplete: Create new user firebase");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(type).child(userid);
         Map<String,String> hashMap = new HashMap<>();
         hashMap.put("uid",userid);
@@ -147,15 +137,7 @@ public class FirebaseSer {
         hashMap.put("contact_img","default");
         hashMap.put("contact_name",name);
         hashMap.put("contact_status","false");      // Trạng thái online - offline
-        reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful())
-                {
-                    Log.i(TAG, "onComplete: Create new user firebase");
-                }
-            }
-        });
+        reference.setValue(hashMap);
     }
 
 

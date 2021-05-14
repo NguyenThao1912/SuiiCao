@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.firebase.FirebaseSer;
@@ -42,10 +43,10 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
 
     public void onClickLogin()
     {
-        FirebaseSer.FireAuth_User = FirebaseSer.mAuth.getCurrentUser();
-        if( FirebaseSer.FireAuth_User != null){
+        FirebaseUser user = FirebaseSer.mAuth.getCurrentUser();
+        if( user != null){
             FirebaseSer.mAuth.signOut();
-            FirebaseSer.FireAuth_User = null;
+            user = null;
         }
         if (getNavigator().login())
         {
@@ -69,7 +70,6 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
                                 Log.d(TAG, "Login Successfull");
                                 GetUserInformation();
 
-
                             }
                             // TODO : Mentor Login
                             else
@@ -77,7 +77,6 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
                                 getNavigator().showToast("Login Successful");
                                 Log.d(TAG, "Login Successfull");
                                 GetMentorInfomation();
-                                //Mentor login
                             }
                         }
                         else
@@ -104,6 +103,11 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
             });
         }
     }
+
+    private void Open_Main()
+    {
+        getNavigator().startMainActivity();
+    }
     public void onClickForgetPassword()
     {
         getNavigator().showToast("Please contact to your mentor for your problem ! ");
@@ -123,7 +127,8 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
                         Log.d(TAG, "onResponse: Get Data" + AppVar.mMentor.getMentorName());
                         GET_INFORMATION_RESULT = CommonUtils.GET_INFORMATION_SUCESS;
                         // TODO start main activity
-                        getNavigator().startMainActivity();
+                        Open_Main();
+
                     }
                     catch (Exception e)
                     {
@@ -153,7 +158,8 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
                            Log.d(TAG, "onResponse: Get Data" + AppVar.mStudent.getFullName());
                            GET_INFORMATION_RESULT = CommonUtils.GET_INFORMATION_SUCESS;
                            // TODO start main activity
-                            getNavigator().startMainActivity();
+                       Open_Main();
+
                    }
                    catch (Exception e)
                    {

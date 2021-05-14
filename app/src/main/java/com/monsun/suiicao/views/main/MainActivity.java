@@ -38,15 +38,15 @@ public class MainActivity extends BaseActivity implements IMainHandler{
         tryLogin(this);
         super.onStart();
     }
-    public static void tryLogin(Context context)
+    public static void tryLogin(Activity context)
     {
         if (AppVar.mStudent != null){
-            if (FirebaseSer.FireAuth_User == null)
-                FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), (Activity) context);
+            if (FirebaseSer.mAuth.getCurrentUser() == null)
+                FirebaseSer.TRY_LOGGING_IN(AppVar.mStudent.getEmail(), context);
         }
         if (AppVar.mMentor != null){
-            if (FirebaseSer.FireAuth_User == null)
-                FirebaseSer.TRY_LOGGING_IN(AppVar.mMentor.getEmail(), (Activity) context);
+            if (FirebaseSer.mAuth.getCurrentUser() == null)
+                FirebaseSer.TRY_LOGGING_IN(AppVar.mMentor.getEmail(), context);
         }
     }
     private void reload() {
@@ -101,16 +101,9 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
                             case R.id.ask_answer:
                             {
-                                if (FirebaseSer.mAuth == null){
-                                    tryLogin(MainActivity.this);
-                                    break;
-                                }
-                                else{
-
-                                    selectedFragment = ContactFragment.newInstance();
-                                    Toast.makeText(MainActivity.this, "ask answer", Toast.LENGTH_SHORT).show();
-                                    break;
-                                }
+                                selectedFragment = ContactFragment.newInstance();
+                                Toast.makeText(MainActivity.this, "ask answer", Toast.LENGTH_SHORT).show();
+                                break;
                             }
 
                             case R.id.user_account:
@@ -122,13 +115,24 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                                 else
                                 {
                                     FirebaseSer.mAuth.signOut();
-                                    FirebaseSer.FireAuth_User = null;
+
                                     AppVar.mMentor = null;
                                     Intent t = LoginActivity.newIntent(MainActivity.this);
                                     startActivity(t);
                                     finish();
                                 }
-
+                            default:
+                                if (AppVar.mStudent != null){
+                                    selectedFragment = HomeFragment.newInstance();
+                                    Toast.makeText(MainActivity.this, "Home screen", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+                                else
+                                {
+                                    selectedFragment = mentormain.newInstance();
+                                    Toast.makeText(MainActivity.this, "mentor main", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
                         }
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
                         return true;
@@ -151,9 +155,7 @@ public class MainActivity extends BaseActivity implements IMainHandler{
     protected void onDestroy() {
 
         FirebaseSer.mAuth.signOut();
-        FirebaseSer.FireAuth_User = null;
         AppVar.mMentor = null;
-
         super.onDestroy();
     }
 }

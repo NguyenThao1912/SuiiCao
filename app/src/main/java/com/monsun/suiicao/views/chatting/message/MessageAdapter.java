@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.monsun.suiicao.R;
-import com.monsun.suiicao.firebase.FirebaseSer;
 import com.monsun.suiicao.models.Chat;
 
 import java.util.List;
@@ -71,7 +71,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if (chatList.get(position).getSender().equals(FirebaseSer.FireAuth_User.getUid()))
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        if (chatList.get(position).getSender().equals(auth.getCurrentUser().getUid()))
         {
             return MSG_TYPE_RIGHT;
         }

@@ -114,7 +114,6 @@ public class ListContactFragment extends BaseFragment implements ListContactAdap
                 for (DataSnapshot data : snapshot.getChildren())
                 {
                     Contact contact = data.getValue(Contact.class);
-
                     contacts.add(contact);
                 }
                 contactList = contacts;

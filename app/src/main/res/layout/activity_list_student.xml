@@ -24,6 +24,7 @@
             />
 
         <CheckBox
+            android:id="@+id/select_all_student"
             android:textSize="16dp"
             android:padding="5dp"
             android:layout_marginRight="12dp"
