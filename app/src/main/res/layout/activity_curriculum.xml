@@ -6,6 +6,7 @@
             name="viewModel"
             type="com.monsun.suiicao.views.curriculum.CurriculumViewModel" />
     </data>
+
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -14,33 +15,22 @@
         android:fitsSystemWindows="true"
         tools:context=".views.study.StudentExamActivity"
         >
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/curriculum_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrow_left_s_line"
-                android:layout_gravity="left"
-                android:onClick="@{() -> viewModel.goBack()}"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"/>
-
+            android:elevation="3dp"
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="wrap_content"
                 android:text="Chương Trình Học"
                 android:gravity="center"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginRight="40dp"
                 />
-        </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-        <androidx.appcompat.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="60dp" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_lecture"
             android:layout_marginTop="10dp"

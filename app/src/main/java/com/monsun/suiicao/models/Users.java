@@ -3,7 +3,9 @@ package com.monsun.suiicao.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Users {
+import java.io.Serializable;
+
+public class Users implements Serializable {
     @SerializedName("student_id")
     @Expose
     private Integer studentId;
@@ -69,15 +71,8 @@ public class Users {
     @SerializedName("nation")
     @Expose
     private String nation;
-    private boolean checkstatus = false;
-
-    public boolean isCheckstatus() {
-        return checkstatus;
-    }
-
-    public void setCheckstatus(boolean checkstatus) {
-        this.checkstatus = checkstatus;
-    }
+    private String username;
+    private String Uid;
 
     public String getParentname() {
         return parentname;
@@ -127,7 +122,14 @@ public class Users {
         this.nation = nation;
     }
 
-    private String username;
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
 
     public String getImg() {
         return img;
@@ -180,7 +182,7 @@ public class Users {
     }
 
     public String getDateOfBirth() {
-        return dateOfBirth;
+        return dateOfBirth.substring(0,10);
     }
 
     public void setDateOfBirth(String dateOfBirth) {

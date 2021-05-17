@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="data"
+            type="com.monsun.suiicao.models.Users" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/student_info_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="3dp"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="5dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/student_infor_img"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="centerCrop"
+                    android:padding="2dp"
+                    android:src="@drawable/testprofile"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp" />
+
+                <TextView
+                    android:id="@+id/txtid"
+                    android:text="MSV :"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/student_infor_img"/>
+                <TextView
+                    android:id="@+id/student_infor_id"
+                    android:text="@{data.studentId.toString()}"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/txtid"/>
+                <TextView
+                    android:id="@+id/student_infor_fullname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@{data.fullName}"
+                    android:textStyle="bold"
+                    android:textColor="#0A2DED"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/txtid"
+                    android:layout_toEndOf="@id/student_infor_img"
+                    />
+
+                <TextView
+                    android:id="@+id/txtclass"
+                    android:layout_below="@+id/student_infor_fullname"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@id/student_infor_img"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:text="LỚP :"/>
+
+                <TextView
+                    android:id="@+id/student_infor_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/student_infor_fullname"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_toEndOf="@+id/txtclass"
+                    android:text="@{data.classId}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THÔNG TIN CƠ BẢN"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/txtgender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Giới Tính"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/student_infor_gender"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@{data.gender.toString()}"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/txthome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Quê quán"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/txtgender"/>
+            <TextView
+                android:id="@+id/student_infor_home"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/student_infor_gender"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@{data.address}"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/txtdateofbirth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Ngày Sinh"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/txthome"/>
+            <TextView
+                android:id="@+id/student_infor_dateofbirth"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/student_infor_home"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@{data.dateOfBirth.toString()}"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/txtcccd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="CCCD"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/txtdateofbirth"/>
+            <TextView
+                android:id="@+id/student_infor_cccd"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/student_infor_dateofbirth"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@{data.CCCD.toString()}"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/txtnationality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Quốc tịch"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/txtcccd"/>
+            <TextView
+                android:id="@+id/student_infor_nationality"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/student_infor_cccd"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@{data.nationality}"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/txtphonenumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Số điện thoại"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/txtnationality"/>
+            <TextView
+                android:id="@+id/student_infor_phonenumber"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/student_infor_nationality"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@{data.studentMobile}"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/txtemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Email"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/txtphonenumber"/>
+            <TextView
+                android:id="@+id/student_infor_email"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/student_infor_phonenumber"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@{data.email}"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@android:color/darker_gray"
+            />
+    </LinearLayout>
+</layout>

@@ -15,7 +15,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
@@ -24,18 +23,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityListStudentBinding;
 import com.monsun.suiicao.databinding.DialogSendMessageBinding;
-import com.monsun.suiicao.models.Contact;
 import com.monsun.suiicao.models.Users;
 import com.monsun.suiicao.task.SendMessageAysncTask;
 import com.monsun.suiicao.views.base.BaseActivity;
+import com.monsun.suiicao.views.liststudent.studentinformation.Student_info;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -179,6 +173,15 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
             checked_users.remove(users);
         Log.d(TAG, "onItemUnCheck: " + users.getFullName() + " " + checked_users.size());
     }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(this, Student_info.class);
+        data.get(position).setUid(Uid.get(position));
+        intent.putExtra("studentinfo",data.get(position));
+        startActivity(intent);
+    }
+
     public void show_dialog_send_message()
     {
         if (checked_users.size() > 0)
@@ -219,7 +222,7 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
                             Toast.makeText(ListStudent.this, "Đang gửi tin", Toast.LENGTH_SHORT).show();
                             SendMessageAysncTask send = new SendMessageAysncTask(ListStudent.this,dialogbinding.listStudentMessage.getText().toString(),Uid);
                             send.executeOnExecutor(Executors.newFixedThreadPool(1));
-                            Uncheckallstudent();
+
                             dialog.dismiss();
                         }
                     });
@@ -246,14 +249,8 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
             onItemUnCheck(u);
         }
     }
-    private void checkallstudent()
-    {
-        for(Users u : data)
-        {
-            onItemCheck(u);
-        }
-    }
-    private void GetUID(String classid)
+
+   /* private void GetUID(String classid)
     {
             DatabaseReference mDatabase;
             mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -279,6 +276,6 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
                     }
                 }
             });
-    }
+    }*/
 
 }

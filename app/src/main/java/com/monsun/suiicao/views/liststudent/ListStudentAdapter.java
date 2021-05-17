@@ -36,7 +36,7 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
     @Override
     public ListStudentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.liststudent_row,parent,false);
-        return new ListStudentAdapter.ViewHolder(view);
+        return new ListStudentAdapter.ViewHolder(view,onItemCheckListener);
     }
 
     @Override
@@ -99,24 +99,31 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder  {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView student_name,student_email;
         public CircleImageView imageView;
         public CheckBox status;
-        public ViewHolder(@NonNull View itemView) {
+        private OnItemCheckListener item;
+        public ViewHolder(@NonNull View itemView,OnItemCheckListener onItemCheckListener) {
             super(itemView);
             student_name = itemView.findViewById(R.id.list_student_name);
             student_email = itemView.findViewById(R.id.list_student_email);
             imageView = itemView.findViewById(R.id.list_student_img);
             status = itemView.findViewById(R.id.list_student_status);
-
+            this.item = onItemCheckListener;
+            itemView.setOnClickListener(this);
         }
 
 
+        @Override
+        public void onClick(View v) {
+            item.onItemClick(getAdapterPosition());
+        }
     }
     interface OnItemCheckListener {
         void onItemCheck(Users users);
         void onItemUnCheck(Users users);
+        void onItemClick(int position);
     }
     public void selectAll(boolean isSelectedAll){
         isSelected=isSelectedAll;

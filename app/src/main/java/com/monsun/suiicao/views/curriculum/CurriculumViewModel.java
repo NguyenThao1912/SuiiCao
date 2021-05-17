@@ -51,8 +51,4 @@ public class CurriculumViewModel extends BaseViewModel<ICurriculum> {
         });
     }
 
-    public void goBack()
-    {
-        getNavigator().goBack();
-    }
 }
