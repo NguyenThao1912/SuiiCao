@@ -14,6 +14,7 @@ import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.FragmentHomeBinding;
 import com.monsun.suiicao.views.base.BaseFragment;
 import com.monsun.suiicao.views.curriculum.CurriculumActivity;
+import com.monsun.suiicao.views.result.ResultActivity;
 import com.monsun.suiicao.views.studentresult.StudentResult;
 import com.monsun.suiicao.views.study.StudentExamActivity;
 import com.monsun.suiicao.views.timetable.TimetableActivity;
@@ -80,7 +81,7 @@ public class HomeFragment extends BaseFragment implements IHomeHandler {
 
     @Override
     public void OpenStudentResult() {
-        Intent i = StudentResult.newIntent(getActivity());
+        Intent i = ResultActivity.newIntent(getActivity());
         startActivity(i);
     }
 }

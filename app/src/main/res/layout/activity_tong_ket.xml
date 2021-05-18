@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:fitsSystemWindows="true">
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/curriculum_toolbar"
+            android:id="@+id/student_result_toolbar"
             android:layout_width="match_parent"
             android:elevation="3dp"
             android:layout_height="wrap_content">
@@ -33,7 +31,8 @@
             app:queryHint="TÌM KIẾM HỌC PHẦN"
             android:background="@drawable/custom_border_search"
             />
-        <TableLayout
+        <com.google.android.material.tabs.TabLayout
+            app:tabMode="scrollable"
             android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="42dp"

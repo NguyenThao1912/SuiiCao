@@ -27,7 +27,7 @@ public class StudentResult extends BaseActivity implements IStudentResult {
         viewModel.setNavigator(this);
         binding.setLifecycleOwner(this);
 
-        setSupportActionBar(binding.curriculumToolbar);
+        setSupportActionBar(binding.studentResultToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
     }

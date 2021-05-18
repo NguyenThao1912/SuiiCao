@@ -14,6 +14,7 @@ import com.monsun.suiicao.databinding.ActivityStudentInfoBinding;
 import com.monsun.suiicao.models.Users;
 import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.chatting.message.MessageActivity;
+import com.monsun.suiicao.views.result.ResultActivity;
 
 import java.util.Objects;
 
@@ -55,6 +56,12 @@ public class Student_info extends BaseActivity implements IStudentinfo  {
                 intent.putExtra("uid",users.getUid());
                 intent.putExtra("name",users.getFullName());
                 intent.putExtra("img",users.getImg());
+                startActivity(intent);
+                return true;
+            }
+            case R.id.student_infor_result:{
+                Intent intent = new Intent(this, ResultActivity.class);
+                intent.putExtra("Sid",users.getStudentId());
                 startActivity(intent);
                 return true;
             }
