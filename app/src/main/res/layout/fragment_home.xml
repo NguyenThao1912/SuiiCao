@@ -186,6 +186,7 @@
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:layout_margin="22dp"
+                        android:onClick="@{()->viewModel._OnClick_Student_Result()}"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:padding="5dp"

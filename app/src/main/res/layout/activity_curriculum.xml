@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:fitsSystemWindows="true"
-        tools:context=".views.study.StudentExamActivity"
+
         >
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/curriculum_toolbar"

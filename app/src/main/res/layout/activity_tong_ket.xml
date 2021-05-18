@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
+        android:orientation="vertical"
+        android:fitsSystemWindows="true">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/curriculum_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrow_left_s_line"
-                android:layout_gravity="left"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"/>
-
+            android:elevation="3dp"
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:text="ĐIỂM THI - TỔNG KẾT"
+                android:layout_height="wrap_content"
+                android:text="HỌC VỤ"
                 android:gravity="center"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginRight="40dp"
                 />
-        </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="18dp"
             android:layout_width="match_parent"
             android:layout_height="60dp"

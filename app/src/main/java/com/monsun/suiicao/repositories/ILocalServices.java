@@ -3,6 +3,7 @@ package com.monsun.suiicao.repositories;
 import com.monsun.suiicao.models.CourseExam;
 import com.monsun.suiicao.models.Curriculum;
 import com.monsun.suiicao.models.Mentor;
+import com.monsun.suiicao.models.Result;
 import com.monsun.suiicao.models.Schedule;
 import com.monsun.suiicao.models.Semester;
 import com.monsun.suiicao.models.Users;
@@ -32,6 +33,9 @@ public interface ILocalServices {
 
     @GET("api/student/schedule/{studentid}/{semester}")
     Call<List<Schedule>> GetStudentSchedule(@Path("studentid") int sid, @Path("semester")int semester);
+
+    @GET("api/student/result/{studentid}/{semesterid}")
+    Call<List<Result>> GetStudentResult(@Path("studentid") int sid,@Path("semesterid") int semesterid);
 
     //================================================================
     //Mentor

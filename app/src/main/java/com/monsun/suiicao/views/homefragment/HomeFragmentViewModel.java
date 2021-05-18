@@ -27,4 +27,5 @@ public class HomeFragmentViewModel extends BaseViewModel<IHomeHandler> {
     {
         getNavigator().OpenCurriculum();
     }
+    public void _OnClick_Student_Result(){getNavigator().OpenStudentResult();}
 }

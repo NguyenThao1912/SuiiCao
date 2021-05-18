@@ -6,24 +6,42 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/tstudy"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/tstudy"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuiiCao"
         android:usesCleartextTraffic="true">
-        <activity android:name=".views.liststudent.studentinformation.Student_info"
+        <service android:name=".service.FirebaseMessage"
+            android:exported="false">
+            <meta-data
+                android:name="@drawable/tstudy"
+                android:resource="@color/colorAccent" />
+            <meta-data
+                android:name="firebase_messaging_auto_init_enabled"
+                android:value="false" />
+            <meta-data
+                android:name="firebase_analytics_collection_enabled"
+                android:value="false" />
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <activity android:name=".views.studentresult.StudentResult"
+            ></activity>
+        <activity
+            android:name=".views.liststudent.studentinformation.Student_info"
             android:parentActivityName=".views.liststudent.ListStudent">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.liststudent.ListStudent"></meta-data>
+                android:value=".views.liststudent.ListStudent" />
         </activity>
         <activity
             android:name=".views.liststudent.ListStudent"
             android:parentActivityName=".views.main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.main.MainActivity"></meta-data>
+                android:value=".views.main.MainActivity" />
         </activity>
         <activity
             android:name=".views.chatting.message.MessageActivity"

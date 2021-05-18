@@ -78,8 +78,7 @@ public class ContactFragment extends Fragment {
         public ViewPagerContactAdapter(@NonNull Fragment fragment) {
             super(fragment);
         }
-
-
+        
         @NonNull
         @Override
         public Fragment createFragment(int position) {

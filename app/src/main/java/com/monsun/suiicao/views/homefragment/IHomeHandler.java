@@ -4,4 +4,5 @@ public interface IHomeHandler {
     void OpenStudentExam();
     void OpenCurriculum();
     void OpenSchedule();
+    void OpenStudentResult();
 }
