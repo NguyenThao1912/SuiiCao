@@ -22,6 +22,7 @@ import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.models.ChatList;
 import com.monsun.suiicao.models.Contact;
+
 import com.monsun.suiicao.views.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -68,6 +69,7 @@ public class ChatFragment extends BaseFragment implements ChatAdapter.OnRecentCh
         v =  inflater.inflate(R.layout.fragment_recent_chat, container, false);
         recyclerView = v.findViewById(R.id.list_chat);
         GetChatList();
+
         return v;
     }
     private void GetChatList()
@@ -100,6 +102,7 @@ public class ChatFragment extends BaseFragment implements ChatAdapter.OnRecentCh
         }
 
     }
+
 
     private void GetListRecentContact()
     {

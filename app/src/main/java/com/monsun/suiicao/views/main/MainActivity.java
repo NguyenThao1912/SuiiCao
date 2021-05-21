@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity implements IMainHandler{
             if (FirebaseSer.mAuth.getCurrentUser() == null)
                 FirebaseSer.TRY_LOGGING_IN(AppVar.mMentor.getEmail(), context);
         }
+
     }
     private void reload() {
         finish();

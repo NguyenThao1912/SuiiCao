@@ -19,9 +19,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
+import com.monsun.suiicao.Utils.AppUtil;
+import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.databinding.FragmentListContactBinding;
+import com.monsun.suiicao.firebase.FirebaseSer;
 import com.monsun.suiicao.models.Contact;
 import com.monsun.suiicao.views.base.BaseFragment;
 import com.monsun.suiicao.views.chatting.message.MessageActivity;
@@ -100,7 +104,16 @@ public class ListContactFragment extends BaseFragment implements ListContactAdap
         intent.putExtra("uid",contactList.get(position).getUid());
         intent.putExtra("name",contactList.get(position).getContact_name());
         intent.putExtra("img",contactList.get(position).getContact_img());
-        startActivity(intent);
+        String RoomID = AppUtil.generateRoomID(FirebaseSer.mAuth.getCurrentUser().getUid(),
+                contactList.get(position).getUid());
+        CommonUtils.ROOM_SELECTED = RoomID;
+        Log.d(TAG, "onContactClick: " + RoomID);
+        FirebaseMessaging.getInstance()
+                .subscribeToTopic(RoomID)
+                .addOnSuccessListener(aVoid -> {
+                    startActivity(intent);
+                });
+
     }
 
     private  void GetUser(String url) {

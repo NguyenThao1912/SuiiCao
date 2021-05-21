@@ -22,12 +22,27 @@ public class Result{
     @SerializedName("mark_exam")
     @Expose
     private String markExam;
+
     @SerializedName("mark_total")
     @Expose
     private String markTotal;
+
     @SerializedName("evaluate")
     @Expose
-    private Object evaluate;
+    private String evaluate;
+
+    @SerializedName("format")
+    @Expose
+    private String format;
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
 
     public String getCourseId() {
         return courseId;
@@ -85,11 +100,11 @@ public class Result{
         this.markTotal = markTotal;
     }
 
-    public Object getEvaluate() {
+    public String getEvaluate() {
         return evaluate;
     }
 
-    public void setEvaluate(Object evaluate) {
+    public void setEvaluate(String evaluate) {
         this.evaluate = evaluate;
     }
 }

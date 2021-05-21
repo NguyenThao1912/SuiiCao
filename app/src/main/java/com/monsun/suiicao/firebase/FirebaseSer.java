@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.Utils.CommonUtils;
 
@@ -43,6 +44,7 @@ public class FirebaseSer {
         {
             SignInUser_with_email_password(email,DEFAULT_FIREBASE_PASSWORD,activity);
         }
+
     }
     public static int SignUpUser_with_email_password(String email,String password , Activity activity)
     {
@@ -91,7 +93,11 @@ public class FirebaseSer {
     {
         try
         {
-            mAuth.signInWithEmailAndPassword(email, password);
+            mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+                FirebaseMessaging.getInstance().getToken().addOnSuccessListener(s -> {
+
+                });
+            });
             FirebaseUser user = mAuth.getCurrentUser();
             LOGIN_FIREBASE_RESULT = CommonUtils.FIREBASE_CREATE_SUCCESS;
             String uid = user.getUid();

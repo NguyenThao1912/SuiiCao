@@ -7,7 +7,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 
-import androidx.core.net.ConnectivityManagerCompat;
+import java.util.Random;
 
 public class AppUtil {
     public static boolean isNetWorkAvaiable(Context context){
@@ -34,5 +34,14 @@ public class AppUtil {
             return networkInfo != null && networkInfo.isConnected();
         }
     }
-
+    public static String generateRoomID(String a, String b){
+        if (a.compareTo(b) > 0){
+            return new StringBuilder(a).append(b).toString();
+        }
+        else if (a.compareTo(b) < 0){
+            return new StringBuilder(b).append(a).toString();
+        }
+        else
+            return new StringBuilder("Chat your self ? ").append(new Random().nextInt()).toString();
+    }
 }

@@ -1,23 +1,36 @@
 package com.monsun.suiicao.Utils;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.provider.Settings;
 
+import androidx.core.app.NotificationCompat;
+
 import com.monsun.suiicao.R;
+import com.monsun.suiicao.firebase.FirebaseSer;
 
 public final class CommonUtils {
-    public static int FIREBASE_SIGN_IN_SUCESS = 6;
-    public static int FIREBASE_SIGN_IN_FAIL = -1;
+
+    public static String NOTI_RECEIVER = "receiver";
     public static int FIREBASE_CREATE_SUCCESS = 8;
     public static int FIREBASE_PASSWORD_TOO_WEAK = 10;
     public static int FIREBASE_EMAIL_WRONG_FORMAT = 15;
     public static int FIREBASE_EMAIL_EXIST = 20;
     public static int GET_INFORMATION_SUCESS = 22;
-
+    public static String NOTI_TITLE = "title";
+    public static String NOTI_CONTENT = "content";
+    public static String NOTI_SENDER = "sender";
+    public static String NOTI_ROOMID = "room_id";
+    public static String ROOM_SELECTED = "";
     private CommonUtils() {
 
     }
@@ -40,5 +53,45 @@ public final class CommonUtils {
         //cannot cancel when touch out side
         progressDialog.setCanceledOnTouchOutside(false);
         return progressDialog;
+    }
+
+
+    public static void showNotification(Context context,
+                                        int id ,
+                                        String title,
+                                        String content, String sender, String room_id,String receiver, Intent intent) {
+        PendingIntent pendingIntent = null;
+        if (intent != null)
+            pendingIntent = PendingIntent.getActivity(context,id,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        String Notification_Chanel_id = "Chanel 1";
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            //checkversion
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O){
+            NotificationChannel notificationChannel = new NotificationChannel(Notification_Chanel_id,
+                    "TStudy",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("New TStudy");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});
+            notificationChannel.enableVibration(true);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,Notification_Chanel_id);
+        builder.setContentTitle(title)
+                .setContentText(content)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.tstudy);
+        if (pendingIntent != null)
+        {
+            builder.setContentIntent(pendingIntent);
+        }
+        Notification notification =  builder.build();
+        if (FirebaseSer.mAuth.getCurrentUser().getUid().equals(receiver))
+        {
+            notificationManager.notify(id,notification);
+        }
+
+
     }
 }

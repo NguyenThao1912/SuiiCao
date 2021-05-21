@@ -46,6 +46,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     //Glide - loading image  link : https://github.com/bumptech/glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     //Circular Image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -57,27 +58,17 @@ dependencies {
 
     // Firebase
     implementation "com.google.firebase:firebase-auth:$rootProject.fireAuthVersion"
-    // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:28.0.1')
-
-    // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.firebase:firebase-database'
-    // Import the BoM for the Firebase platform
+
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
-
-    // Declare the dependency for the Cloud Storage library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-storage'
-
     // View Model
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
-
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     // font
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
 

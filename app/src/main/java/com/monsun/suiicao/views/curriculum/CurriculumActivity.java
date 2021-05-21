@@ -84,7 +84,11 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
 
     @Override
     public void onBackPressed() {
-        finish();
+
+        if (searchView.isIconified())
+            searchView.setIconified(false);
+        else
+             finish();
     }
 
 

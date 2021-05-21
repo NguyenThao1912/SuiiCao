@@ -86,7 +86,7 @@
                     android:layout_marginBottom="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bài tập lớn"
+                    android:text="@{data.format}"
                     android:textColor="#000000"
                     android:textSize="20dp"
                     android:id="@+id/tv_HTT"/>
