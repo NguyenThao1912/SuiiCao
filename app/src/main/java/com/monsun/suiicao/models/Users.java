@@ -72,6 +72,8 @@ public class Users implements Serializable {
     @Expose
     private String nation;
     private String username;
+    @SerializedName("uid")
+    @Expose
     private String Uid;
     private String password;
 
