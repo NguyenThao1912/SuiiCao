@@ -12,6 +12,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ILocalServices {
@@ -50,4 +51,7 @@ public interface ILocalServices {
 
     @GET("api/student/class/{classid}")
     Call<List<Users>> getAllStudentByClassId(@Path("classid") int cid);
+
+    @PUT("api/student/evaluation/{studentid}/{eval}")
+    Call<String> Update_Student_Evaluation(@Path("studentid") int sid,@Path("eval") String evaluation);
 }

@@ -17,11 +17,8 @@ import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityTongKetBinding;
 import com.monsun.suiicao.models.Semester;
 import com.monsun.suiicao.repositories.ApiInstance;
-import com.monsun.suiicao.views.chatting.message.MessageActivity;
-import com.monsun.suiicao.views.studentresult.StudentResult;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

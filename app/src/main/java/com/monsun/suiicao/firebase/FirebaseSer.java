@@ -95,7 +95,7 @@ public class FirebaseSer {
         {
             mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
                 FirebaseMessaging.getInstance().getToken().addOnSuccessListener(s -> {
-
+                    
                 });
             });
             FirebaseUser user = mAuth.getCurrentUser();

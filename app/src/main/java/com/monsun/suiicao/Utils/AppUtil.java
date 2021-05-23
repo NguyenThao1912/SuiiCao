@@ -44,4 +44,5 @@ public class AppUtil {
         else
             return new StringBuilder("Chat your self ? ").append(new Random().nextInt()).toString();
     }
+
 }

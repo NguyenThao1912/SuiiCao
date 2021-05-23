@@ -14,29 +14,22 @@
         tools:context=".views.study.StudentExamActivity"
         android:fitsSystemWindows="true"
         >
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/student_exam_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/arrow_left_s_line"
-                android:layout_gravity="left"
-                android:onClick="@{() -> viewModel.goBack()}"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"/>
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="wrap_content"
                 android:text="Lịch Thi"
                 android:gravity="center"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginRight="40dp"
                 />
-        </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,18 +55,23 @@
                 android:gravity="center"
                 />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+            android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/blank_exam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="20dp"
+                android:src="@drawable/chuacolichthi"
+                />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_exam"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
 </layout>

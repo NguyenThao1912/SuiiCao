@@ -8,8 +8,10 @@ import com.monsun.suiicao.views.base.BaseViewModel;
 public class StudentInfoViewModel extends BaseViewModel<IStudentinfo> {
     public MutableLiveData<Users> usersMutableLiveData = new MutableLiveData<>();
 
+
     public StudentInfoViewModel() {
 
     }
+
 
 }

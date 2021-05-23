@@ -91,13 +91,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:clickable="true"
+                    android:onClick="@{()->viewModel.MentorInforClick()}"
                     android:drawableEnd="@drawable/arrow_right_line"
                     android:focusable="true"
                     android:fontFamily="@font/alike"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:padding="20dp"
-                    android:text="Thông Báo"
+                    android:text="Thông tin cố vấn"
                     android:textSize="15sp" />
 
                 <TextView
@@ -136,7 +137,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:gravity="center_vertical"
                     android:padding="20dp"
-                    android:text="Profile information"
+                    android:text="Thông Báo"
                     android:textSize="15sp" />
 
                 <Button

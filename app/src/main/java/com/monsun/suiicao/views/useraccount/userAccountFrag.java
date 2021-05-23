@@ -1,6 +1,8 @@
 package com.monsun.suiicao.views.useraccount;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,10 +15,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
+import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.databinding.FragmentUserAccountBinding;
 import com.monsun.suiicao.firebase.FirebaseSer;
 import com.monsun.suiicao.views.base.BaseFragment;
 import com.monsun.suiicao.views.login.LoginActivity;
+import com.monsun.suiicao.views.useraccount.Mentorinformation.MentorInformation;
 import com.monsun.suiicao.views.useraccount.studentinformation.StudentInformationActivity;
 
 /**
@@ -78,8 +82,12 @@ public class userAccountFrag extends BaseFragment implements IUserHandler {
         Intent t = LoginActivity.newIntent(getActivity());
         startActivity(t);
         getActivity().finish();
-
-
+        //======================
+        SharedPreferences preferences = getActivity().getSharedPreferences(CommonUtils.MY_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.clear();
+        edit.apply();
+        //======================
         FirebaseSer.mAuth.signOut();
         AppVar.mStudent = null;
     }
@@ -88,6 +96,12 @@ public class userAccountFrag extends BaseFragment implements IUserHandler {
     public void OpenStudentInfor() {
         Log.d(TAG, "OpenStudentInfor: hahhaha");
         Intent t = StudentInformationActivity.newIntent(getActivity());
+        startActivity(t);
+    }
+
+    @Override
+    public void OpenMentorInfor() {
+        Intent t = MentorInformation.newIntent(getActivity());
         startActivity(t);
     }
 

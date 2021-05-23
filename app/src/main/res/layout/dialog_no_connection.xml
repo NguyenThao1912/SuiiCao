@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:background="@drawable/custom_dialog_nointernetconnection">
+
+        <ImageView
+            android:id="@+id/img_nointernetconnection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nointernetconnection"
+            android:background="@drawable/custom_dialog_nointernetconnection"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/txt_nointernetconnection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/img_nointernetconnection"
+            android:textColorHighlight="@color/black"
+            android:text="@string/title_dialog_conection"/>
+
+        <Button
+            android:id="@+id/try_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="45dp"
+            android:text="thử lại"
+            android:backgroundTint="#00B339"
+            android:textStyle="bold"
+            android:textColor="@color/color_white"
+            android:layout_below="@id/txt_nointernetconnection"
+            android:background="@drawable/custom_dialog_nointernetconnection"/>
+        <Button
+            android:id="@+id/exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="45dp"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:text="Thoát"
+            android:backgroundTint="#F01511"
+            android:textColor="@color/color_white"
+            android:layout_below="@id/txt_nointernetconnection"
+
+            android:background="@drawable/custom_dialog_nointernetconnection"/>
+    </RelativeLayout>
+</layout>

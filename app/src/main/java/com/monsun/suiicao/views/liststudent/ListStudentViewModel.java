@@ -26,6 +26,7 @@ public class ListStudentViewModel extends BaseViewModel<IListStudent> {
     }
     public void getdata()
     {
+
         ApiInstance api = new ApiInstance();
         Call<List<Users>> caller = api.getServices().getAllStudentByClassId(AppVar.mMentor.getClassId());
         caller.enqueue(new Callback<List<Users>>() {

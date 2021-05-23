@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.databinding.DataBindingUtil;
@@ -12,13 +15,18 @@ import androidx.lifecycle.ViewModelProvider;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityStudentInfoBinding;
 import com.monsun.suiicao.models.Users;
+import com.monsun.suiicao.repositories.ApiInstance;
 import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.chatting.message.MessageActivity;
 import com.monsun.suiicao.views.result.ResultActivity;
 
 import java.util.Objects;
 
-public class Student_info extends BaseActivity implements IStudentinfo  {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class Student_info extends BaseActivity implements IStudentinfo , OnClickListener {
     ActivityStudentInfoBinding binding;
     StudentInfoViewModel viewModel;
     Users users;
@@ -36,6 +44,7 @@ public class Student_info extends BaseActivity implements IStudentinfo  {
         Intent intent = getIntent();
         users = (Users) intent.getExtras().getSerializable("studentinfo");
         binding.setData(users);
+        binding.updateEvaluation.setOnClickListener(this);
 
     }
     @Override
@@ -65,8 +74,33 @@ public class Student_info extends BaseActivity implements IStudentinfo  {
                 startActivity(intent);
                 return true;
             }
+
         }
         return super.onOptionsItemSelected(item);
     }
+    private void UpdateEvaluation()
+    {
+        ApiInstance apiInstance = new ApiInstance();
+        Call<String> call = apiInstance.getServices().Update_Student_Evaluation(users.getStudentId(),binding.getData().getEvaluation());
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(Student_info.this, "Update thanh cong " + response.body(), Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.update_evaluation: {
+                UpdateEvaluation();
+            }
+        }
+    }
 }

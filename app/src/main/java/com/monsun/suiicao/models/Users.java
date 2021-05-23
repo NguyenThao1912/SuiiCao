@@ -73,6 +73,15 @@ public class Users implements Serializable {
     private String nation;
     private String username;
     private String Uid;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getParentname() {
         return parentname;

@@ -3,6 +3,7 @@ package com.monsun.suiicao.views.main;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,8 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
+import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.firebase.FirebaseSer;
 import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.chatting.ContactFragment;
@@ -50,11 +53,6 @@ public class MainActivity extends BaseActivity implements IMainHandler{
         }
 
     }
-    private void reload() {
-        finish();
-        startActivity(getIntent());
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
@@ -109,6 +107,7 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
                             case R.id.user_account:
                                 if (AppVar.mStudent != null){
+                                    FirebaseSer.mAuth.signOut();
                                     selectedFragment = userAccountFrag.newInstance();
                                     Toast.makeText(MainActivity.this, "user account", Toast.LENGTH_SHORT).show();
                                     break;
@@ -116,9 +115,9 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                                 else
                                 {
                                     FirebaseSer.mAuth.signOut();
-
                                     AppVar.mMentor = null;
                                     Intent t = LoginActivity.newIntent(MainActivity.this);
+                                    overridePendingTransition(0, 0);
                                     startActivity(t);
                                     finish();
                                 }
@@ -154,9 +153,27 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
     @Override
     protected void onDestroy() {
-
-        FirebaseSer.mAuth.signOut();
-        AppVar.mMentor = null;
         super.onDestroy();
+        /* FirebaseSer.mAuth.signOut();
+        AppVar.mMentor = null;*/
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences(CommonUtils.MY_PREFERENCE,MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.remove(CommonUtils.MY_USER);
+        edit.remove(CommonUtils.TYPE_USER);
+        if (AppVar.mMentor != null){
+            Gson gson = new Gson();
+            String json = gson.toJson(AppVar.mMentor);
+            edit.putString(CommonUtils.MY_USER,json);
+            edit.putString(CommonUtils.TYPE_USER,"mentor");
+        }
+        else {
+            Gson gson = new Gson();
+            String json = gson.toJson(AppVar.mStudent);
+            edit.putString(CommonUtils.MY_USER,json);
+            edit.putString(CommonUtils.TYPE_USER,"student");
+        }
+        edit.apply();
+
+
     }
 }

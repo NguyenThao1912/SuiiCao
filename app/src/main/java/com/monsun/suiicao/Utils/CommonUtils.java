@@ -10,16 +10,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioAttributes;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.firebase.FirebaseSer;
 
 public final class CommonUtils {
-
+    public static final String MY_PREFERENCE = "Myprefer";
+    public static final String TYPE_USER = "type";
+    public static final String MY_USER = "user";;
     public static String NOTI_RECEIVER = "receiver";
     public static int FIREBASE_CREATE_SUCCESS = 8;
     public static int FIREBASE_PASSWORD_TOO_WEAK = 10;
@@ -56,11 +61,17 @@ public final class CommonUtils {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void showNotification(Context context,
                                         int id ,
                                         String title,
-                                        String content, String sender, String room_id,String receiver, Intent intent) {
+                                        String content, String sender, String room_id, String receiver, Intent intent) {
         PendingIntent pendingIntent = null;
+        Uri urisound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.message_notification);
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION_COMMUNICATION_INSTANT)
+                .build();
         if (intent != null)
             pendingIntent = PendingIntent.getActivity(context,id,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         String Notification_Chanel_id = "Chanel 1";
@@ -75,12 +86,14 @@ public final class CommonUtils {
             notificationChannel.setLightColor(Color.RED);
             notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});
             notificationChannel.enableVibration(true);
+            notificationChannel.setSound(urisound,audioAttributes);
             notificationManager.createNotificationChannel(notificationChannel);
         }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,Notification_Chanel_id);
         builder.setContentTitle(title)
                 .setContentText(content)
                 .setAutoCancel(true)
+                .setSound(urisound)
                 .setSmallIcon(R.drawable.tstudy);
         if (pendingIntent != null)
         {

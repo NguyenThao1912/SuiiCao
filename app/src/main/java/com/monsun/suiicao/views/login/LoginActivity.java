@@ -27,6 +27,7 @@ public class LoginActivity extends BaseActivity  implements ILoginHandler {
         viewModel.setNavigator(this);
         loginBinding.setLifecycleOwner(this);
         loginBinding.setViewModel(viewModel);
+
     }
 
     public static Intent newIntent(Context context) {
@@ -35,7 +36,7 @@ public class LoginActivity extends BaseActivity  implements ILoginHandler {
 
     @Override
     public void HandlerError(Throwable throwable) {
-        //hander error
+        //handler error
     }
 
     @Override

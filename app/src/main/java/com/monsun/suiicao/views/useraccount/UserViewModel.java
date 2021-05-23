@@ -39,4 +39,9 @@ public class UserViewModel extends BaseViewModel<IUserHandler> {
         Log.d("userAccountFrag", "OpenStudentInformation: ");
         getNavigator().OpenStudentInfor();
     }
+    public void MentorInforClick()
+    {
+        Log.d("userAccountFrag", "MentorInforClick: ");
+        getNavigator().OpenMentorInfor();
+    }
 }

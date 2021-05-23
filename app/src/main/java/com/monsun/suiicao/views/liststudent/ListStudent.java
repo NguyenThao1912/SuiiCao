@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -51,7 +50,6 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
     private long backpresstimes;
     Dialog dialog;
     SearchView searchView;
-    EditText mentor_message;
     public static Intent newIntent(Context context) {
         return new Intent(context, ListStudent.class);
     }
@@ -59,7 +57,6 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_student);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_list_student);
         viewModel = new ViewModelProvider(this).get(ListStudentViewModel.class);
         viewModel.setNavigator(this);
@@ -242,13 +239,7 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
             Toast.makeText(this, "Bạn cần thêm nội dung tin nhắn ", Toast.LENGTH_SHORT).show();
         }
     }
-    private void Uncheckallstudent()
-    {
-        for(Users u : data)
-        {
-            onItemUnCheck(u);
-        }
-    }
+
 
    /* private void GetUID(String classid)
     {

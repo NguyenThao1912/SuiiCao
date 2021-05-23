@@ -4,14 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +47,9 @@ public class StudentExamActivity extends BaseActivity implements IStudentExam {
         viewModel.setNavigator(this);
         binding.setLifecycleOwner(this);
         binding.setViewModel(viewModel);
+        setSupportActionBar(binding.studentExamToolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
         getWidget();
         viewModel.getListSemester().observe(this, new Observer<List<Semester>>() {
             @Override
@@ -82,15 +88,32 @@ public class StudentExamActivity extends BaseActivity implements IStudentExam {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(StudentExamActivity.this,LinearLayoutManager.VERTICAL,false);
                     recyclerView.setLayoutManager(linearLayoutManager);
                     examAdapter = new ExamAdapter(courseExams);
+
+                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                            linearLayoutManager.getOrientation());
+                    recyclerView.addItemDecoration(dividerItemDecoration);
                     recyclerView.setAdapter(examAdapter);
                     recyclerView.setVisibility(View.VISIBLE);
+                    binding.blankExam.setVisibility(View.GONE);
                 }
                 else
                 {
+                    binding.blankExam.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 }
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                return true;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
     }
     private void getWidget()
     {

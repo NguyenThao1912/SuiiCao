@@ -3,7 +3,9 @@ package com.monsun.suiicao.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Mentor {
+import java.io.Serializable;
+
+public class Mentor implements Serializable {
 
     private String Username;
 
@@ -40,6 +42,15 @@ public class Mentor {
     @SerializedName("HocVi")
     @Expose
     private String hocVi;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Integer getMentorId() {
         return mentorId;

@@ -15,7 +15,6 @@ import com.monsun.suiicao.databinding.FragmentHomeBinding;
 import com.monsun.suiicao.views.base.BaseFragment;
 import com.monsun.suiicao.views.curriculum.CurriculumActivity;
 import com.monsun.suiicao.views.result.ResultActivity;
-import com.monsun.suiicao.views.studentresult.StudentResult;
 import com.monsun.suiicao.views.study.StudentExamActivity;
 import com.monsun.suiicao.views.timetable.TimetableActivity;
 

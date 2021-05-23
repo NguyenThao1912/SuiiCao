@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SuiiCao"
         android:usesCleartextTraffic="true">
+        <activity android:name=".views.useraccount.Mentorinformation.MentorInformation">
+        </activity>
+
         <service
             android:name=".Notification.MyFCMService"
             android:enabled="true"
@@ -22,7 +25,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".views.studentresult.StudentResult" />
         <activity
             android:name=".views.liststudent.studentinformation.Student_info"
             android:parentActivityName=".views.liststudent.ListStudent">
@@ -42,8 +44,18 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".views.curriculum.CurriculumActivity" />
-        <activity android:name=".views.timetable.TimetableActivity" />
-        <activity android:name=".views.study.StudentExamActivity" />
+        <activity android:name=".views.timetable.TimetableActivity"
+            android:parentActivityName=".views.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.main.MainActivity" />
+        </activity>
+        <activity android:name=".views.study.StudentExamActivity"
+            android:parentActivityName=".views.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.main.MainActivity" />
+        </activity>
         <activity android:name=".views.useraccount.studentinformation.StudentInformationActivity" />
         <activity
             android:name=".views.main.MainActivity"
@@ -59,7 +71,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.result.ResultActivity"></activity>
+        <activity android:name=".views.result.ResultActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

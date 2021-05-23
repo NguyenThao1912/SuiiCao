@@ -124,6 +124,7 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
 
                         AppVar.mMentor = response.body();
                         AppVar.mMentor.setUsername(Username);
+                        AppVar.mMentor.setPassword(Password);
                         Log.d(TAG, "onResponse: Get Data" + AppVar.mMentor.getMentorName());
                         GET_INFORMATION_RESULT = CommonUtils.GET_INFORMATION_SUCESS;
                         // TODO start main activity
@@ -155,10 +156,11 @@ public class LoginViewModel extends BaseViewModel<ILoginHandler> {
 
                            AppVar.mStudent = response.body();
                            AppVar.mStudent.setUsername(Username);
+                           AppVar.mStudent.setPassword(Password);
                            Log.d(TAG, "onResponse: Get Data" + AppVar.mStudent.getFullName());
                            GET_INFORMATION_RESULT = CommonUtils.GET_INFORMATION_SUCESS;
                            // TODO start main activity
-                       Open_Main();
+                            Open_Main();
 
                    }
                    catch (Exception e)

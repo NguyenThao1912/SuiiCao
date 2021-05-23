@@ -15,25 +15,13 @@
         android:orientation="vertical"
         android:fitsSystemWindows="true"
         >
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/curriculum_toolbar"
             android:layout_width="match_parent"
+            android:elevation="3dp"
             android:layout_height="wrap_content">
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/curriculum_toolbar"
-                android:layout_width="match_parent"
-                android:elevation="3dp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Chương Trình Học"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginRight="40dp"
-                    />
-            </androidx.appcompat.widget.Toolbar></LinearLayout>
 
+        </androidx.appcompat.widget.Toolbar>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_lecture"
             android:layout_marginTop="10dp"

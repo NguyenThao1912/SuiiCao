@@ -1,6 +1,5 @@
 package com.monsun.suiicao.views.curriculum;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,7 +34,6 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_curriculum);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_curriculum);
         viewModel = new ViewModelProvider(this).get(CurriculumViewModel.class);
         viewModel.setNavigator(this);
@@ -44,7 +42,7 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
         setSupportActionBar(binding.curriculumToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
+        ab.setTitle("Chương trình học");
         viewModel.getData().observe(this, new Observer<List<Curriculum>>() {
             @Override
             public void onChanged(List<Curriculum> curricula) {
@@ -66,16 +64,11 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
                 finish();
-                return true;
-            }
-            case R.id.curriculum_sort: {
-
                 return true;
             }
         }
