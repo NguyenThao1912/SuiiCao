@@ -14,18 +14,35 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
                 android:orientation="vertical">
-            <TextView
-                android:textColor="#0303fc"
-                android:id="@+id/lecture_name"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="18sp"
-                android:padding="18dp"
-                android:hint="thu nghiem"
-                android:gravity="left"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:textColor="#0303fc"
+                        android:id="@+id/lecture_name"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textSize="18sp"
+                        android:padding="18dp"
+                        android:hint="thu nghiem"
+                        android:gravity="left"/>
+
+                    <ImageView
+                        android:id="@+id/curriculum_study"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/check"
+                        android:padding="3dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="5dp"
+                        />
+                </RelativeLayout>
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"

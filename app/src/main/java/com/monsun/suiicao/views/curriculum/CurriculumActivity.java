@@ -14,18 +14,25 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityCurriculumBinding;
 import com.monsun.suiicao.models.Curriculum;
+import com.monsun.suiicao.repositories.ApiInstance;
 import com.monsun.suiicao.views.base.BaseActivity;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQueryTextListener {
     private static final String TAG = "CurriculumActivity";
     private ActivityCurriculumBinding binding;
     private CurriculumViewModel viewModel;
     private List<Curriculum> currentCurriculum;
+    private List<Curriculum> unstudycurriculum;
     private SearchView searchView;
     private CurriculumAdapter examAdapter;
     public static Intent newIntent(Context context) {
@@ -43,13 +50,14 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Chương trình học");
+        GetListUnstudylecture();
         viewModel.getData().observe(this, new Observer<List<Curriculum>>() {
             @Override
             public void onChanged(List<Curriculum> curricula) {
                 currentCurriculum = curricula;
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CurriculumActivity.this,LinearLayoutManager.VERTICAL,false);
                 binding.listLecture.setLayoutManager(linearLayoutManager);
-                examAdapter = new CurriculumAdapter(currentCurriculum);
+                examAdapter = new CurriculumAdapter(currentCurriculum,unstudycurriculum);
                 binding.listLecture.setAdapter(examAdapter);
             }
         });
@@ -87,12 +95,28 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        return false;
+        examAdapter.getFilter().filter(query);return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
         examAdapter.getFilter().filter(newText);
         return false;
+    }
+    private void GetListUnstudylecture()
+    {
+        ApiInstance apiInstance = new ApiInstance();
+        Call<List<Curriculum>> call = apiInstance.getServices().getUnstudylecture(AppVar.mStudent.getStudentId(), Integer.parseInt(AppVar.mStudent.getClassId()));
+        call.enqueue(new Callback<List<Curriculum>>() {
+            @Override
+            public void onResponse(Call<List<Curriculum>> call, Response<List<Curriculum>> response) {
+                unstudycurriculum = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<Curriculum>> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -18,9 +18,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.Utils.CommonUtils;
+import com.monsun.suiicao.repositories.ApiInstance;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FirebaseSer {
     public static FirebaseAuth mAuth =  FirebaseAuth.getInstance();;
@@ -95,8 +100,9 @@ public class FirebaseSer {
         {
             mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
                 FirebaseMessaging.getInstance().getToken().addOnSuccessListener(s -> {
-                    
+
                 });
+                UpdateUID();
             });
             FirebaseUser user = mAuth.getCurrentUser();
             LOGIN_FIREBASE_RESULT = CommonUtils.FIREBASE_CREATE_SUCCESS;
@@ -146,5 +152,26 @@ public class FirebaseSer {
         reference.setValue(hashMap);
     }
 
+    private static void UpdateUID()
+    {
+        ApiInstance apiInstance = new ApiInstance();
+        if (AppVar.mStudent != null){
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user.getUid() !=  AppVar.mStudent.getUid()){
+                Call<String> call = apiInstance.getServices().UpdateUID(AppVar.mStudent.getStudentId(),user.getUid());
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Log.d(TAG, "UID: " + response.body());
+                    }
 
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+            }
+        }
+
+    }
 }

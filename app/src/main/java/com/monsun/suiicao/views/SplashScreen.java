@@ -19,16 +19,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.google.gson.Gson;
-import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.Utils.AppUtil;
 import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.databinding.DialogNoConnectionBinding;
-import com.monsun.suiicao.models.Mentor;
-import com.monsun.suiicao.models.Users;
 import com.monsun.suiicao.views.login.LoginActivity;
-import com.monsun.suiicao.views.main.MainActivity;
 
 public class SplashScreen extends AppCompatActivity implements View.OnClickListener{
     private static int SPLASH_DURATION = 3; // 4 seconds
@@ -63,7 +58,7 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
                 //do something
                 SharedPreferences preferences = getApplicationContext().getSharedPreferences(CommonUtils.MY_PREFERENCE,MODE_PRIVATE);
                 String type = preferences.getString(CommonUtils.TYPE_USER,"");
-                if (type != null && !type.isEmpty()){
+/*                if (type != null && !type.isEmpty()){
                     if (type.equals("mentor"))
                     {
                         Gson gson = new Gson();
@@ -79,13 +74,13 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                     finish();
                 }
-                else {
+                else {*/
                     //Open Login activity
                     Intent intent = new Intent(SplashScreen.this,
                             LoginActivity.class);
                     startActivity(intent);
                     finish();
-                }
+              //  }
 
             }, SPLASH_DURATION * 1000);
         }

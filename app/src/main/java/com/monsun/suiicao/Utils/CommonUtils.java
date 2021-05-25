@@ -67,7 +67,7 @@ public final class CommonUtils {
                                         String title,
                                         String content, String sender, String room_id, String receiver, Intent intent) {
         PendingIntent pendingIntent = null;
-        Uri urisound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.message_notification);
+        Uri urisound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.message_notification_v2);
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION_COMMUNICATION_INSTANT)
@@ -80,20 +80,21 @@ public final class CommonUtils {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O){
             NotificationChannel notificationChannel = new NotificationChannel(Notification_Chanel_id,
                     "TStudy",
-                    NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager.IMPORTANCE_HIGH);
             notificationChannel.setDescription("New TStudy");
-            notificationChannel.enableLights(true);
+            notificationChannel.enableLights(false);
+            notificationChannel.enableVibration(false);
             notificationChannel.setLightColor(Color.RED);
-            notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});
-            notificationChannel.enableVibration(true);
             notificationChannel.setSound(urisound,audioAttributes);
             notificationManager.createNotificationChannel(notificationChannel);
         }
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,Notification_Chanel_id);
         builder.setContentTitle(title)
                 .setContentText(content)
                 .setAutoCancel(true)
                 .setSound(urisound)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.tstudy);
         if (pendingIntent != null)
         {

@@ -38,6 +38,12 @@ public interface ILocalServices {
     @GET("api/student/result/{studentid}/{semesterid}")
     Call<List<Result>> GetStudentResult(@Path("studentid") int sid,@Path("semesterid") int semesterid);
 
+    @PUT("api/student/uid/{studentid}/{fireuid}")
+    Call<String> UpdateUID(@Path("studentid") int sid,@Path("fireuid") String UID);
+
+    @GET("api/student/unstudy/{studentid}/{classid}")
+    Call<List<Curriculum>> getUnstudylecture(@Path("studentid") int sid,@Path("classid") int classid);
+
     //================================================================
     //Mentor
     @GET("api/mentor/class/{classid}")

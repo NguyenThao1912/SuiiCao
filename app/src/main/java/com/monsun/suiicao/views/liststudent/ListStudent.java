@@ -174,7 +174,7 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this, Student_info.class);
-        data.get(position).setUid(Uid.get(position));
+        //data.get(position).setUid(Uid.get(position));
         intent.putExtra("studentinfo",data.get(position));
         startActivity(intent);
     }

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,10 +25,12 @@ public class CurriculumAdapter extends RecyclerView.Adapter<CurriculumAdapter.Vi
 
     private List<Curriculum> list;
     private List<Curriculum> filterlist;
+    private List<Curriculum> unstudylist;
     //thu
     private List<Boolean> isexpandable ;
-    public CurriculumAdapter(List<Curriculum> mlist)
+    public CurriculumAdapter(List<Curriculum> mlist,List<Curriculum> unstudy)
     {
+        this.unstudylist = unstudy;
         list = mlist;
         filterlist = mlist;
     }
@@ -48,6 +51,13 @@ public class CurriculumAdapter extends RecyclerView.Adapter<CurriculumAdapter.Vi
         holder.discuss.setText( list.get(position).getDiscuss().trim());
         holder.semester.setText( list.get(position).getSemester().trim());
         holder.relativeLayout.setVisibility(list.get(position).isIsexpandable()?View.VISIBLE:View.GONE);
+        if (!unstudylist.contains(list.get(position)))
+        {
+            holder.imageView.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.imageView.setVisibility(View.GONE);
+        }
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +118,7 @@ public class CurriculumAdapter extends RecyclerView.Adapter<CurriculumAdapter.Vi
         public TextView lectureName,credit,theory,practical,discuss,semester,lectureid;
         LinearLayout linearLayout;
         RelativeLayout relativeLayout;
+        public ImageView imageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             lectureName = itemView.findViewById(R.id.lecture_name);
@@ -119,7 +130,7 @@ public class CurriculumAdapter extends RecyclerView.Adapter<CurriculumAdapter.Vi
             lectureid = itemView.findViewById(R.id.lecture_id);
             linearLayout = itemView.findViewById(R.id.lecture_linear);
             relativeLayout = itemView.findViewById(R.id.lecture_expanable);
-
+            imageView = itemView.findViewById(R.id.curriculum_study);
         }
     }
 }
