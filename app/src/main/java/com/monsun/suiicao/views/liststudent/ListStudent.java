@@ -74,10 +74,10 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
 
         // lấy danh sách uid của sinh viên trên firebase
         // GetUID("class_" + AppVar.mMentor.getClassId());
-        Uid.add("LWvc5tIlKTYJAaLWVllIfGdCMc73");
-        Uid.add("WcoRd3ZSEsWgecdAVw7TeOZ3JZh1");
-        Uid.add("Y3MP9GRW07TMqQxPkkPxfa1DpXA2");
-        Uid.add("zH1M8pcU6TWum2SWzVJCcYDsxbm2");
+        //        Uid.add("LWvc5tIlKTYJAaLWVllIfGdCMc73");
+        //        Uid.add("WcoRd3ZSEsWgecdAVw7TeOZ3JZh1");
+        //        Uid.add("Y3MP9GRW07TMqQxPkkPxfa1DpXA2");
+        //        Uid.add("zH1M8pcU6TWum2SWzVJCcYDsxbm2");
 
         viewModel.user.observe(this, new Observer<List<Users>>() {
             @Override
@@ -87,12 +87,7 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
                 binding.listStudent.setAdapter(adapter);
             }
         });
-        binding.selectAllStudent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    adapter.selectAll(binding.selectAllStudent.isChecked());
-            }
-        });
+        binding.selectAllStudent.setOnClickListener(v -> adapter.selectAll(binding.selectAllStudent.isChecked()));
 
 
     }
@@ -208,20 +203,16 @@ public class ListStudent extends BaseActivity implements IListStudent, SearchVie
             alertDialogBuilder.setTitle("Bạn có muốn gửi tin nhắn cho " + checked_users.size() + " sinh viên ? ");
             alertDialogBuilder.setMessage("Xác nhận gửi tin nhắn");
             alertDialogBuilder.setPositiveButton("OK",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface arg0, int arg1) {
-
+                    (arg0, arg1) -> {
 //                            for (Users users : checked_users){
 //                                Uid.add(Uid_Userid.get(users.getStudentId()));
 //                                Log.d(TAG, "onClick: Uid = " + Uid_Userid.get(users.getStudentId()) );
 //                            }
-                            Toast.makeText(ListStudent.this, "Đang gửi tin", Toast.LENGTH_SHORT).show();
-                            SendMessageAysncTask send = new SendMessageAysncTask(ListStudent.this,dialogbinding.listStudentMessage.getText().toString(),Uid);
-                            send.executeOnExecutor(Executors.newFixedThreadPool(1));
+                        Toast.makeText(ListStudent.this, "Đang gửi tin", Toast.LENGTH_SHORT).show();
+                        SendMessageAysncTask send = new SendMessageAysncTask(ListStudent.this,dialogbinding.listStudentMessage.getText().toString(),Uid);
+                        send.executeOnExecutor(Executors.newFixedThreadPool(1));
 
-                            dialog.dismiss();
-                        }
+                        dialog.dismiss();
                     });
             alertDialogBuilder.setNegativeButton("CANCEL",
                     new DialogInterface.OnClickListener() {

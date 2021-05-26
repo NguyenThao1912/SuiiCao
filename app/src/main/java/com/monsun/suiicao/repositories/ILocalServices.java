@@ -10,6 +10,7 @@ import com.monsun.suiicao.models.Users;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
@@ -19,7 +20,8 @@ public interface ILocalServices {
     //Student
     @GET("api/student/semester")
     Call<List<Semester>> getSemester();
-
+    @GET("api/student/semester")
+    Observable<List<Semester>> getAllSemester();
     @GET("api/login/{username}/{password}")
     Call<Boolean> GetLoginResult(@Path("username") String username,@Path("password") String pass);
 

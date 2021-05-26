@@ -3,6 +3,8 @@ package com.monsun.suiicao.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Calendar;
+
 public class Schedule {
     @SerializedName("CourseID")
     @Expose
@@ -25,6 +27,7 @@ public class Schedule {
     @SerializedName("location")
     @Expose
     private String location;
+    private Calendar date;
 
     private boolean isexpandable = true;
 
@@ -90,5 +93,13 @@ public class Schedule {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 }

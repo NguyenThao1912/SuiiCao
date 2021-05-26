@@ -5,13 +5,10 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.monsun.suiicao.AppVar;
-import com.monsun.suiicao.models.CourseExam;
-import com.monsun.suiicao.models.Curriculum;
 import com.monsun.suiicao.models.Schedule;
 import com.monsun.suiicao.models.Semester;
 import com.monsun.suiicao.repositories.ApiInstance;
 import com.monsun.suiicao.views.base.BaseViewModel;
-import com.monsun.suiicao.views.timetable.ITimetable;
 
 import java.util.List;
 
@@ -23,13 +20,18 @@ public class TimetableViewModel extends BaseViewModel<ITimetable> {
 
     private static final String TAG = "TimetableViewModel";
     private MutableLiveData<List<Schedule>> listSchedule = new MutableLiveData<>();
-    private MutableLiveData<List<Semester>> listSemester = new MutableLiveData<>();
+
+    public void setSemester(Semester current) {
+        getSchedule(current.getSemesterKey());
+    }
+
     private ApiInstance apiInstance;
     public TimetableViewModel()
     {
         apiInstance = new ApiInstance();
-        getSchedule(3);
+        getSchedule(AppVar.semester.getSemesterKey());
     }
+
     public MutableLiveData<List<Schedule>> getListSchedule() {
         return listSchedule;
     }
@@ -46,6 +48,7 @@ public class TimetableViewModel extends BaseViewModel<ITimetable> {
                 }
                 else
                 {
+                    Log.d(TAG, "onResponse: Get Schedule Success");
                     List<Schedule> scheduleList = response.body();
                     listSchedule.setValue(scheduleList);
                 }

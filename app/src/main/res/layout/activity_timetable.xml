@@ -30,11 +30,19 @@
                 />
         </androidx.appcompat.widget.Toolbar>
 
+        <com.applandeo.materialcalendarview.CalendarView
+            android:id="@+id/calendarView"
+            app:headerLabelColor="#FFFFFF"
+            app:headerColor="#5781FF"
+            app:todayLabelColor="#ff0000"
+            app:eventsEnabled="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_timetable"
             android:layout_marginTop="10dp"
             android:padding="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>

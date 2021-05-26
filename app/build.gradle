@@ -87,4 +87,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     implementation "com.github.skydoves:expandablelayout:1.0.6"
+
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
 }

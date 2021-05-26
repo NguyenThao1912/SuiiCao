@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Chọn Kỳ"
+        android:id="@+id/select_timetable_semester">
+
+    </item>
+    <item
+        android:title="Chọn Ngày"
+        android:id="@+id/select_day">
+
+    </item>
+</menu>

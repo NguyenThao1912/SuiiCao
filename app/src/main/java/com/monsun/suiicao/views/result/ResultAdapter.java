@@ -1,7 +1,6 @@
 package com.monsun.suiicao.views.result;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;

@@ -80,16 +80,17 @@ public class userAccountFrag extends BaseFragment implements IUserHandler {
     public void OpenLoginActivity() {
         Log.d(TAG, "OpenLoginActivity: ");
         Intent t = LoginActivity.newIntent(getActivity());
-        startActivity(t);
-        getActivity().finish();
         //======================
         SharedPreferences preferences = getActivity().getSharedPreferences(CommonUtils.MY_PREFERENCE, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();
-        edit.clear();
-        edit.apply();
+        edit.remove(CommonUtils.MY_USER);
+        edit.remove(CommonUtils.TYPE_USER);
+        edit.commit();
         //======================
         FirebaseSer.mAuth.signOut();
         AppVar.mStudent = null;
+        startActivity(t);
+        getActivity().finish();
     }
 
     @Override

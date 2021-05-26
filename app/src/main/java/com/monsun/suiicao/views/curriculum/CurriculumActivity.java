@@ -10,7 +10,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -51,16 +50,7 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle("Chương trình học");
         GetListUnstudylecture();
-        viewModel.getData().observe(this, new Observer<List<Curriculum>>() {
-            @Override
-            public void onChanged(List<Curriculum> curricula) {
-                currentCurriculum = curricula;
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CurriculumActivity.this,LinearLayoutManager.VERTICAL,false);
-                binding.listLecture.setLayoutManager(linearLayoutManager);
-                examAdapter = new CurriculumAdapter(currentCurriculum,unstudycurriculum);
-                binding.listLecture.setAdapter(examAdapter);
-            }
-        });
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,6 +101,13 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
             @Override
             public void onResponse(Call<List<Curriculum>> call, Response<List<Curriculum>> response) {
                 unstudycurriculum = response.body();
+                viewModel.getData().observe(CurriculumActivity.this, curricula -> {
+                    currentCurriculum = curricula;
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CurriculumActivity.this,LinearLayoutManager.VERTICAL,false);
+                    binding.listLecture.setLayoutManager(linearLayoutManager);
+                    examAdapter = new CurriculumAdapter(currentCurriculum,unstudycurriculum);
+                    binding.listLecture.setAdapter(examAdapter);
+                });
             }
 
             @Override

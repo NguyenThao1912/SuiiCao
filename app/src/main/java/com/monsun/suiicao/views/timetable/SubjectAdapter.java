@@ -1,11 +1,8 @@
 package com.monsun.suiicao.views.timetable;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,19 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.monsun.suiicao.R;
-import com.monsun.suiicao.models.Curriculum;
 import com.monsun.suiicao.models.Schedule;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHolder> {
 
     private List<Schedule> scheduleList;
+    private Calendar calendar;
 
-    public SubjectAdapter(List<Schedule> scheduleList) {
+    public SubjectAdapter(List<Schedule> scheduleList,Calendar calendar) {
         this.scheduleList = scheduleList;
+        this.calendar = calendar;
     }
 
     private List<Boolean> isexpandable ;
@@ -40,7 +39,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull SubjectAdapter.ViewHolder holder, int position) {
         String shift = scheduleList.get(position).getShift();
-        int start = Integer.parseInt(shift.substring(0,shift.indexOf(',')));
+        int start = Integer.parseInt(shift);
         String time = "";
         switch (start){
             case 1:
@@ -82,18 +81,22 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         }
         String hour = time.substring(0,2);
         String minute = time.substring(3,5);
+        Calendar date = calendar;
+        int day = date.get(Calendar.DAY_OF_MONTH);
+        int month = date.get(Calendar.MONTH);
+        int year = date.get(Calendar.YEAR);
+        int day_in_week = date.get(Calendar.DAY_OF_WEEK);
+        String txt = "Thứ " + day_in_week + ", " + day + "/" + month + "/" + year;
+        holder.date.setText(txt);
         holder.subjectTitle.setText(scheduleList.get(position).getName());
         holder.subjectRoom.setText(scheduleList.get(position).getLocation());
         holder.subjectHour.setText(hour);
         holder.subjectMinute.setText(minute);
         holder.linearLayout2.setVisibility(scheduleList.get(position).isIsexpandable()?View.VISIBLE:View.GONE);
-        holder.linearLayout1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Schedule c =  scheduleList.get(position);
-                c.setIsexpandable(!c.isIsexpandable());
-                notifyItemChanged(position);
-            }
+        holder.linearLayout1.setOnClickListener(view -> {
+            Schedule c =  scheduleList.get(position);
+            c.setIsexpandable(!c.isIsexpandable());
+            notifyItemChanged(position);
         });
 
     }
@@ -117,13 +120,16 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         public final LinearLayout linearLayout2;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            subjectTitle = (TextView) itemView.findViewById(R.id.tvSubjectTitle1);
-            subjectRoom = (TextView) itemView.findViewById(R.id.tvSubjectRoom1);
-            subjectHour = (TextView) itemView.findViewById(R.id.tvSubjectHour1);
-            subjectMinute = (TextView) itemView.findViewById(R.id.tvSubjectMinute1);
-            date = (TextView) itemView.findViewById(R.id.tvDate);
-            linearLayout1 = (LinearLayout) itemView.findViewById(R.id.schedule_linear);
-            linearLayout2 = (LinearLayout) itemView.findViewById(R.id.layoutSubject);
+            subjectTitle =  itemView.findViewById(R.id.tvSubjectTitle1);
+            subjectRoom =  itemView.findViewById(R.id.tvSubjectRoom1);
+            subjectHour =  itemView.findViewById(R.id.tvSubjectHour1);
+            subjectMinute =  itemView.findViewById(R.id.tvSubjectMinute1);
+            date =  itemView.findViewById(R.id.tvDate);
+            linearLayout1 =  itemView.findViewById(R.id.schedule_linear);
+            linearLayout2 =  itemView.findViewById(R.id.layoutSubject);
         }
+    }
+    public interface GetThing{
+        Calendar getdate(int position);
     }
 }
