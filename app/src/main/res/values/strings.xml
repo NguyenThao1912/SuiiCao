@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_notification_channel_id">Chanel 1</string>
     <string name="title_dialog_conection">Không có kết nối mạng</string>
+
+    <string name="lbl_set_profile_photo">Đặt ảnh đại diện</string>
+    <string name="lbl_take_camera_picture">Chụp ảnh</string>
+    <string name="lbl_choose_from_gallery">Chọn từ bộ sưu tập</string>
 </resources>

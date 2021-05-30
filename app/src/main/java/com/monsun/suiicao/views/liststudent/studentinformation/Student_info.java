@@ -1,6 +1,7 @@
 package com.monsun.suiicao.views.liststudent.studentinformation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,10 +9,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityStudentInfoBinding;
 import com.monsun.suiicao.models.Users;
@@ -44,6 +52,20 @@ public class Student_info extends BaseActivity implements IStudentinfo , OnClick
         Intent intent = getIntent();
         users = (Users) intent.getExtras().getSerializable("studentinfo");
         binding.setData(users);
+        StorageReference storageReference  = FirebaseStorage.getInstance().getReference().child(users.getStudentId().toString());
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(Student_info.this)
+                        .load(storageReference)
+                        .into(binding.studentInforImg);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+
+            }
+        });
         binding.updateEvaluation.setOnClickListener(this);
 
     }

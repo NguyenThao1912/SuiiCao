@@ -83,7 +83,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         String minute = time.substring(3,5);
         Calendar date = calendar;
         int day = date.get(Calendar.DAY_OF_MONTH);
-        int month = date.get(Calendar.MONTH);
+        int month = date.get(Calendar.MONTH) + 1;
         int year = date.get(Calendar.YEAR);
         int day_in_week = date.get(Calendar.DAY_OF_WEEK);
         String txt = "Thứ " + day_in_week + ", " + day + "/" + month + "/" + year;
