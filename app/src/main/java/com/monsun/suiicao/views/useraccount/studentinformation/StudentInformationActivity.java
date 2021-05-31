@@ -15,7 +15,11 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityStudentInformationBinding;
 import com.monsun.suiicao.views.base.BaseActivity;
@@ -90,6 +94,11 @@ public class StudentInformationActivity extends BaseActivity implements IStuInfo
         titleToolbarTextSingle = findViewById(R.id.tv_profile_name_single);
         background = findViewById(R.id.fl_background);
         invisibleTextViewWorkAround = findViewById(R.id.tv_workaround);
+        StorageReference storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mStudent.getStudentId().toString());
+        // Load the image using Glide
+        Glide.with(this)
+                .load(storageReference)
+                .into((de.hdodenhof.circleimageview.CircleImageView)findViewById(R.id.imgb_avatar_wrap));
 
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             StudentInformationActivity var10000;

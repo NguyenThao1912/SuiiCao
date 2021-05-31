@@ -1,5 +1,7 @@
 package com.monsun.suiicao.views.liststudent;
 
+import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.models.Users;
 
@@ -25,6 +33,8 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
     private List<Users> listAll;
     private OnItemCheckListener onItemCheckListener;
     private boolean isSelected = false;
+    private Context context;
+
     public ListStudentAdapter(List<Users> mlist, OnItemCheckListener itemCheckListener)
     {
         list = mlist;
@@ -36,6 +46,7 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
     @Override
     public ListStudentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.liststudent_row,parent,false);
+        this.context = parent.getContext();
         return new ListStudentAdapter.ViewHolder(view,onItemCheckListener);
     }
 
@@ -44,7 +55,20 @@ public class ListStudentAdapter extends RecyclerView.Adapter<ListStudentAdapter.
         holder.status.setChecked(isSelected);
         holder.student_name.setText(list.get(position).getFullName());
         holder.student_email.setText(list.get(position).getEmail());
-        //holder.imageView.setImageURI(list.get(position).getImg());
+        StorageReference storageReference  = FirebaseStorage.getInstance().getReference().child(list.get(position).getStudentId().toString());
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context)
+                        .load(storageReference)
+                        .into(holder.imageView);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+
+            }
+        });
         holder.status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

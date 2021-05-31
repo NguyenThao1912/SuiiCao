@@ -1,5 +1,6 @@
 package com.monsun.suiicao.views.main;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -176,4 +177,5 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
 
     }
+
 }

@@ -4,4 +4,5 @@ public interface IUserHandler {
      void OpenLoginActivity();
      void OpenStudentInfor();
      void OpenMentorInfor();
+     void OpenUploadImage();
 }

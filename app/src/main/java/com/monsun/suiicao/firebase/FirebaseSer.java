@@ -1,11 +1,14 @@
 package com.monsun.suiicao.firebase;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,10 +19,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnPausedListener;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.repositories.ApiInstance;
 
+import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -173,5 +184,41 @@ public class FirebaseSer {
             }
         }
 
+    }
+
+    public static void UploadImage(Uri filePath)
+    {
+        if (filePath != null) {
+            FirebaseStorage storage = FirebaseStorage.getInstance();;
+            StorageReference storageReference = storage.getReference();
+
+            // Defining the child of storageReference
+            StorageReference ref
+                    = storageReference
+                    .child(AppVar.mStudent.getStudentId().toString());
+            // adding listeners on upload
+            // or failure of image
+            ref.putFile(filePath)
+                    .addOnSuccessListener(
+                            taskSnapshot -> Log.d("Uploaded ","Image Uploaded!"))
+                    .addOnFailureListener(e -> {
+                        // Error, Image not uploaded
+                        Log.e("Uploaded ","Failed " + e.getMessage());
+                    })
+                    .addOnProgressListener(
+                            taskSnapshot -> {
+                                double progress
+                                        = (100.0
+                                        * taskSnapshot.getBytesTransferred()
+                                        / taskSnapshot.getTotalByteCount());
+                                Log.d("Upload ",(int)progress + "%");
+                            });
+        }
+    }
+
+    private static String GetFileName(Uri filePath) {
+        String file = filePath.getPath();
+        int index = file.indexOf("cache/");
+        return file.substring(index+6);
     }
 }

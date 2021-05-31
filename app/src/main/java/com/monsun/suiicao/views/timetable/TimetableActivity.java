@@ -113,6 +113,7 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
     private void setEventSchedule() {
         List<EventDay> events = new ArrayList<>();
         for (Calendar calendar : calendarSchedule){
+            //neeus lich nho hon ngay hien tai
             EventDay eventDay = new EventDay(calendar,R.drawable.star);
             events.add(eventDay);
            /* if (!events.contains(eventDay))

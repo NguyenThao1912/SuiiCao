@@ -44,4 +44,9 @@ public class UserViewModel extends BaseViewModel<IUserHandler> {
         Log.d("userAccountFrag", "MentorInforClick: ");
         getNavigator().OpenMentorInfor();
     }
+    public void ImagePickerClick(){
+        getNavigator().OpenUploadImage();
+    }
+
+
 }
