@@ -46,13 +46,13 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
                 time = "07:00";
                 break;
             case 2:
-                time = "07:50";
+                time = "09:30";
                 break;
             case 3:
-                time = "08:40";
+                time = "13:00";
                 break;
             case 4:
-                time = "09:30";
+                time = "15:30";
                 break;
             case 5:
                 time = "10:20";

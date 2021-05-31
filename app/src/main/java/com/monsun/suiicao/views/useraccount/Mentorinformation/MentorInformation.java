@@ -8,12 +8,10 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityMentorInformationBinding;
-import com.monsun.suiicao.models.Mentor;
 import com.monsun.suiicao.views.base.BaseActivity;
 
 public class MentorInformation extends BaseActivity implements IMentorInfomation {
@@ -36,12 +34,9 @@ public class MentorInformation extends BaseActivity implements IMentorInfomation
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        viewModel.getMentor().observe(this, new Observer<Mentor>() {
-            @Override
-            public void onChanged(Mentor mentor) {
-                binding.setData(mentor);
-                setIsLoading(false);
-            }
+        viewModel.getMentor().observe(this, mentor -> {
+            binding.setData(mentor);
+            setIsLoading(false);
         });
     }
 
