@@ -24,7 +24,9 @@ import com.monsun.suiicao.firebase.FirebaseSer;
 public final class CommonUtils {
     public static final String MY_PREFERENCE = "Myprefer";
     public static final String TYPE_USER = "type";
-    public static final String MY_USER = "user";;
+    public static final String MY_USER = "user";
+    public static final String MY_MAP_SCHEDULE = "scheduleinday";
+    public static final String MY_SCHEDULE = "allschedule";
     public static String NOTI_RECEIVER = "receiver";
     public static int FIREBASE_CREATE_SUCCESS = 8;
     public static int FIREBASE_PASSWORD_TOO_WEAK = 10;

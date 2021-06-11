@@ -55,10 +55,10 @@ public class ContactFragment extends Fragment {
                 switch (position)
                 {
                     case 0:
-                        tab.setText("Recent Contact");
+                        tab.setText("Liên hệ gần đây");
                         break;
                     case 1:
-                        tab.setText("Users");
+                        tab.setText("Người dùng");
                         break;
                 }
             }

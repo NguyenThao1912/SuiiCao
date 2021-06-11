@@ -1,6 +1,5 @@
 package com.monsun.suiicao.views.main;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +38,7 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
     @Override
     protected void onStart() {
+        AppVar.getListUnstudyCurriculum();
         tryLogin(this);
         super.onStart();
     }
@@ -162,10 +162,7 @@ public class MainActivity extends BaseActivity implements IMainHandler{
         edit.remove(CommonUtils.MY_USER);
         edit.remove(CommonUtils.TYPE_USER);
         if (AppVar.mMentor != null){
-            Gson gson = new Gson();
-            String json = gson.toJson(AppVar.mMentor);
-            edit.putString(CommonUtils.MY_USER,json);
-            edit.putString(CommonUtils.TYPE_USER,"mentor");
+            
         }
         else {
             Gson gson = new Gson();

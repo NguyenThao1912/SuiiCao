@@ -52,11 +52,11 @@ public class TimetableViewModel extends BaseViewModel<ITimetable> {
                     List<Schedule> scheduleList = response.body();
                     listSchedule.setValue(scheduleList);
                 }
+
             }
 
             @Override
             public void onFailure(Call<List<Schedule>> call, Throwable t) {
-
             }
         });
     }

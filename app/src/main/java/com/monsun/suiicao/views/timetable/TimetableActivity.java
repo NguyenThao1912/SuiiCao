@@ -3,6 +3,7 @@ package com.monsun.suiicao.views.timetable;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,13 +26,16 @@ import com.applandeo.materialcalendarview.DatePicker;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
+import com.google.gson.Gson;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
+import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.databinding.ActivityTimetableBinding;
 import com.monsun.suiicao.databinding.DialogSelectSemesterBinding;
 import com.monsun.suiicao.models.Schedule;
 import com.monsun.suiicao.models.Semester;
 import com.monsun.suiicao.repositories.ApiInstance;
+import com.monsun.suiicao.repositories.DBManager;
 import com.monsun.suiicao.views.base.BaseActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -56,11 +60,8 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
     DialogSelectSemesterBinding dialogbinding;
     private Dialog dialog;
     private List<Schedule> listschedules = new ArrayList<>();
-
     private List<Semester> semesters = new ArrayList<>();
-
     private Map<Calendar,List<Schedule>> scheduleMap = new HashMap<>();
-
     private List<Calendar> calendarSchedule = new ArrayList<>();
     private Semester currentSemester;
 
@@ -77,7 +78,7 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
         binding.setLifecycleOwner(this);
         binding.setViewModel(viewModel);
         setSupportActionBar(binding.timetableToolbar);
-        setData();
+        getSemester();
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(TimetableActivity.this,LinearLayoutManager.VERTICAL,false);
@@ -85,21 +86,7 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
 
         binding.calendarView.setOnDayClickListener(eventDay -> {
             Calendar calendar = eventDay.getCalendar();
-            List<Schedule> scheduleList = scheduleMap.get(calendar);
-            if (scheduleList != null){
-                binding.listTimetable.setVisibility(View.VISIBLE);
-                binding.listTimetable.setAdapter(null);
-                binding.listTimetable.setAdapter(new SubjectAdapter(scheduleList,calendar));
-                Log.d(TAG, "onCreate: " + scheduleList.size());
-                Toast.makeText(TimetableActivity.this, "có " + scheduleList.size() + " môn", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-
-                binding.listTimetable.setVisibility(View.GONE);
-                Toast.makeText(TimetableActivity.this, "Hôm nay chả có gì cả ", Toast.LENGTH_SHORT).show();
-            }
-
+            loadListSchedule(calendar);
         });
 
         //Sau khi lấy lịch học về thì xử lý dữ liệu lịch học hàm tự gọi mỗi khi lịch học trong viewmodel thay đổi
@@ -107,13 +94,35 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
                     listschedules = schedules;
                     HandlerSchedule();
                     setEventSchedule();
+                    loadListSchedule(Calendar.getInstance());
                 });
     }
 
+    private void loadListSchedule(Calendar calendar)
+    {
+        List<Schedule> scheduleList = scheduleMap.get(calendar);
+        if (scheduleList != null){
+            binding.listTimetable.setVisibility(View.VISIBLE);
+            binding.listTimetable.setAdapter(null);
+            binding.listTimetable.setAdapter(new SubjectAdapter(scheduleList,calendar));
+            Log.d(TAG, "onCreate: " + scheduleList.size());
+            Toast.makeText(TimetableActivity.this, "có " + scheduleList.size() + " môn", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+
+            binding.listTimetable.setVisibility(View.GONE);
+            Toast.makeText(TimetableActivity.this, "Hôm nay chả có gì cả ", Toast.LENGTH_SHORT).show();
+        }
+
+    }
     private void setEventSchedule() {
         List<EventDay> events = new ArrayList<>();
+        Calendar today = Calendar.getInstance();
         for (Calendar calendar : calendarSchedule){
             //neeus lich nho hon ngay hien tai
+            if (calendar.before(today))
+                continue;
             EventDay eventDay = new EventDay(calendar,R.drawable.star);
             events.add(eventDay);
            /* if (!events.contains(eventDay))
@@ -137,6 +146,16 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
     public void goBack() {
         finish();
     }
+
+    @Override
+    public void setIsLoading(Boolean isLoading) {
+        if (isLoading)
+            showLoading();
+        else
+            hideLoading();
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -184,7 +203,7 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
         dialog.show();
     }
 
-    public void setData()
+    public void getSemester()
     {
         ApiInstance apiInstance = new ApiInstance();
         Call<List<Semester>> lsemester = apiInstance.getServices().getSemester();
@@ -198,7 +217,6 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
                 else
                 {
                     semesters = response.body();
-
                 }
             }
             @Override
@@ -310,6 +328,16 @@ public class TimetableActivity extends BaseActivity implements OnSelectDateListe
             }
             break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = DBManager.getInstance(this).getSharedPreferences().edit();
+        Gson gson = new Gson();
+        editor.putString(CommonUtils.MY_MAP_SCHEDULE,gson.toJson(scheduleMap));
+        editor.putString(CommonUtils.MY_SCHEDULE,gson.toJson(calendarSchedule));
+        editor.apply();
     }
 
     @Override

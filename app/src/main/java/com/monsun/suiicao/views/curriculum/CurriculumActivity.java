@@ -3,6 +3,7 @@ package com.monsun.suiicao.views.curriculum;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,7 +21,10 @@ import com.monsun.suiicao.models.Curriculum;
 import com.monsun.suiicao.repositories.ApiInstance;
 import com.monsun.suiicao.views.base.BaseActivity;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +40,12 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
     private CurriculumAdapter examAdapter;
     public static Intent newIntent(Context context) {
         return new Intent(context, CurriculumActivity.class);
+    }
+    public List<Curriculum> getListStudyCurriculum() {
+        Set<Curriculum> curricula = new HashSet<>(currentCurriculum);
+        Set<Curriculum> unstudy = new HashSet<>(unstudycurriculum);
+        curricula.removeAll(unstudy);
+        return  new ArrayList(curricula);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +77,10 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
         switch (item.getItemId()) {
             case android.R.id.home: {
                 finish();
+                return true;
+            }
+            case R.id.curriculum_sort:{
+                
                 return true;
             }
         }
@@ -105,9 +119,11 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
                     currentCurriculum = curricula;
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CurriculumActivity.this,LinearLayoutManager.VERTICAL,false);
                     binding.listLecture.setLayoutManager(linearLayoutManager);
+                    Log.d(TAG, "Unstudy lecture  : " + unstudycurriculum.size());
                     examAdapter = new CurriculumAdapter(currentCurriculum,unstudycurriculum);
                     binding.listLecture.setAdapter(examAdapter);
                 });
+
             }
 
             @Override
@@ -115,5 +131,7 @@ public class CurriculumActivity extends BaseActivity implements ICurriculum, OnQ
 
             }
         });
+
     }
-}
+
+    }

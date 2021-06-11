@@ -51,13 +51,14 @@ public class CurriculumAdapter extends RecyclerView.Adapter<CurriculumAdapter.Vi
         holder.discuss.setText( list.get(position).getDiscuss().trim());
         holder.semester.setText( list.get(position).getSemester().trim());
         holder.relativeLayout.setVisibility(list.get(position).isIsexpandable()?View.VISIBLE:View.GONE);
-        if (!unstudylist.contains(list.get(position)))
-        {
-            holder.imageView.setVisibility(View.VISIBLE);
-        }
-        else {
-            holder.imageView.setVisibility(View.GONE);
-        }
+
+       for(Curriculum curriculum: unstudylist){
+           if (curriculum.getCourseId() == list.get(position).getCourseId()) {
+               holder.imageView.setVisibility(View.GONE);
+               break;
+           }
+       }
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
