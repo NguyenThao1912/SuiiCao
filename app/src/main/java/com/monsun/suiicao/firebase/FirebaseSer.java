@@ -7,8 +7,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,17 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnPausedListener;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.repositories.ApiInstance;
 
-import java.io.File;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -156,6 +148,7 @@ public class FirebaseSer {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(type).child(userid);
         Map<String,String> hashMap = new HashMap<>();
         hashMap.put("uid",userid);
+        hashMap.put("contact_msv","");
         hashMap.put("contact_id",username);
         hashMap.put("contact_img","default");
         hashMap.put("contact_name",name);

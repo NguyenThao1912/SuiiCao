@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.monsun.suiicao.AppVar;
@@ -52,12 +51,9 @@ public class ListContactAdapter extends RecyclerView.Adapter<ListContactAdapter.
         StorageReference storageReference  = FirebaseStorage.getInstance().getReference().child(lcontact.get(position).getContact_id().toString());
         storageReference.getDownloadUrl().addOnSuccessListener(uri -> Glide.with(context)
                 .load(storageReference)
-                .into(holder.contact_image)).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
+                .into(holder.contact_image)).addOnFailureListener(exception -> {
 
-            }
-        });
+                });
 //        if (lcontact.get(position).getContact_img().equals("default"))
 //            Glide.with(context).load(R.drawable.testprofile).into(holder.contact_image);
 //        else
