@@ -19,11 +19,11 @@ import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.firebase.FirebaseSer;
+import com.monsun.suiicao.views.mentoraccount.MentorAccountFragment;
 import com.monsun.suiicao.views.base.BaseActivity;
 import com.monsun.suiicao.views.chatting.ContactFragment;
 import com.monsun.suiicao.views.homefragment.HomeFragment;
 import com.monsun.suiicao.views.homementor.mentormain;
-import com.monsun.suiicao.views.login.LoginActivity;
 import com.monsun.suiicao.views.useraccount.userAccountFrag;
 
 public class MainActivity extends BaseActivity implements IMainHandler{
@@ -38,7 +38,9 @@ public class MainActivity extends BaseActivity implements IMainHandler{
 
     @Override
     protected void onStart() {
-        AppVar.getListUnstudyCurriculum();
+        if(AppVar.mStudent != null){
+            AppVar.getListUnstudyCurriculum();
+        }
         tryLogin(this);
         super.onStart();
     }
@@ -116,11 +118,9 @@ public class MainActivity extends BaseActivity implements IMainHandler{
                                 else
                                 {
                                     FirebaseSer.mAuth.signOut();
-                                    AppVar.mMentor = null;
-                                    Intent t = LoginActivity.newIntent(MainActivity.this);
-                                    overridePendingTransition(0, 0);
-                                    startActivity(t);
-                                    finish();
+                                    selectedFragment = MentorAccountFragment.newInstance();
+                                    Toast.makeText(MainActivity.this, "user account", Toast.LENGTH_SHORT).show();
+                                    break;
                                 }
                             default:
                                 if (AppVar.mStudent != null){

@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityMentorInformationBinding;
 import com.monsun.suiicao.views.base.BaseActivity;
@@ -26,18 +27,24 @@ public class MentorInformation extends BaseActivity implements IMentorInfomation
         super.onCreate(savedInstanceState);
         setIsLoading(true);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_mentor_information);
-        viewModel = new ViewModelProvider(this).get(MentorInformationViewModel.class);
-        viewModel.setNavigator(this);
+
         binding.setLifecycleOwner(this);
         setSupportActionBar(binding.mentorInformation);
         binding.setLifecycleOwner(this);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-
-        viewModel.getMentor().observe(this, mentor -> {
-            binding.setData(mentor);
+        if(AppVar.mStudent!=null){
+            viewModel = new ViewModelProvider(this).get(MentorInformationViewModel.class);
+            viewModel.setNavigator(this);
+            viewModel.getMentor().observe(this, mentor -> {
+                binding.setData(mentor);
+                setIsLoading(false);
+            });
+        }
+        else {
+            binding.setData(AppVar.mMentor);
             setIsLoading(false);
-        });
+        }
     }
 
     @Override

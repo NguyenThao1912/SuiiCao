@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.monsun.suiicao.views.mentoraccount.UserViewModel" />
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.mentoraccount.MentorAccountFragment"
+        android:fitsSystemWindows="true">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mentor_pic"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:onClick="@{()->viewModel.ImagePickerClick()}"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="156dp"
+                    />
+
+                <TextView
+                    android:id="@+id/mentor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mentor_pic"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+
+                    android:fontFamily="@font/alike"
+                    android:text="@{viewModel.men_fullName}"
+                    android:textColor="#072C9A"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/mentor_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mentor_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/alike"
+                    android:text="@{viewModel.menID}"
+                    android:textColor="#072C9A"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_below="@+id/mentor_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@drawable/divinder"
+                    android:showDividers="beginning|middle"
+                    android:layout_marginTop="5dp"
+                    android:dividerPadding="12dip"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:clickable="true"
+                        android:onClick="@{()->viewModel.MentorInforClick()}"
+                        android:drawableEnd="@drawable/arrow_right_line"
+                        android:focusable="true"
+                        android:fontFamily="@font/alike"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:padding="20dp"
+                        android:text="Thông tin cố vấn"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/arrow_right_line"
+                        android:focusable="true"
+                        android:fontFamily="@font/alike"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:padding="20dp"
+                        android:text="Cài Đặt"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/arrow_right_line"
+                        android:focusable="true"
+                        android:fontFamily="@font/alike"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:padding="20dp"
+                        android:text="Trợ giúp và giúp đỡ"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/arrow_right_line"
+                        android:focusable="true"
+                        android:fontFamily="@font/alike"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:padding="20dp"
+                        android:text="Thông Báo"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/roundbtn"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="@{() ->viewModel.signOutClick()}"
+                        android:text="Sign out"
+                        android:textSize="18sp"
+                        android:textColor="#627BBB"
+                        android:layout_marginBottom="10dp"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </FrameLayout>
+</layout>
