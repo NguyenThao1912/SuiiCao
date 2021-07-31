@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.models.Chat;
 
@@ -49,8 +52,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         // TODO delete message -> click -> lấy id -> xóa message có id
         holder.message.setText(chat.getMessage());
         // TODO set user img from firebase
-        Glide.with(context).load(R.drawable.testprofile).into(holder.imageView);
-
+        StorageReference storageReference;
+        if(AppVar.mStudent != null){
+            storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mStudent.getStudentId().toString());
+        }
+        else {
+            storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mMentor.getMentorId().toString());
+        }
+        Glide.with(context)
+                .load(storageReference)
+                .into(holder.imageView);
     }
 
     @Override

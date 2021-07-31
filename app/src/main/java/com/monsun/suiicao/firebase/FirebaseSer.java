@@ -42,6 +42,7 @@ public class FirebaseSer {
         {
             // TODO do nothing
             Log.d(TAG, "TRY_LOGGING_IN: Create Success");
+            SignInUser_with_email_password(email,DEFAULT_FIREBASE_PASSWORD,activity);
         }
         else if (k == CommonUtils.FIREBASE_EMAIL_EXIST)
         {

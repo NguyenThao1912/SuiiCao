@@ -42,22 +42,19 @@ public class ListContactAdapter extends RecyclerView.Adapter<ListContactAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.contact_name.setText(  lcontact.get(position).getContact_name());
         // TODO Nếu là mentor thì thấy sv
+        StorageReference storageReference;
         if (AppVar.mStudent != null)
         {
+            storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mStudent.getStudentId().toString());
             holder.contact_id.setText("" + lcontact.get(position).getContact_msv());
         }
-        else
+        else{
+            storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mMentor.getMentorId().toString());
             holder.contact_id.setText("MSV : " + lcontact.get(position).getContact_msv());
-        StorageReference storageReference  = FirebaseStorage.getInstance().getReference().child(lcontact.get(position).getContact_id().toString());
-        storageReference.getDownloadUrl().addOnSuccessListener(uri -> Glide.with(context)
+        }
+        Glide.with(context)
                 .load(storageReference)
-                .into(holder.contact_image)).addOnFailureListener(exception -> {
-
-                });
-//        if (lcontact.get(position).getContact_img().equals("default"))
-//            Glide.with(context).load(R.drawable.testprofile).into(holder.contact_image);
-//        else
-//            Glide.with(context).load(lcontact.get(position).getContact_img()).into(holder.contact_image);
+                .into(holder.contact_image);
         // TODO  Nếu là Sinh viên thì thấy mentor
     }
 
