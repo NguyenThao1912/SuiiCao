@@ -19,15 +19,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.google.gson.Gson;
-import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.Utils.AppUtil;
 import com.monsun.suiicao.Utils.CommonUtils;
 import com.monsun.suiicao.databinding.DialogNoConnectionBinding;
-import com.monsun.suiicao.models.Users;
 import com.monsun.suiicao.views.login.LoginActivity;
-import com.monsun.suiicao.views.main.MainActivity;
 
 public class SplashScreen extends AppCompatActivity implements View.OnClickListener{
     private static int SPLASH_DURATION = 3; // 4 seconds
@@ -62,27 +58,27 @@ public class SplashScreen extends AppCompatActivity implements View.OnClickListe
                 //do something
                 SharedPreferences preferences = getApplicationContext().getSharedPreferences(CommonUtils.MY_PREFERENCE,MODE_PRIVATE);
                 String type = preferences.getString(CommonUtils.TYPE_USER,"");
-                if (type != null && !type.isEmpty()){
-                    if (type.equals("mentor"))
-                    {
-
-                    }
-                    else {
-                        Gson gson = new Gson();
-                        String json = preferences.getString(CommonUtils.MY_USER, "");
-                        AppVar.mStudent =  gson.fromJson(json, Users.class);
-                    }
-                    Intent intent = MainActivity.newIntent(SplashScreen.this);
-                    startActivity(intent);
-                    finish();
-                }
-                else {
+//                if (type != null && !type.isEmpty()){
+//                    if (type.equals("mentor"))
+//                    {
+//
+//                    }
+//                    else {
+//                        Gson gson = new Gson();
+//                        String json = preferences.getString(CommonUtils.MY_USER, "");
+//                        AppVar.mStudent =  gson.fromJson(json, Users.class);
+//                    }
+//                    Intent intent = MainActivity.newIntent(SplashScreen.this);
+//                    startActivity(intent);
+//                    finish();
+//                }
+//                else {
                     //Open Login activity
                     Intent intent = new Intent(SplashScreen.this,
                             LoginActivity.class);
                     startActivity(intent);
                     finish();
-                }
+//                }
 
             }, SPLASH_DURATION * 1000);
         }

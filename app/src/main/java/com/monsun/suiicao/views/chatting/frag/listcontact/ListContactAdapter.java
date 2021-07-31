@@ -10,6 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.models.Contact;
 
@@ -39,12 +43,25 @@ public class ListContactAdapter extends RecyclerView.Adapter<ListContactAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.contact_name.setText(  lcontact.get(position).getContact_name());
         // TODO Nếu là mentor thì thấy sv
-        holder.contact_id.setText("MSV : " + lcontact.get(position).getContact_id());
-
-        if (lcontact.get(position).getContact_img().equals("default"))
-            Glide.with(context).load(R.drawable.testprofile).into(holder.contact_image);
+        if (AppVar.mStudent != null)
+        {
+            holder.contact_id.setText("" + lcontact.get(position).getContact_msv());
+        }
         else
-            Glide.with(context).load(lcontact.get(position).getContact_img()).into(holder.contact_image);
+            holder.contact_id.setText("MSV : " + lcontact.get(position).getContact_msv());
+        StorageReference storageReference  = FirebaseStorage.getInstance().getReference().child(lcontact.get(position).getContact_id().toString());
+        storageReference.getDownloadUrl().addOnSuccessListener(uri -> Glide.with(context)
+                .load(storageReference)
+                .into(holder.contact_image)).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+
+            }
+        });
+//        if (lcontact.get(position).getContact_img().equals("default"))
+//            Glide.with(context).load(R.drawable.testprofile).into(holder.contact_image);
+//        else
+//            Glide.with(context).load(lcontact.get(position).getContact_img()).into(holder.contact_image);
         // TODO  Nếu là Sinh viên thì thấy mentor
     }
 

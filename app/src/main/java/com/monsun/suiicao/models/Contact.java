@@ -2,10 +2,19 @@ package com.monsun.suiicao.models;
 
 public class Contact {
     private String contact_id;
+    private String contact_msv;
     private String contact_name;
     private String contact_img;
     private String contact_status;
     private String uid;
+
+    public String getContact_msv() {
+        return contact_msv;
+    }
+
+    public void setContact_msv(String contact_msv) {
+        this.contact_msv = contact_msv;
+    }
 
     public String getContact_id() {
         return contact_id;

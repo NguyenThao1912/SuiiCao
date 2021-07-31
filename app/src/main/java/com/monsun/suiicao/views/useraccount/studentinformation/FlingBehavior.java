@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-public final class FlingBehavior extends AppBarLayout.Behavior {
+public final class 	FlingBehavior extends AppBarLayout.Behavior {
 
 	private static final int TOP_CHILD_FLING_THRESHOLD = 3;
 	private boolean isPositive;

@@ -28,19 +28,24 @@ public class AppVar extends Application {
 
     }
     public static void getListUnstudyCurriculum(){
-        ApiInstance apiInstance = new ApiInstance();
-        Call<List<Curriculum>> call = apiInstance.getServices().getUnstudylecture(AppVar.mStudent.getStudentId(), Integer.parseInt(AppVar.mStudent.getClassId()));
-        call.enqueue(new Callback<List<Curriculum>>() {
-            @Override
-            public void onResponse(Call<List<Curriculum>> call, Response<List<Curriculum>> response) {
-                unstudy_curriculum = response.body();
-            }
 
-            @Override
-            public void onFailure(Call<List<Curriculum>> call, Throwable t) {
+        if(AppVar.mStudent != null)
+        {
+            ApiInstance apiInstance = new ApiInstance();
+            Call<List<Curriculum>> call = apiInstance.getServices().getUnstudylecture(AppVar.mStudent.getStudentId(), Integer.parseInt(AppVar.mStudent.getClassId()));
+            call.enqueue(new Callback<List<Curriculum>>() {
+                @Override
+                public void onResponse(Call<List<Curriculum>> call, Response<List<Curriculum>> response) {
+                    unstudy_curriculum = response.body();
+                }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<List<Curriculum>> call, Throwable t) {
+
+                }
+            });
+        }
+
     }
 
 }
