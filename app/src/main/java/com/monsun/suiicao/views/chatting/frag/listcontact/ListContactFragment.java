@@ -104,6 +104,7 @@ public class ListContactFragment extends BaseFragment implements ListContactAdap
         intent.putExtra("uid",contactList.get(position).getUid());
         intent.putExtra("name",contactList.get(position).getContact_name());
         intent.putExtra("img",contactList.get(position).getContact_img());
+        intent.putExtra("contact_id",contactList.get(position).getContact_id());
         String RoomID = AppUtil.generateRoomID(FirebaseSer.mAuth.getCurrentUser().getUid(),
                 contactList.get(position).getUid());
         CommonUtils.ROOM_SELECTED = RoomID;

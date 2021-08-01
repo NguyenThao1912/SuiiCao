@@ -101,6 +101,7 @@ public class MessageActivity extends BaseActivity implements IMessage {
             Log.d(TAG, "ReadMessage: ");
             List<Chat> chats =  new ArrayList<>();
             chats.clear();
+            recyclerView.setAdapter(null);
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("chats");
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -112,7 +113,7 @@ public class MessageActivity extends BaseActivity implements IMessage {
                                 chat.getReceiver().equals(receiverid) && chat.getSender().equals(myid))
                             chats.add(chat);
                     }
-                    MessageAdapter adapter = new MessageAdapter(chats);
+                    MessageAdapter adapter = new MessageAdapter(chats, i.getStringExtra("contact_id"));
                     recyclerView.setAdapter(adapter);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MessageActivity.this);
                     linearLayoutManager.setStackFromEnd(true);

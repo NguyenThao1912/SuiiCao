@@ -10,10 +10,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.databinding.ActivityMentorInformationBinding;
 import com.monsun.suiicao.views.base.BaseActivity;
+
+import java.util.Objects;
 
 public class MentorInformation extends BaseActivity implements IMentorInfomation {
     ActivityMentorInformationBinding binding;
@@ -39,11 +44,26 @@ public class MentorInformation extends BaseActivity implements IMentorInfomation
             viewModel.getMentor().observe(this, mentor -> {
                 binding.setData(mentor);
                 setIsLoading(false);
+                StorageReference storageReference;
+                String image = "mentor_" + mentor.getMentorId().toString();
+                storageReference  = FirebaseStorage.getInstance().getReference().child(image);
+                // Load the image using Glide
+                Glide.with(this)
+                        .load(storageReference)
+                        .into(binding.mentorInformationImg);
             });
+
         }
         else {
             binding.setData(AppVar.mMentor);
             setIsLoading(false);
+            String image = "mentor_" + AppVar.mMentor.getMentorId().toString();
+            StorageReference storageReference;
+            storageReference  = FirebaseStorage.getInstance().getReference().child(image);
+            // Load the image using Glide
+            Glide.with(this)
+                    .load(storageReference)
+                    .into(binding.mentorInformationImg);
         }
     }
 

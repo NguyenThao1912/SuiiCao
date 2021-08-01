@@ -78,7 +78,8 @@ public class MentorAccountFragment extends BaseFragment implements IUserHandler 
         viewModel.setNavigator(this);
         View v = binding.getRoot();
         StorageReference storageReference;
-        storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mMentor.getMentorId().toString());
+        String image = "mentor_" + AppVar.mMentor.getMentorId().toString();
+        storageReference  = FirebaseStorage.getInstance().getReference().child(image);
         // Load the image using Glide
         Glide.with(getActivity())
                 .load(storageReference)

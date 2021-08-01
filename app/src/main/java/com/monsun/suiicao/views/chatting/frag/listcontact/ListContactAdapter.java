@@ -45,11 +45,11 @@ public class ListContactAdapter extends RecyclerView.Adapter<ListContactAdapter.
         StorageReference storageReference;
         if (AppVar.mStudent != null)
         {
-            storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mStudent.getStudentId().toString());
+            storageReference  = FirebaseStorage.getInstance().getReference().child("mentor_1" /*+ lcontact.get(position).getContact_id()*/);
             holder.contact_id.setText("" + lcontact.get(position).getContact_msv());
         }
         else{
-            storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mMentor.getMentorId().toString());
+            storageReference  = FirebaseStorage.getInstance().getReference().child(lcontact.get(position).getContact_id());
             holder.contact_id.setText("MSV : " + lcontact.get(position).getContact_msv());
         }
         Glide.with(context)

@@ -20,16 +20,20 @@ public class MyFCMService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         Map<String,String> data = remoteMessage.getData();
         if (data!= null){
+            try {
+                CommonUtils.showNotification(this,
+                        new Random().nextInt(),
+                        data.get(CommonUtils.NOTI_TITLE),
+                        data.get(CommonUtils.NOTI_CONTENT),
+                        data.get(CommonUtils.NOTI_SENDER),
+                        data.get(CommonUtils.NOTI_ROOMID),
+                        data.get(CommonUtils.NOTI_RECEIVER),
+                        null
+                );
+            }
+            catch (Exception e){
 
-            CommonUtils.showNotification(this,
-                    new Random().nextInt(),
-                data.get(CommonUtils.NOTI_TITLE),
-                data.get(CommonUtils.NOTI_CONTENT),
-                data.get(CommonUtils.NOTI_SENDER),
-                data.get(CommonUtils.NOTI_ROOMID),
-                data.get(CommonUtils.NOTI_RECEIVER),
-                    null
-            );
+            }
         }
     }
 }

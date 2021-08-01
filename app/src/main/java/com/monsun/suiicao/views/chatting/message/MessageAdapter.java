@@ -7,15 +7,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.monsun.suiicao.AppVar;
 import com.monsun.suiicao.R;
 import com.monsun.suiicao.models.Chat;
+import com.monsun.suiicao.models.Users;
 
 import java.util.List;
 
@@ -26,9 +34,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public static final int MSG_TYPE_LEFT = 1;
     private List<Chat> chatList;
     private Context context;
+    private String contact_id;
     public MessageAdapter(List<Chat> chats)
     {
         this.chatList = chats;
+    }
+    public MessageAdapter(List<Chat> chats, String id)
+    {
+        this.chatList = chats;
+        this.contact_id = id;
     }
     @NonNull
     @Override
@@ -54,10 +68,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         // TODO set user img from firebase
         StorageReference storageReference;
         if(AppVar.mStudent != null){
-            storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mStudent.getStudentId().toString());
+            storageReference  = FirebaseStorage.getInstance().getReference().child("mentor_" + contact_id);
         }
         else {
-            storageReference  = FirebaseStorage.getInstance().getReference().child(AppVar.mMentor.getMentorId().toString());
+            storageReference  = FirebaseStorage.getInstance().getReference().child(contact_id);
         }
         Glide.with(context)
                 .load(storageReference)

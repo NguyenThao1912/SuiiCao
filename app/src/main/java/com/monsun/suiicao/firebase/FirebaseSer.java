@@ -187,9 +187,16 @@ public class FirebaseSer {
             StorageReference storageReference = storage.getReference();
 
             // Defining the child of storageReference
-            StorageReference ref
-                    = storageReference
-                    .child(AppVar.mStudent.getStudentId().toString());
+            StorageReference ref;
+            if (AppVar.mStudent != null){
+                ref = storageReference
+                        .child(AppVar.mStudent.getStudentId().toString());
+            }
+            else {
+                ref = storageReference
+                        .child("mentor_" + AppVar.mMentor.getMentorId().toString());
+            }
+
             // adding listeners on upload
             // or failure of image
             ref.putFile(filePath)
