@@ -31,6 +31,8 @@ public class UserViewModel extends BaseViewModel<IUserHandler> {
     {
         Log.d("MentorAccountFrag", "signOutClick: ");
         getNavigator().OpenLoginActivity();
+        AppVar.mMentor = null;
+        AppVar.mStudent = null;
     }
     public void MentorInforClick()
     {
